@@ -14,5 +14,5 @@ class AdminCreate(AdminBase):
     pass
 
 
-class Admin(SQLModel, table=True):
+class Admin(AdminCreate, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)

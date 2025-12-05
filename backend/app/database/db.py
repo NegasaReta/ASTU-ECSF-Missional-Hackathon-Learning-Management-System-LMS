@@ -10,6 +10,8 @@ engine = create_engine(
 
 # Create tables
 def create_db_and_tables():
+    from app.model.models import Admin
+
     SQLModel.metadata.create_all(engine)
 
 
