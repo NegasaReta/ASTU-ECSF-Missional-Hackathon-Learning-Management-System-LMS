@@ -10,7 +10,7 @@ engine = create_engine(
 
 # Create tables
 def create_db_and_tables():
-    from app.model.models import Admin
+    from app.model.models import Admin, Missionary
 
     SQLModel.metadata.create_all(engine)
 
