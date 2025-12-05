@@ -12,6 +12,9 @@ env/
 venv/
 ENV/
 .venv/
+.mms-env/
+mms-env/
+
 
 # -----------------------------
 # Distribution / packaging
