@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from app.database.db import create_db_and_tables
-from app.routers import admin
+from app.routers import admin, missionary
 
 app = FastAPI()
 
 
 app.include_router(admin.router)
+app.include_router(missionary.router)
 
 
 @app.on_event("startup")
