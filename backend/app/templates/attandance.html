@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance - Go Preach</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before {
+content: "\f3c2";
+}
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#4F46E5',
+secondary: '#059669'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<div class="flex h-screen">
+<aside class="w-64 bg-white shadow-lg flex flex-col">
+<div class="p-6 border-b">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-church-line text-white text-lg"></i>
+</div>
+</div>
+<div>
+<h1 class="font-['Pacifico'] text-xl text-primary">Go Preach</h1>
+</div>
+</div>
+</div>
+<nav class="flex-1 p-4">
+<ul class="space-y-2">
+<li>
+<a href="dashboard.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-dashboard-line"></i>
+</div>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a href="mission.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-compass-line"></i>
+</div>
+<span>Missions</span>
+</a>
+</li>
+<li>
+<a href="members.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-team-line"></i>
+</div>
+<span>Members</span>
+</a>
+</li>
+<li>
+<a href="report.html" data-readdy="true" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-file-text-line"></i>
+</div>
+<span>Reports</span>
+</a>
+</li>
+<li>
+<a href="communication.html" data-readdy="true" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-chat-3-line"></i>
+</div>
+<span>Communication</span>
+</a>
+</li>
+<li>
+<a href="pairing.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-robot-line"></i>
+</div>
+<span>Pairing</span>
+</a>
+</li>
+<li>
+<a href="media.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-gallery-line"></i>
+</div>
+<span>Media Gallery</span>
+</a>
+</li>
+<li>
+<a href="attandance.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary text-white">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-calendar-check-line"></i>
+</div>
+<span>Attendance</span>
+</a>
+</li>
+<li>
+<a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-profile-line"></i>
+</div>
+<span>Profile</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-4 border-t">
+  <a href="#" id="logoutBtn" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+    <div class="w-5 h-5 flex items-center justify-center">
+      <i class="ri-logout-box-line"></i>
+    </div>
+    <span>Logout</span>
+  </a>
+</div>
+
+</aside>
+<main class="flex-1 flex flex-col">
+<header class="bg-white shadow-sm border-b px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<h2 class="text-2xl font-semibold text-gray-900">Attendance</h2>
+<nav class="text-sm text-gray-500">
+<span>Home</span>
+<span class="mx-2">/</span>
+<span class="text-gray-900">Attendance</span>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+
+    <!-- Search -->
+    <div class="relative">
+        <input 
+            id="searchInput"
+            type="text" 
+            placeholder="Search missions, members..." 
+            class="w-80 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+        >
+        <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+            <i class="ri-search-line text-gray-400"></i>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <button class="relative p-2 text-gray-600 hover:text-gray-900">
+        <div class="w-6 h-6 flex items-center justify-center">
+            <i class="ri-notification-line"></i>
+        </div>
+        <span 
+            id="notificationCount" 
+            class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+        </span>
+    </button>
+
+    <!-- Profile -->
+    <div class="flex items-center space-x-3 cursor-pointer">
+        <img 
+            id="profileImage"
+            src="" 
+            alt="Profile"
+            class="w-10 h-10 rounded-full object-cover"
+        >
+
+        <div>
+            <p id="profileName" class="text-sm font-medium text-gray-900"></p>
+            <p id="profileRole" class="text-xs text-gray-500"></p>
+        </div>
+
+        <div class="w-4 h-4 flex items-center justify-center">
+            <i class="ri-arrow-down-s-line text-gray-400"></i>
+        </div>
+    </div>
+
+</div>
+</div>
+</header>
+<div class="bg-white border-b px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2 whitespace-nowrap !rounded-button" id="mark-attendance-btn">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-check-line"></i>
+</div>
+<span>Mark Attendance</span>
+</button>
+<div class="flex items-center space-x-1 bg-gray-100 p-1 rounded-lg">
+<button class="px-3 py-1 text-sm rounded-md bg-white text-gray-900 shadow-sm whitespace-nowrap !rounded-button attendance-filter active" data-filter="overview">Overview</button>
+<button class="px-3 py-1 text-sm rounded-md text-gray-600 hover:text-gray-900 whitespace-nowrap !rounded-button attendance-filter" data-filter="events">Events</button>
+<button class="px-3 py-1 text-sm rounded-md text-gray-600 hover:text-gray-900 whitespace-nowrap !rounded-button attendance-filter" data-filter="records">Records</button>
+<button class="px-3 py-1 text-sm rounded-md text-gray-600 hover:text-gray-900 whitespace-nowrap !rounded-button attendance-filter" data-filter="analytics">Analytics</button>
+</div>
+</div>
+<div class="flex items-center space-x-3">
+<div class="relative">
+<button class="flex items-center space-x-2 px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button" id="date-range-btn">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-calendar-line text-gray-400"></i>
+</div>
+<span>This Month</span>
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+</button>
+<div class="absolute right-0 top-full mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10 hidden" id="date-range-dropdown">
+<div class="py-1">
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 date-option" data-range="week">This Week</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 date-option" data-range="month">This Month</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 date-option" data-range="quarter">This Quarter</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 date-option" data-range="year">This Year</button>
+</div>
+</div>
+</div>
+<button class="flex items-center space-x-2 px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button" id="export-btn">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-download-line text-gray-400"></i>
+</div>
+<span>Export</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex-1 p-6 overflow-y-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white rounded-xl shadow-sm p-6 border">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-600">Total Active Members</p>
+<p class="text-3xl font-bold text-gray-900 mt-2">164</p>
+<p class="text-sm text-secondary mt-1">+5 this month</p>
+</div>
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-team-line text-primary"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm p-6 border">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-600">Average Attendance Rate</p>
+<p class="text-3xl font-bold text-gray-900 mt-2">87%</p>
+<p class="text-sm text-secondary mt-1">+3% from last month</p>
+</div>
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-calendar-check-line text-secondary"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm p-6 border">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-600">This Week's Events</p>
+<p class="text-3xl font-bold text-gray-900 mt-2">8</p>
+<p class="text-sm text-secondary mt-1">3 completed</p>
+</div>
+<div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-calendar-event-line text-orange-600"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm p-6 border">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-600">Present Today</p>
+<p class="text-3xl font-bold text-gray-900 mt-2">142</p>
+<p class="text-sm text-secondary mt-1">86% of members</p>
+</div>
+<div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-user-check-line text-green-600"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<div class="lg:col-span-2 bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="text-lg font-semibold text-gray-900">Attendance Calendar</h3>
+<p class="text-sm text-gray-600 mt-1">December 2024 - Event attendance patterns</p>
+</div>
+<div class="flex items-center space-x-2">
+<button class="p-2 hover:bg-gray-100 rounded-lg" id="prev-month">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-left-s-line text-gray-600"></i>
+</div>
+</button>
+<span class="text-sm font-medium text-gray-900 px-3">December 2024</span>
+<button class="p-2 hover:bg-gray-100 rounded-lg" id="next-month">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-right-s-line text-gray-600"></i>
+</div>
+</button>
+</div>
+</div>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-7 gap-2 mb-4">
+<div class="text-center text-sm font-medium text-gray-600 py-2">Sun</div>
+<div class="text-center text-sm font-medium text-gray-600 py-2">Mon</div>
+<div class="text-center text-sm font-medium text-gray-600 py-2">Tue</div>
+<div class="text-center text-sm font-medium text-gray-600 py-2">Wed</div>
+<div class="text-center text-sm font-medium text-gray-600 py-2">Thu</div>
+<div class="text-center text-sm font-medium text-gray-600 py-2">Fri</div>
+<div class="text-center text-sm font-medium text-gray-600 py-2">Sat</div>
+</div>
+<div class="grid grid-cols-7 gap-2" id="calendar-grid">
+<div class="h-12 flex items-center justify-center text-sm text-gray-400 cursor-pointer rounded-lg hover:bg-gray-50">1</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50 bg-primary/20 border border-primary/30">2</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">3</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50 bg-secondary/20 border border-secondary/30">4</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50 bg-primary text-white">5</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">6</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">7</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50 bg-orange-100 border border-orange-200">8</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">9</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">10</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50 bg-secondary/20 border border-secondary/30">11</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">12</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">13</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">14</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50 bg-primary/20 border border-primary/30">15</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">16</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">17</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50 bg-secondary/20 border border-secondary/30">18</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">19</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">20</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">21</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50 bg-primary/20 border border-primary/30">22</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">23</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">24</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50 bg-orange-100 border border-orange-200">25</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">26</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">27</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">28</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50 bg-secondary/20 border border-secondary/30">29</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">30</div>
+<div class="h-12 flex items-center justify-center text-sm text-gray-900 cursor-pointer rounded-lg hover:bg-gray-50">31</div>
+</div>
+<div class="mt-4 flex items-center space-x-6 text-sm">
+<div class="flex items-center space-x-2">
+<div class="w-4 h-4 bg-primary rounded"></div>
+<span class="text-gray-600">Sunday Service</span>
+</div>
+<div class="flex items-center space-x-2">
+<div class="w-4 h-4 bg-secondary rounded"></div>
+<span class="text-gray-600">Prayer Meeting</span>
+</div>
+<div class="flex items-center space-x-2">
+<div class="w-4 h-4 bg-orange-200 rounded"></div>
+<span class="text-gray-600">Special Events</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-semibold text-gray-900">Upcoming Events</h3>
+<button class="text-primary hover:text-primary/80 text-sm">View All</button>
+</div>
+</div>
+<div class="divide-y divide-gray-200">
+<div class="p-6">
+<div class="flex items-start justify-between">
+<div class="flex-1">
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Sunday Service</span>
+</div>
+<h4 class="font-medium text-gray-900">Morning Worship</h4>
+<p class="text-sm text-gray-600 mt-1">December 8, 2024 at 10:00 AM</p>
+<div class="flex items-center space-x-4 mt-3">
+<span class="text-xs text-gray-500">Expected: 160</span>
+<span class="text-xs text-gray-500">RSVP: 142</span>
+</div>
+</div>
+<button class="text-primary hover:text-primary/80 text-sm whitespace-nowrap !rounded-button">Mark Attendance</button>
+</div>
+</div>
+<div class="p-6">
+<div class="flex items-start justify-between">
+<div class="flex-1">
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-secondary/10 text-secondary text-xs rounded-full">Prayer Meeting</span>
+</div>
+<h4 class="font-medium text-gray-900">Wednesday Prayer</h4>
+<p class="text-sm text-gray-600 mt-1">December 11, 2024 at 7:00 PM</p>
+<div class="flex items-center space-x-4 mt-3">
+<span class="text-xs text-gray-500">Expected: 85</span>
+<span class="text-xs text-gray-500">RSVP: 78</span>
+</div>
+</div>
+<button class="text-primary hover:text-primary/80 text-sm whitespace-nowrap !rounded-button">Mark Attendance</button>
+</div>
+</div>
+<div class="p-6">
+<div class="flex items-start justify-between">
+<div class="flex-1">
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Youth Ministry</span>
+</div>
+<h4 class="font-medium text-gray-900">Friday Youth Night</h4>
+<p class="text-sm text-gray-600 mt-1">December 13, 2024 at 6:30 PM</p>
+<div class="flex items-center space-x-4 mt-3">
+<span class="text-xs text-gray-500">Expected: 45</span>
+<span class="text-xs text-gray-500">RSVP: 38</span>
+</div>
+</div>
+<button class="text-primary hover:text-primary/80 text-sm whitespace-nowrap !rounded-button">Mark Attendance</button>
+</div>
+</div>
+<div class="p-6">
+<div class="flex items-start justify-between">
+<div class="flex-1">
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Special Event</span>
+</div>
+<h4 class="font-medium text-gray-900">Christmas Celebration</h4>
+<p class="text-sm text-gray-600 mt-1">December 25, 2024 at 11:00 AM</p>
+<div class="flex items-center space-x-4 mt-3">
+<span class="text-xs text-gray-500">Expected: 200</span>
+<span class="text-xs text-gray-500">RSVP: 156</span>
+</div>
+</div>
+<button class="text-primary hover:text-primary/80 text-sm whitespace-nowrap !rounded-button">Mark Attendance</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<h3 class="text-lg font-semibold text-gray-900">Attendance Trends</h3>
+<p class="text-sm text-gray-600 mt-1">Monthly attendance patterns over the year</p>
+</div>
+<div class="p-6">
+<div id="attendance-trends-chart" style="width: 100%; height: 300px;"></div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<h3 class="text-lg font-semibold text-gray-900">Event Type Participation</h3>
+<p class="text-sm text-gray-600 mt-1">Attendance breakdown by event category</p>
+</div>
+<div class="p-6">
+<div id="event-participation-chart" style="width: 100%; height: 300px;"></div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border mb-8">
+<div class="p-6 border-b">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-semibold text-gray-900">Member Attendance Records</h3>
+<div class="flex items-center space-x-2">
+<div class="relative">
+<input type="text" placeholder="Search members..." class="w-48 pl-8 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+<div class="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+<i class="ri-search-line text-gray-400 text-sm"></i>
+</div>
+</div>
+<button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-filter-line text-gray-600"></i>
+</div>
+</button>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead class="bg-gray-50 border-b">
+<tr>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Member</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Contact</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Attendance Rate</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Recent History</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Last Attended</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200">
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6">
+<div class="flex items-center space-x-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20young%20woman%20with%20warm%20smile%20wearing%20casual%20blouse%20against%20clean%20white%20background%20modern%20headshot%20photography&width=40&height=40&seq=member1&orientation=squarish" alt="Sarah" class="w-10 h-10 rounded-full object-cover">
+<div>
+<h4 class="font-medium text-gray-900">Sarah Williams</h4>
+<p class="text-sm text-gray-600">Active Member</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div>
+<p class="text-sm text-gray-900">sarah.williams@email.com</p>
+<p class="text-sm text-gray-600">(555) 123-4567</p>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<div class="flex-1 bg-gray-200 rounded-full h-2">
+<div class="bg-secondary h-2 rounded-full" style="width: 94%"></div>
+</div>
+<span class="text-sm font-medium text-gray-900">94%</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-1">
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-red-500 rounded-full" title="Absent"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-gray-600">Dec 5, 2024</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<button class="text-primary hover:text-primary/80 text-sm">View Details</button>
+<button class="text-gray-600 hover:text-gray-900 text-sm">Send Reminder</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6">
+<div class="flex items-center space-x-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20middle%20aged%20man%20with%20friendly%20smile%20wearing%20button%20shirt%20against%20clean%20white%20background%20modern%20headshot%20photography&width=40&height=40&seq=member2&orientation=squarish" alt="David" class="w-10 h-10 rounded-full object-cover">
+<div>
+<h4 class="font-medium text-gray-900">David Chen</h4>
+<p class="text-sm text-gray-600">Active Member</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div>
+<p class="text-sm text-gray-900">david.chen@email.com</p>
+<p class="text-sm text-gray-600">(555) 234-5678</p>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<div class="flex-1 bg-gray-200 rounded-full h-2">
+<div class="bg-secondary h-2 rounded-full" style="width: 89%"></div>
+</div>
+<span class="text-sm font-medium text-gray-900">89%</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-1">
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-red-500 rounded-full" title="Absent"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-gray-600">Dec 5, 2024</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<button class="text-primary hover:text-primary/80 text-sm">View Details</button>
+<button class="text-gray-600 hover:text-gray-900 text-sm">Send Reminder</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6">
+<div class="flex items-center space-x-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20elderly%20woman%20with%20kind%20smile%20wearing%20elegant%20cardigan%20against%20clean%20white%20background%20modern%20headshot%20photography&width=40&height=40&seq=member3&orientation=squarish" alt="Margaret" class="w-10 h-10 rounded-full object-cover">
+<div>
+<h4 class="font-medium text-gray-900">Margaret Thompson</h4>
+<p class="text-sm text-gray-600">Senior Member</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div>
+<p class="text-sm text-gray-900">margaret.t@email.com</p>
+<p class="text-sm text-gray-600">(555) 345-6789</p>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<div class="flex-1 bg-gray-200 rounded-full h-2">
+<div class="bg-orange-400 h-2 rounded-full" style="width: 76%"></div>
+</div>
+<span class="text-sm font-medium text-gray-900">76%</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-1">
+<div class="w-3 h-3 bg-red-500 rounded-full" title="Absent"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-red-500 rounded-full" title="Absent"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-gray-600">Dec 5, 2024</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<button class="text-primary hover:text-primary/80 text-sm">View Details</button>
+<button class="text-gray-600 hover:text-gray-900 text-sm">Send Reminder</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6">
+<div class="flex items-center space-x-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20young%20man%20with%20confident%20smile%20wearing%20polo%20shirt%20against%20clean%20white%20background%20modern%20headshot%20photography&width=40&height=40&seq=member4&orientation=squarish" alt="James" class="w-10 h-10 rounded-full object-cover">
+<div>
+<h4 class="font-medium text-gray-900">James Rodriguez</h4>
+<p class="text-sm text-gray-600">Youth Leader</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div>
+<p class="text-sm text-gray-900">james.r@email.com</p>
+<p class="text-sm text-gray-600">(555) 456-7890</p>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<div class="flex-1 bg-gray-200 rounded-full h-2">
+<div class="bg-secondary h-2 rounded-full" style="width: 92%"></div>
+</div>
+<span class="text-sm font-medium text-gray-900">92%</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-1">
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-red-500 rounded-full" title="Absent"></div>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-gray-600">Dec 5, 2024</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<button class="text-primary hover:text-primary/80 text-sm">View Details</button>
+<button class="text-gray-600 hover:text-gray-900 text-sm">Send Reminder</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6">
+<div class="flex items-center space-x-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20middle%20aged%20woman%20with%20gentle%20smile%20wearing%20sweater%20against%20clean%20white%20background%20modern%20headshot%20photography&width=40&height=40&seq=member5&orientation=squarish" alt="Lisa" class="w-10 h-10 rounded-full object-cover">
+<div>
+<h4 class="font-medium text-gray-900">Lisa Anderson</h4>
+<p class="text-sm text-gray-600">Volunteer Coordinator</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div>
+<p class="text-sm text-gray-900">lisa.anderson@email.com</p>
+<p class="text-sm text-gray-600">(555) 567-8901</p>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<div class="flex-1 bg-gray-200 rounded-full h-2">
+<div class="bg-secondary h-2 rounded-full" style="width: 96%"></div>
+</div>
+<span class="text-sm font-medium text-gray-900">96%</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-1">
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full" title="Present"></div>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-gray-600">Dec 5, 2024</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<button class="text-primary hover:text-primary/80 text-sm">View Details</button>
+<button class="text-gray-600 hover:text-gray-900 text-sm">Send Reminder</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 border-t">
+<div class="flex items-center justify-between">
+<p class="text-sm text-gray-600">Showing 5 of 164 members</p>
+<div class="flex items-center space-x-2">
+<button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button">Previous</button>
+<button class="px-3 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 text-sm whitespace-nowrap !rounded-button">Next</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<h3 class="text-lg font-semibold text-gray-900">Attendance Analytics</h3>
+<p class="text-sm text-gray-600 mt-1">Detailed insights and participation patterns</p>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div>
+<h4 class="text-sm font-medium text-gray-900 mb-4">Weekly Attendance Distribution</h4>
+<div id="weekly-distribution-chart" style="width: 100%; height: 250px;"></div>
+</div>
+<div>
+<h4 class="text-sm font-medium text-gray-900 mb-4">Member Engagement Levels</h4>
+<div id="engagement-levels-chart" style="width: 100%; height: 250px;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" id="mark-attendance-modal">
+<div class="flex items-center justify-center min-h-screen p-4">
+<div class="bg-white rounded-xl shadow-xl max-w-4xl w-full max-h-screen overflow-y-auto">
+<div class="p-6 border-b">
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-semibold text-gray-900">Mark Attendance</h2>
+<button class="p-2 hover:bg-gray-100 rounded-lg" id="close-attendance-modal">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-close-line text-gray-600"></i>
+</div>
+</button>
+</div>
+</div>
+<div class="p-6">
+<div class="mb-6">
+<label class="block text-sm font-medium text-gray-700 mb-2">Select Event</label>
+<div class="relative">
+<button type="button" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm text-left flex items-center justify-between" id="event-select-btn">
+<span>Morning Worship - December 8, 2024</span>
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+</button>
+</div>
+</div>
+<div class="mb-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-medium text-gray-900">Member List</h3>
+<div class="flex items-center space-x-2">
+<button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button" id="mark-all-present">Mark All Present</button>
+<button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button" id="mark-all-absent">Mark All Absent</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-96 overflow-y-auto">
+<div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg member-attendance-item">
+<input type="checkbox" class="sr-only attendance-checkbox" checked>
+<div class="w-5 h-5 border-2 border-primary bg-primary rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center">
+<i class="ri-check-line text-white text-xs"></i>
+</div>
+</div>
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20young%20woman%20with%20warm%20smile%20wearing%20casual%20blouse%20against%20clean%20white%20background%20modern%20headshot%20photography&width=32&height=32&seq=att1&orientation=squarish" alt="Sarah" class="w-8 h-8 rounded-full object-cover">
+<span class="text-sm font-medium text-gray-900">Sarah Williams</span>
+</div>
+<div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg member-attendance-item">
+<input type="checkbox" class="sr-only attendance-checkbox" checked>
+<div class="w-5 h-5 border-2 border-primary bg-primary rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center">
+<i class="ri-check-line text-white text-xs"></i>
+</div>
+</div>
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20middle%20aged%20man%20with%20friendly%20smile%20wearing%20button%20shirt%20against%20clean%20white%20background%20modern%20headshot%20photography&width=32&height=32&seq=att2&orientation=squarish" alt="David" class="w-8 h-8 rounded-full object-cover">
+<span class="text-sm font-medium text-gray-900">David Chen</span>
+</div>
+<div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg member-attendance-item">
+<input type="checkbox" class="sr-only attendance-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center">
+<i class="ri-check-line text-white text-xs hidden"></i>
+</div>
+</div>
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20elderly%20woman%20with%20kind%20smile%20wearing%20elegant%20cardigan%20against%20clean%20white%20background%20modern%20headshot%20photography&width=32&height=32&seq=att3&orientation=squarish" alt="Margaret" class="w-8 h-8 rounded-full object-cover">
+<span class="text-sm font-medium text-gray-900">Margaret Thompson</span>
+</div>
+<div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg member-attendance-item">
+<input type="checkbox" class="sr-only attendance-checkbox" checked>
+<div class="w-5 h-5 border-2 border-primary bg-primary rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center">
+<i class="ri-check-line text-white text-xs"></i>
+</div>
+</div>
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20young%20man%20with%20confident%20smile%20wearing%20polo%20shirt%20against%20clean%20white%20background%20modern%20headshot%20photography&width=32&height=32&seq=att4&orientation=squarish" alt="James" class="w-8 h-8 rounded-full object-cover">
+<span class="text-sm font-medium text-gray-900">James Rodriguez</span>
+</div>
+<div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg member-attendance-item">
+<input type="checkbox" class="sr-only attendance-checkbox" checked>
+<div class="w-5 h-5 border-2 border-primary bg-primary rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center">
+<i class="ri-check-line text-white text-xs"></i>
+</div>
+</div>
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20middle%20aged%20woman%20with%20gentle%20smile%20wearing%20sweater%20against%20clean%20white%20background%20modern%20headshot%20photography&width=32&height=32&seq=att5&orientation=squarish" alt="Lisa" class="w-8 h-8 rounded-full object-cover">
+<span class="text-sm font-medium text-gray-900">Lisa Anderson</span>
+</div>
+<div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg member-attendance-item">
+<input type="checkbox" class="sr-only attendance-checkbox" checked>
+<div class="w-5 h-5 border-2 border-primary bg-primary rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center">
+<i class="ri-check-line text-white text-xs"></i>
+</div>
+</div>
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20senior%20man%20with%20wise%20smile%20wearing%20casual%20shirt%20against%20clean%20white%20background%20modern%20headshot%20photography&width=32&height=32&seq=att6&orientation=squarish" alt="Robert" class="w-8 h-8 rounded-full object-cover">
+<span class="text-sm font-medium text-gray-900">Robert Miller</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-6 border-t">
+<div class="text-sm text-gray-600">
+<span id="present-count">5</span> present, <span id="absent-count">1</span> absent out of <span id="total-count">6</span> members
+</div>
+<div class="flex items-center space-x-3">
+<button type="button" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button" id="cancel-attendance">Cancel</button>
+<button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 text-sm whitespace-nowrap !rounded-button">Save Attendance</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script id="attendance-filters">
+document.addEventListener('DOMContentLoaded', function() {
+const filterButtons = document.querySelectorAll('.attendance-filter');
+filterButtons.forEach(button => {
+button.addEventListener('click', function() {
+filterButtons.forEach(btn => {
+btn.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+btn.classList.add('text-gray-600');
+});
+this.classList.remove('text-gray-600');
+this.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+});
+});
+});
+</script>
+<script id="date-range-dropdown">
+document.addEventListener('DOMContentLoaded', function() {
+const dateButton = document.getElementById('date-range-btn');
+const dateDropdown = document.getElementById('date-range-dropdown');
+const dateOptions = document.querySelectorAll('.date-option');
+dateButton.addEventListener('click', function() {
+dateDropdown.classList.toggle('hidden');
+});
+document.addEventListener('click', function(e) {
+if (!dateButton.contains(e.target) && !dateDropdown.contains(e.target)) {
+dateDropdown.classList.add('hidden');
+}
+});
+dateOptions.forEach(option => {
+option.addEventListener('click', function() {
+const rangeText = this.textContent;
+dateButton.querySelector('span').textContent = rangeText;
+dateDropdown.classList.add('hidden');
+});
+});
+});
+</script>
+<script id="mark-attendance-modal">
+document.addEventListener('DOMContentLoaded', function() {
+const markAttendanceBtn = document.getElementById('mark-attendance-btn');
+const attendanceModal = document.getElementById('mark-attendance-modal');
+const closeAttendanceModal = document.getElementById('close-attendance-modal');
+const cancelAttendance = document.getElementById('cancel-attendance');
+const markAllPresentBtn = document.getElementById('mark-all-present');
+const markAllAbsentBtn = document.getElementById('mark-all-absent');
+const attendanceCheckboxes = document.querySelectorAll('.attendance-checkbox');
+const checkboxCustoms = document.querySelectorAll('.member-attendance-item .checkbox-custom');
+const presentCountEl = document.getElementById('present-count');
+const absentCountEl = document.getElementById('absent-count');
+const totalCountEl = document.getElementById('total-count');
+markAttendanceBtn.addEventListener('click', function() {
+attendanceModal.classList.remove('hidden');
+document.body.style.overflow = 'hidden';
+});
+closeAttendanceModal.addEventListener('click', function() {
+attendanceModal.classList.add('hidden');
+document.body.style.overflow = 'auto';
+});
+cancelAttendance.addEventListener('click', function() {
+attendanceModal.classList.add('hidden');
+document.body.style.overflow = 'auto';
+});
+attendanceModal.addEventListener('click', function(e) {
+if (e.target === attendanceModal) {
+attendanceModal.classList.add('hidden');
+document.body.style.overflow = 'auto';
+}
+});
+function updateCounts() {
+const total = attendanceCheckboxes.length;
+const present = Array.from(attendanceCheckboxes).filter(cb => cb.checked).length;
+const absent = total - present;
+presentCountEl.textContent = present;
+absentCountEl.textContent = absent;
+totalCountEl.textContent = total;
+}
+checkboxCustoms.forEach((checkbox, index) => {
+checkbox.addEventListener('click', function() {
+const realCheckbox = attendanceCheckboxes[index];
+const checkIcon = this.querySelector('i');
+const isChecked = realCheckbox.checked;
+if (isChecked) {
+realCheckbox.checked = false;
+this.classList.remove('border-primary', 'bg-primary');
+this.classList.add('border-gray-300');
+checkIcon.classList.add('hidden');
+} else {
+realCheckbox.checked = true;
+this.classList.remove('border-gray-300');
+this.classList.add('border-primary', 'bg-primary');
+checkIcon.classList.remove('hidden');
+}
+updateCounts();
+});
+});
+markAllPresentBtn.addEventListener('click', function() {
+attendanceCheckboxes.forEach((checkbox, index) => {
+checkbox.checked = true;
+const customCheckbox = checkboxCustoms[index];
+const checkIcon = customCheckbox.querySelector('i');
+customCheckbox.classList.remove('border-gray-300');
+customCheckbox.classList.add('border-primary', 'bg-primary');
+checkIcon.classList.remove('hidden');
+});
+updateCounts();
+});
+markAllAbsentBtn.addEventListener('click', function() {
+attendanceCheckboxes.forEach((checkbox, index) => {
+checkbox.checked = false;
+const customCheckbox = checkboxCustoms[index];
+const checkIcon = customCheckbox.querySelector('i');
+customCheckbox.classList.remove('border-primary', 'bg-primary');
+customCheckbox.classList.add('border-gray-300');
+checkIcon.classList.add('hidden');
+});
+updateCounts();
+});
+updateCounts();
+});
+</script>
+<script id="charts-initialization">
+document.addEventListener('DOMContentLoaded', function() {
+const attendanceTrendsChart = echarts.init(document.getElementById('attendance-trends-chart'));
+const attendanceTrendsOption = {
+animation: false,
+grid: { top: 0, right: 0, bottom: 0, left: 0 },
+xAxis: {
+type: 'category',
+data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+axisLine: { lineStyle: { color: '#e5e7eb' } },
+axisTick: { show: false },
+axisLabel: { color: '#6b7280', fontSize: 12 }
+},
+yAxis: {
+type: 'value',
+axisLine: { show: false },
+axisTick: { show: false },
+axisLabel: { color: '#6b7280', fontSize: 12 },
+splitLine: { lineStyle: { color: '#f3f4f6' } }
+},
+series: [{
+data: [82, 88, 85, 91, 89, 93, 87, 90, 94, 88, 92, 87],
+type: 'line',
+smooth: true,
+symbol: 'none',
+lineStyle: { color: 'rgba(87, 181, 231, 1)', width: 3 },
+areaStyle: { color: 'rgba(87, 181, 231, 0.1)' }
+}],
+tooltip: {
+trigger: 'axis',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderColor: '#e5e7eb',
+textStyle: { color: '#1f2937' }
+}
+};
+attendanceTrendsChart.setOption(attendanceTrendsOption);
+const eventParticipationChart = echarts.init(document.getElementById('event-participation-chart'));
+const eventParticipationOption = {
+animation: false,
+grid: { top: 0, right: 0, bottom: 0, left: 0 },
+tooltip: {
+trigger: 'item',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderColor: '#e5e7eb',
+textStyle: { color: '#1f2937' }
+},
+series: [{
+type: 'pie',
+radius: ['40%', '70%'],
+center: ['50%', '50%'],
+data: [
+{ value: 92, name: 'Sunday Service', itemStyle: { color: 'rgba(87, 181, 231, 1)' } },
+{ value: 78, name: 'Prayer Meeting', itemStyle: { color: 'rgba(141, 211, 199, 1)' } },
+{ value: 85, name: 'Youth Ministry', itemStyle: { color: 'rgba(251, 191, 114, 1)' } },
+{ value: 65, name: 'Bible Study', itemStyle: { color: 'rgba(252, 141, 98, 1)' } }
+],
+label: { color: '#1f2937', fontSize: 12 },
+emphasis: { itemStyle: { shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0, 0, 0, 0.5)' } }
+}]
+};
+eventParticipationChart.setOption(eventParticipationOption);
+const weeklyDistributionChart = echarts.init(document.getElementById('weekly-distribution-chart'));
+const weeklyDistributionOption = {
+animation: false,
+grid: { top: 0, right: 0, bottom: 0, left: 0 },
+xAxis: {
+type: 'category',
+data: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+axisLine: { lineStyle: { color: '#e5e7eb' } },
+axisTick: { show: false },
+axisLabel: { color: '#6b7280', fontSize: 12 }
+},
+yAxis: {
+type: 'value',
+axisLine: { show: false },
+axisTick: { show: false },
+axisLabel: { color: '#6b7280', fontSize: 12 },
+splitLine: { lineStyle: { color: '#f3f4f6' } }
+},
+series: [{
+data: [142, 0, 0, 78, 0, 38, 0],
+type: 'bar',
+itemStyle: { color: 'rgba(87, 181, 231, 1)', borderRadius: [4, 4, 0, 0] }
+}],
+tooltip: {
+trigger: 'axis',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderColor: '#e5e7eb',
+textStyle: { color: '#1f2937' }
+}
+};
+weeklyDistributionChart.setOption(weeklyDistributionOption);
+const engagementLevelsChart = echarts.init(document.getElementById('engagement-levels-chart'));
+const engagementLevelsOption = {
+animation: false,
+grid: { top: 0, right: 0, bottom: 0, left: 0 },
+tooltip: {
+trigger: 'item',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderColor: '#e5e7eb',
+textStyle: { color: '#1f2937' }
+},
+series: [{
+type: 'pie',
+radius: '70%',
+center: ['50%', '50%'],
+data: [
+{ value: 98, name: 'High (90%+)', itemStyle: { color: 'rgba(87, 181, 231, 1)' } },
+{ value: 45, name: 'Medium (70-89%)', itemStyle: { color: 'rgba(141, 211, 199, 1)' } },
+{ value: 18, name: 'Low (50-69%)', itemStyle: { color: 'rgba(251, 191, 114, 1)' } },
+{ value: 3, name: 'Inactive (<50%)', itemStyle: { color: 'rgba(252, 141, 98, 1)' } }
+],
+label: { color: '#1f2937', fontSize: 12 },
+emphasis: { itemStyle: { shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0, 0, 0, 0.5)' } }
+}]
+};
+engagementLevelsChart.setOption(engagementLevelsOption);
+window.addEventListener('resize', function() {
+attendanceTrendsChart.resize();
+eventParticipationChart.resize();
+weeklyDistributionChart.resize();
+engagementLevelsChart.resize();
+});
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("/api/admin-info")
+        .then(res => res.json())
+        .then(data => {
+            if (!data.success) return;
+
+            // Dynamic name
+            document.getElementById("profileName").textContent = data.full_name;
+
+            // Dynamic role
+            document.getElementById("profileRole").textContent = data.role;
+
+            // Dynamic profile image
+            document.getElementById("profileImage").src =
+                data.profile_image 
+                || "https://ui-avatars.com/api/?name=" + encodeURIComponent(data.full_name);
+
+            // Notifications
+            const noti = document.getElementById("notificationCount");
+            noti.textContent = data.notifications;
+
+            if (data.notifications === 0) {
+                noti.classList.add("hidden");
+            }
+        });
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const logoutBtn = document.getElementById('logoutBtn'); // make sure <a> has id="logoutBtn"
+    
+    logoutBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch('/admin/logout', { method: 'POST' });
+            const data = await res.json();
+            if (data.success) {
+                window.location.href = '/'; // redirect to login page
+            } else {
+                alert(data.message || 'Failed to logout');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Server error. Try again.');
+        }
+    });
+});
+</script>
+
+
+
+</body>
+</html>

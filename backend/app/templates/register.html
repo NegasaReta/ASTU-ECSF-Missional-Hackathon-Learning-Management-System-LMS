@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - Go Preach</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#8B5CF6',
+secondary: '#F59E0B'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+},
+fontFamily: {
+'pacifico': ['Pacifico', 'serif'],
+'inter': ['Inter', 'sans-serif']
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before {
+content: "\f3c2";
+}
+body {
+font-family: 'Inter', sans-serif;
+}
+.step-card {
+backdrop-filter: blur(10px);
+background: rgba(255, 255, 255, 0.95);
+border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.input-field {
+transition: all 0.3s ease;
+}
+.input-field:focus {
+transform: translateY(-1px);
+box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
+}
+.progress-bar {
+transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.step-indicator {
+transition: all 0.3s ease;
+}
+.step-indicator.active {
+background: linear-gradient(135deg, #8B5CF6, #A855F7);
+color: white;
+transform: scale(1.1);
+}
+.step-indicator.completed {
+background: linear-gradient(135deg, #10B981, #059669);
+color: white;
+}
+.floating-label {
+transition: all 0.3s ease;
+}
+.input-focused .floating-label {
+transform: translateY(-1.5rem) scale(0.85);
+color: #8B5CF6;
+}
+.password-strength {
+height: 4px;
+border-radius: 2px;
+transition: all 0.3s ease;
+}
+.strength-weak { background: #EF4444; width: 33%; }
+.strength-medium { background: #F59E0B; width: 66%; }
+.strength-strong { background: #10B981; width: 100%; }
+.celebration-animation {
+animation: celebrate 0.6s ease-out;
+}
+@keyframes celebrate {
+0% { transform: scale(0.8) rotate(-5deg); opacity: 0; }
+50% { transform: scale(1.1) rotate(2deg); }
+100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.slide-enter {
+animation: slideIn 0.5s ease-out;
+}
+@keyframes slideIn {
+from { transform: translateX(20px); opacity: 0; }
+to { transform: translateX(0); opacity: 1; }
+}
+.emoji-float {
+animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+0%, 100% { transform: translateY(0px); }
+50% { transform: translateY(-10px); }
+}
+</style>
+</head>
+<body class="bg-gradient-to-br from-purple-50 via-white to-blue-50 min-h-screen">
+<header class="bg-white/80 backdrop-blur-md shadow-sm border-b border-purple-100">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-16">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-gradient-to-r from-primary to-purple-600 rounded-full flex items-center justify-center">
+<i class="ri-community-line text-white text-sm"></i>
+</div>
+<span class="font-pacifico text-xl text-primary">Go Preach</span>
+</div>
+<a href="index.html" class="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors">
+<i class="ri-arrow-left-line"></i>
+<span>Back to Home</span>
+</a>
+</div>
+</div>
+</header>
+<main class="flex-1 py-8 px-4 sm:px-6 lg:px-8">
+<div class="max-w-2xl mx-auto">
+<div class="text-center mb-8">
+<div class="inline-flex items-center space-x-2 mb-4">
+<span class="text-4xl emoji-float">🎉</span>
+<h1 class="text-3xl font-bold text-gray-900">Join Go Preach</h1>
+<span class="text-4xl emoji-float" style="animation-delay: 0.5s;">✨</span>
+</div>
+<p class="text-gray-600 text-lg">Create your account in just a few simple steps</p>
+</div>
+<div class="mb-8">
+<div class="flex justify-between items-center mb-4">
+<div class="flex space-x-4">
+<div class="step-indicator active w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold">1</div>
+<div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold bg-gray-200 text-gray-500">2</div>
+<div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold bg-gray-200 text-gray-500">3</div>
+<div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold bg-gray-200 text-gray-500">4</div>
+</div>
+<span class="text-sm text-gray-500 font-medium">Step <span id="current-step">1</span> of 4</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-2">
+<div class="progress-bar bg-gradient-to-r from-primary to-purple-600 h-2 rounded-full" style="width: 25%"></div>
+</div>
+</div>
+<div class="step-card rounded-2xl shadow-xl p-8 mb-6">
+<div id="step-1" class="step-content slide-enter">
+<div class="text-center mb-8">
+<div class="inline-flex items-center space-x-2 mb-4">
+<span class="text-3xl">👋</span>
+<h2 class="text-2xl font-bold text-gray-900">Welcome to Go Preach!</h2>
+<span class="text-3xl">😊</span>
+</div>
+<p class="text-gray-600">Let's start with your personal information</p>
+<div class="mt-4">
+<img src="https://readdy.ai/api/search-image?query=modern%20welcoming%20illustration%20with%20diverse%20people%20joining%20hands%20in%20a%20circle%2C%20warm%20colors%2C%20friendly%20community%20atmosphere%2C%20minimalist%20design%20with%20soft%20gradients%20and%20geometric%20shapes&width=400&height=200&seq=welcome1&orientation=landscape"
+alt="Welcome" class="mx-auto rounded-lg object-cover w-full max-w-md h-32">
+</div>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="relative">
+<input type="text" id="firstName" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary peer" placeholder=" " required>
+<label for="firstName" class="floating-label absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-2 peer-focus:left-2 peer-focus:text-sm peer-focus:text-primary peer-focus:bg-white peer-focus:px-2">First Name</label>
+<div class="absolute right-3 top-3 w-6 h-6 flex items-center justify-center">
+<i class="ri-user-line text-gray-400"></i>
+</div>
+</div>
+<div class="relative">
+<input type="text" id="lastName" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary peer" placeholder=" " required>
+<label for="lastName" class="floating-label absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-2 peer-focus:left-2 peer-focus:text-sm peer-focus:text-primary peer-focus:bg-white peer-focus:px-2">Last Name</label>
+<div class="absolute right-3 top-3 w-6 h-6 flex items-center justify-center">
+<i class="ri-user-line text-gray-400"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="step-2" class="step-content hidden">
+<div class="text-center mb-8">
+<div class="inline-flex items-center space-x-2 mb-4">
+<span class="text-3xl">📞</span>
+<h2 class="text-2xl font-bold text-gray-900">Let's Connect!</h2>
+<span class="text-3xl">💬</span>
+</div>
+<p class="text-gray-600">How can we reach you?</p>
+<div class="mt-4">
+<img src="https://readdy.ai/api/search-image?query=modern%20communication%20illustration%20with%20connected%20devices%2C%20phones%2C%20emails%2C%20network%20lines%2C%20digital%20connectivity%20concept%2C%20clean%20minimalist%20design%20with%20blue%20and%20purple%20gradients&width=400&height=200&seq=connect1&orientation=landscape"
+alt="Connect" class="mx-auto rounded-lg object-cover w-full max-w-md h-32">
+</div>
+</div>
+<div class="space-y-6">
+<div class="relative">
+<input type="text" id="phone" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary peer" placeholder=" " required>
+<label for="phone" class="floating-label absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-2 peer-focus:left-2 peer-focus:text-sm peer-focus:text-primary peer-focus:bg-white peer-focus:px-2">Phone Number</label>
+<div class="absolute right-3 top-3 w-6 h-6 flex items-center justify-center">
+<i class="ri-phone-line text-gray-400"></i>
+</div>
+</div>
+<div class="relative">
+<input type="email" id="email" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary peer" placeholder=" " required>
+<label for="email" class="floating-label absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-2 peer-focus:left-2 peer-focus:text-sm peer-focus:text-primary peer-focus:bg-white peer-focus:px-2">Email Address</label>
+<div class="absolute right-3 top-3 w-6 h-6 flex items-center justify-center">
+<i class="ri-mail-line text-gray-400"></i>
+</div>
+</div>
+</div>
+</div>
+<div id="step-3" class="step-content hidden">
+<div class="text-center mb-8">
+<div class="inline-flex items-center space-x-2 mb-4">
+<span class="text-3xl">💼</span>
+<h2 class="text-2xl font-bold text-gray-900">Tell Us About You!</h2>
+<span class="text-3xl">🎯</span>
+</div>
+<p class="text-gray-600">Help us personalize your experience</p>
+<div class="mt-4">
+<img src="https://readdy.ai/api/search-image?query=professional%20development%20illustration%20with%20graduation%20cap%2C%20briefcase%2C%20career%20growth%20symbols%2C%20achievement%20badges%2C%20modern%20flat%20design%20with%20purple%20and%20gold%20accents&width=400&height=200&seq=professional1&orientation=landscape"
+alt="Professional" class="mx-auto rounded-lg object-cover w-full max-w-md h-32">
+</div>
+</div>
+<div class="space-y-6">
+<div class="relative">
+<select id="batch" class="input-field w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:border-primary appearance-none" required>
+<option value="">Select Your Batch</option>
+<option value="1">Freshman</option>
+<option value="2">Sophomore</option>
+<option value="3">Junior</option>
+<option value="4">Senior</option>
+<option value="5">Graduate</option>
+</select>
+<div class="absolute right-3 top-3 w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+</div>
+<div class="relative">
+<select id="experience" class="input-field w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:border-primary appearance-none" required>
+<option value="">Select Experience Level</option>
+<option value='true'>Experienced</option>
+<option value="false">Not Experienced</option>
+</select>
+<div class="absolute right-3 top-3 w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+</div>
+<div class="relative">
+<select id="language" class="input-field w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:border-primary appearance-none" required>
+<option value="">Preferred Language</option>
+<option value="Amharic">Amharic</option>
+<option value="Afan Oromo">Afan Oromo</option>
+<option value="Both">Both languages</option>
+</select>
+<div class="absolute right-3 top-3 w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+</div>
+</div>
+</div>
+<div id="step-4" class="step-content hidden">
+<div class="text-center mb-8">
+<div class="inline-flex items-center space-x-2 mb-4">
+<span class="text-3xl">🔐</span>
+<h2 class="text-2xl font-bold text-gray-900">Secure Your Account!</h2>
+<span class="text-3xl">🛡️</span>
+</div>
+<p class="text-gray-600">Create a strong password to protect your account</p>
+<div class="mt-4">
+<img src="https://readdy.ai/api/search-image?query=cybersecurity%20illustration%20with%20shield%2C%20lock%2C%20digital%20protection%20symbols%2C%20secure%20network%20connections%2C%20modern%20tech%20design%20with%20green%20and%20blue%20security%20themes&width=400&height=200&seq=security1&orientation=landscape"
+alt="Security" class="mx-auto rounded-lg object-cover w-full max-w-md h-32">
+</div>
+</div>
+<div class="space-y-6">
+<div class="relative">
+<input type="password" id="password" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary peer" placeholder=" " required>
+<label for="password" class="floating-label absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-2 peer-focus:left-2 peer-focus:text-sm peer-focus:text-primary peer-focus:bg-white peer-focus:px-2">Password</label>
+<div class="absolute right-3 top-3 w-6 h-6 flex items-center justify-center">
+<i class="ri-lock-line text-gray-400"></i>
+</div>
+<div class="mt-2">
+<div class="password-strength bg-gray-200 rounded-full"></div>
+<p class="text-xs text-gray-500 mt-1" id="password-strength-text">Password strength</p>
+</div>
+</div>
+<div class="relative">
+<input type="password" id="confirmPassword" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary peer" placeholder=" " required>
+<label for="confirmPassword" class="floating-label absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-2 peer-focus:left-2 peer-focus:text-sm peer-focus:text-primary peer-focus:bg-white peer-focus:px-2">Confirm Password</label>
+<div class="absolute right-3 top-3 w-6 h-6 flex items-center justify-center">
+<i class="ri-lock-line text-gray-400"></i>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<div class="flex items-center h-5">
+<input type="checkbox" id="terms" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2" required>
+</div>
+<label for="terms" class="text-sm text-gray-600">
+I agree to the <a href="#" class="text-primary hover:underline">Terms of Service</a> and <a href="#" class="text-primary hover:underline">Privacy Policy</a>
+</label>
+</div>
+</div>
+</div>
+<div class="flex justify-between mt-8">
+<button id="prev-btn" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-button hover:bg-gray-50 transition-colors !rounded-button whitespace-nowrap hidden">
+<i class="ri-arrow-left-line mr-2"></i>Previous
+</button>
+<div class="flex-1"></div>
+<button id="next-btn" class="px-8 py-3 bg-gradient-to-r from-primary to-purple-600 text-white rounded-button hover:from-purple-600 hover:to-purple-700 transition-all transform hover:scale-105 !rounded-button whitespace-nowrap">
+Next<i class="ri-arrow-right-line ml-2"></i>
+</button>
+<button id="submit-btn" class="px-8 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-button hover:from-green-600 hover:to-green-700 transition-all transform hover:scale-105 !rounded-button whitespace-nowrap hidden">
+Create Account<i class="ri-check-line ml-2"></i>
+</button>
+</div>
+</div>
+<div class="text-center text-sm text-gray-500">
+Already have an account? <a href="login.html" data-readdy="true" class="text-primary hover:underline">Sign in here</a>
+</div>
+</div>
+</main>
+
+
+<script id="form-navigation">
+document.addEventListener('DOMContentLoaded', function() {
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    const nextBtn = document.getElementById('next-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const currentStepSpan = document.getElementById('current-step');
+    const progressBar = document.querySelector('.progress-bar');
+
+    function updateUI() {
+        document.querySelectorAll('.step-content').forEach(content => content.classList.add('hidden'));
+        document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+
+        document.querySelectorAll('.step-indicator').forEach((indicator, index) => {
+            indicator.classList.remove('active', 'completed');
+
+            if (index + 1 < currentStep) {
+                indicator.classList.add('completed');
+                indicator.innerHTML = '<i class="ri-check-line"></i>';
+            } else if (index + 1 === currentStep) {
+                indicator.classList.add('active');
+                indicator.textContent = currentStep;
+            } else {
+                indicator.textContent = index + 1;
+            }
+        });
+
+        currentStepSpan.textContent = currentStep;
+        progressBar.style.width = `${(currentStep / totalSteps) * 100}%`;
+
+        prevBtn.classList.toggle('hidden', currentStep === 1);
+        nextBtn.classList.toggle('hidden', currentStep === totalSteps);
+        submitBtn.classList.toggle('hidden', currentStep !== totalSteps);
+    }
+
+    function validateStep(step) {
+        const stepElement = document.getElementById(`step-${step}`);
+        const inputs = stepElement.querySelectorAll('input[required], select[required]');
+
+        for (let input of inputs) {
+            if (!input.value.trim()) {
+                input.focus();
+                input.classList.add('border-red-500');
+                setTimeout(() => input.classList.remove('border-red-500'), 3000);
+                return false;
+            }
+        }
+
+        if (step === 4) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const terms = document.getElementById('terms').checked;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return false;
+            }
+            if (!terms) {
+                alert('Please accept the terms and conditions!');
+                return false;
+            }
+        }
+        return true;
+    }
+
+    nextBtn.addEventListener('click', function() {
+        if (validateStep(currentStep)) {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateUI();
+            }
+        }
+    });
+
+    prevBtn.addEventListener('click', function() {
+        if (currentStep > 1) {
+            currentStep--;
+            updateUI();
+        }
+    });
+
+    // ✅ SEND FORM DATA TO BACKEND
+    submitBtn.addEventListener('click', async function() {
+        if (!validateStep(currentStep)) return;
+
+        // Disable UI
+        submitBtn.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i>Creating Account...';
+        submitBtn.disabled = true;
+
+        // Collect all form data
+     const full_name = 
+    document.getElementById("firstName").value.trim() + " " +
+    document.getElementById("lastName").value.trim();
+
+const formData = {
+    full_name: full_name,
+    phone: document.getElementById("phone").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    batch: document.getElementById("batch").value,
+    experience: document.getElementById("experience").value,
+    language: document.getElementById("language").value,
+    password: document.getElementById("password").value
+};
+
+
+        try {
+            const apiBaseUrl = "https://astu-ecsf-missional-hackathon-mms.onrender.com"
+            const response = await fetch(`${apiBaseUrl}/auth/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                alert(result.message || "Registration failed!");
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = "Create Account";
+                return;
+            }
+
+            // Success animation
+            submitBtn.innerHTML = '<i class="ri-check-line mr-2"></i>Account Created!';
+            submitBtn.classList.add('from-green-600', 'to-green-700');
+
+            document.querySelector('.step-card').classList.add('celebration-animation');
+
+            setTimeout(() => {
+                window.location.href = "/dashboard";
+            }, 1500);
+
+        } catch (error) {
+            alert("Network error — try again!");
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Create Account";
+        }
+    });
+
+    updateUI();
+});
+</script>
+
+
+
+<script id="input-interactions">
+document.addEventListener('DOMContentLoaded', function() {
+const inputs = document.querySelectorAll('input, select');
+inputs.forEach(input => {
+const container = input.closest('.relative');
+input.addEventListener('focus', function() {
+container?.classList.add('input-focused');
+});
+input.addEventListener('blur', function() {
+if (!input.value) {
+container?.classList.remove('input-focused');
+}
+});
+input.addEventListener('input', function() {
+if (input.value) {
+container?.classList.add('input-focused');
+} else {
+container?.classList.remove('input-focused');
+}
+});
+});
+});
+</script>
+
+
+
+
+
+
+<script id="password-strength">
+document.addEventListener('DOMContentLoaded', function() {
+const passwordInput = document.getElementById('password');
+const strengthBar = document.querySelector('.password-strength');
+const strengthText = document.getElementById('password-strength-text');
+passwordInput.addEventListener('input', function() {
+const password = this.value;
+let strength = 0;
+if (password.length >= 8) strength++;
+if (/[A-Z]/.test(password)) strength++;
+if (/[0-9]/.test(password)) strength++;
+if (/[^A-Za-z0-9]/.test(password)) strength++;
+strengthBar.className = 'password-strength bg-gray-200 rounded-full';
+if (strength === 1) {
+strengthBar.classList.add('strength-weak');
+strengthText.textContent = 'Weak password';
+strengthText.className = 'text-xs text-red-500 mt-1';
+} else if (strength === 2 || strength === 3) {
+strengthBar.classList.add('strength-medium');
+strengthText.textContent = 'Medium password';
+strengthText.className = 'text-xs text-yellow-500 mt-1';
+} else if (strength === 4) {
+strengthBar.classList.add('strength-strong');
+strengthText.textContent = 'Strong password';
+strengthText.className = 'text-xs text-green-500 mt-1';
+} else {
+strengthText.textContent = 'Password strength';
+strengthText.className = 'text-xs text-gray-500 mt-1';
+}
+});
+});
+</script>
+</body>
+</html>
