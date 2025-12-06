@@ -3,7 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database.db import create_db_and_tables
 from app.routers import admin, missionary, recipient, auth, team_generation, site, team, team_member
 from app.core.dependencies import get_current_user
+from fastapi.templating import Jinja2Templates
 
+templates = Jinja2Templates(directory="app/templates")
 app = FastAPI()
 
 # Configure CORS
