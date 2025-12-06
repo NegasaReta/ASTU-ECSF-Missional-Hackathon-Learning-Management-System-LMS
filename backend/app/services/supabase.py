@@ -13,3 +13,12 @@ def login(email: EmailStr, password: str) -> Optional[str]:
     # Access token as an attribute
     token = getattr(response.session, "access_token", None)
     return token
+
+
+def register_in_supabase(email: EmailStr, password: str) -> Optional[str]:
+    response = supabase.auth.sign_up({"email": email, "password": password})
+
+    if response.user is None:
+        return None
+
+    return response.user.id  # Supabase UUID
