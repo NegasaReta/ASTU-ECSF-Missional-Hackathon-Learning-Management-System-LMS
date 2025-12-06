@@ -37,6 +37,9 @@ class MisionnaryBase(SQLModel):
     language: LanguageOption
     experienced: bool
     password: str
+    attendance: bool = Field(default=False)
+    verified: bool = Field(default=False)
+    
 
 
 class MissionaryCreate(MisionnaryBase):
@@ -47,7 +50,6 @@ class Missionary(MissionaryCreate, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
-
     recipients: List["Recipient"] = Relationship(back_populates="missionary")
 
 
