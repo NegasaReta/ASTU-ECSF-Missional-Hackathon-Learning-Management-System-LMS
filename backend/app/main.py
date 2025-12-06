@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from app.database.db import create_db_and_tables
 from app.routers import admin, missionary, recipient, auth, team_generation, site, team, team_member
@@ -34,6 +34,10 @@ app.include_router(team_member.router)
 def on_startup():
     create_db_and_tables()
 
+
+@app.get("/register-page")
+def register_page(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/")
 def main(user=Depends(get_current_user)):
