@@ -24,22 +24,19 @@ class Admin(AdminCreate, table=True):
 
 
 class LanguageOption(str, Enum):
-    both = "Afan Oromo and Amharic"
+    both = "Both"
     afan_oromo = "Afan Oromo"
     amharic = "Amharic"
 
 
 class MisionnaryBase(SQLModel):
     full_name: str
-    email: EmailStr
     batch: int
     phone: str = Field(max_length=10, min_length=10)
     language: LanguageOption
     experienced: bool
-    password: str
     attendance: bool = Field(default=False)
     verified: bool = Field(default=False)
-    
 
 
 class MissionaryCreate(MisionnaryBase):
@@ -47,7 +44,7 @@ class MissionaryCreate(MisionnaryBase):
 
 
 class Missionary(MissionaryCreate, table=True):
-    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
+    id: uuid.UUID = Field(index=True, unique=True, primary_key=True)
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
     recipients: List["Recipient"] = Relationship(back_populates="missionary")
