@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Missionary Dashboard - Mission Central</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#4f46e5',secondary:'#06b6d4'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+</style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<!-- Mobile Menu Overlay -->
+<div id="mobileMenuOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50 md:hidden">
+<div class="p-6">
+<div class="text-2xl font-['Pacifico'] text-primary mb-8">GoPreach</div>
+<nav class="space-y-2">
+<a href="#" class="block text-primary font-medium px-3 py-2 rounded-button bg-primary/10">Dashboard</a>
+<a href="#" class="block text-gray-600 hover:text-gray-900 px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">Missions</a>
+<a href="https://readdy.ai/home/ae8dd0fe-f3d1-4c7c-bd5c-c581ef134658/6412bcd3-646b-4b38-a46b-bf5aedb2020b" data-readdy="true" class="block text-gray-600 hover:text-gray-900 px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">Reports</a>
+<a href="#" class="block text-gray-600 hover:text-gray-900 px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">Messages</a>
+<a href="#" class="block text-gray-600 hover:text-gray-900 px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">Settings</a>
+</nav>
+</div>
+</div>
+<nav class="bg-white shadow-sm border-b border-gray-200">
+<div class="px-4 sm:px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4 md:space-x-8">
+<button id="mobileMenuToggle" class="md:hidden w-10 h-10 flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full">
+<i class="ri-menu-line ri-lg"></i>
+</button>
+<div class="text-xl sm:text-2xl font-['Pacifico'] text-primary">GoPreach</div>
+<div class="hidden md:flex space-x-6">
+<a href="#" class="text-primary font-medium px-3 py-2 rounded-button bg-primary/10">Dashboard</a>
+<a href="#" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">Missions</a>
+<a href="https://readdy.ai/home/ae8dd0fe-f3d1-4c7c-bd5c-c581ef134658/6412bcd3-646b-4b38-a46b-bf5aedb2020b" data-readdy="true" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">Reports</a>
+<a href="#" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">Messages</a>
+<a href="#" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">Settings</a>
+</div>
+</div>
+<div class="flex items-center space-x-2 sm:space-x-4">
+<div class="relative">
+<button class="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors">
+<i class="ri-notification-3-line ri-lg"></i>
+</button>
+<span class="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+</div>
+<div class="relative">
+<button id="profileDropdown" class="flex items-center space-x-1 sm:space-x-2 text-gray-700 hover:text-gray-900 px-2 sm:px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">
+<div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-medium">JD</div>
+<span class="hidden sm:block text-sm">John Davidson</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div id="profileMenu" class="absolute right-0 top-full mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 hidden z-50">
+<button id="profileSettingsBtn" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Profile Settings</button>
+<button id="accountSettingsBtn" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Account Settings</button>
+<button id="changePasswordBtn" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Change Password</button>
+<div class="border-t border-gray-200 my-1"></div>
+<a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sign Out</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<div class="px-4 sm:px-6 py-4 sm:py-6">
+<div class="bg-gradient-to-r from-primary to-secondary text-white rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
+<div class="flex items-center justify-between">
+<div>
+<h1 class="text-lg sm:text-xl md:text-2xl font-bold mb-2">Welcome back, John Davidson</h1>
+<p class="text-blue-100 text-xs sm:text-sm">Saturday, December 6, 2025 • Addis Ababa, Ethiopia • 22°C Sunny</p>
+</div>
+<div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center">
+<i class="ri-sun-line ri-2x sm:ri-3x text-yellow-300"></i>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+<div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-lg">
+<i class="ri-map-pin-line ri-xl text-blue-600"></i>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-gray-900">5</div>
+<div class="text-sm text-green-600 flex items-center">
+<i class="ri-arrow-up-line ri-sm"></i>
+<span>+2 this month</span>
+</div>
+</div>
+</div>
+<h3 class="font-semibold text-gray-900">Active Missions</h3>
+<p class="text-gray-600 text-sm">Currently registered missions</p>
+</div>
+<div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 flex items-center justify-center bg-green-100 rounded-lg">
+<i class="ri-group-line ri-xl text-green-600"></i>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-gray-900">1,247</div>
+<div class="text-sm text-green-600 flex items-center">
+<i class="ri-arrow-up-line ri-sm"></i>
+<span>+156 this month</span>
+</div>
+</div>
+</div>
+<h3 class="font-semibold text-gray-900">People Reached</h3>
+<p class="text-gray-600 text-sm">Total individuals contacted</p>
+</div>
+<div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 flex items-center justify-center bg-orange-100 rounded-lg">
+<i class="ri-task-line ri-xl text-orange-600"></i>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-gray-900">8</div>
+<div class="text-sm text-orange-600 flex items-center">
+<i class="ri-time-line ri-sm"></i>
+<span>3 urgent</span>
+</div>
+</div>
+</div>
+<h3 class="font-semibold text-gray-900">Upcoming Tasks</h3>
+<p class="text-gray-600 text-sm">Pending activities</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+<div class="lg:col-span-2 space-y-6 lg:space-y-8">
+<div class="bg-white rounded-xl shadow-sm border border-gray-200">
+<div class="p-6 border-b border-gray-200">
+<h2 class="text-xl font-bold text-gray-900">Current Missions</h2>
+<p class="text-gray-600">Available mission opportunities and your registrations</p>
+</div>
+<div class="p-4 sm:p-6 space-y-4">
+<div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+<div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
+<div class="flex-1">
+<h3 class="font-semibold text-gray-900 mb-1 text-sm sm:text-base">Urban Outreach - Merkato District</h3>
+<p class="text-gray-600 text-sm mb-2">Addis Ababa, Ethiopia • 3 weeks • 8-12 members</p>
+<div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-gray-500">
+<span class="flex items-center">
+<i class="ri-calendar-line ri-sm mr-1"></i>
+Jan 15 - Feb 5, 2025
+</span>
+<span class="flex items-center">
+<i class="ri-user-line ri-sm mr-1"></i>
+Team Leader: Sarah Mitchell
+</span>
+</div>
+</div>
+<button class="bg-primary text-white px-4 py-2 rounded-button hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">Register</button>
+</div>
+</div>
+<div class="border-2 border-primary/20 bg-primary/5 rounded-lg p-4">
+<div class="flex items-start justify-between mb-3">
+<div>
+<h3 class="font-semibold text-gray-900 mb-1">Rural Community Outreach - Bahir Dar</h3>
+<p class="text-gray-600 text-sm mb-2">Amhara Region, Ethiopia • 2 weeks • 6-10 members</p>
+<div class="flex items-center space-x-4 text-sm text-gray-500 mb-2">
+<span class="flex items-center">
+<i class="ri-calendar-line ri-sm mr-1"></i>
+Dec 20 - Jan 3, 2025
+</span>
+<span class="flex items-center">
+<i class="ri-user-line ri-sm mr-1"></i>
+Team Leader: Michael Johnson
+</span>
+</div>
+<div class="bg-white rounded-lg p-3 border border-primary/20">
+<div class="text-sm font-medium text-primary mb-1">✓ Registered - Group Alpha</div>
+<div class="text-sm text-gray-600">Assigned Group: Alpha Team (8 members)</div>
+<div class="text-sm text-gray-600">Next Meeting: Dec 12, 2025 at 7:00 PM</div>
+</div>
+</div>
+<div class="flex space-x-2">
+<button class="bg-green-600 text-white px-3 py-2 rounded-button hover:bg-green-700 transition-colors text-sm whitespace-nowrap !rounded-button">View Details</button>
+</div>
+</div>
+</div>
+<div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-3">
+<div>
+<h3 class="font-semibold text-gray-900 mb-1">Youth Ministry - Jimma University</h3>
+<p class="text-gray-600 text-sm mb-2">Jimma, Ethiopia • 4 weeks • 5-8 members</p>
+<div class="flex items-center space-x-4 text-sm text-gray-500">
+<span class="flex items-center">
+<i class="ri-calendar-line ri-sm mr-1"></i>
+Feb 10 - Mar 10, 2025
+</span>
+<span class="flex items-center">
+<i class="ri-user-line ri-sm mr-1"></i>
+Team Leader: David Wilson
+</span>
+</div>
+</div>
+<button class="bg-primary text-white px-4 py-2 rounded-button hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">Register</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border border-gray-200">
+<div class="p-6 border-b border-gray-200">
+<h2 class="text-xl font-bold text-gray-900">Reports</h2>
+<div class="flex space-x-1 mt-4">
+<button id="groupReportTab" class="px-4 py-2 text-sm font-medium text-primary bg-primary/10 rounded-button whitespace-nowrap !rounded-button">Group Reports</button>
+<button id="individualReportTab" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-button whitespace-nowrap !rounded-button">Individual Reports</button>
+</div>
+</div>
+<div id="groupReportContent" class="p-6">
+<form class="space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Mission</label>
+<select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm pr-8">
+<option>Rural Community Outreach - Bahir Dar</option>
+<option>Urban Outreach - Merkato District</option>
+<option>Youth Ministry - Jimma University</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Report Date</label>
+<input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm" value="2025-12-06">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Group Total Exposed</label>
+<input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm" placeholder="Enter total number of people reached by group">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Comments</label>
+<textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm h-24 resize-none" placeholder="Additional notes about the outreach activities..."></textarea>
+</div>
+<button type="submit" class="bg-primary text-white px-6 py-2 rounded-button hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">Submit Group Report</button>
+</form>
+</div>
+<div id="individualReportContent" class="p-6 hidden">
+<form class="space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+<input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm" placeholder="Enter full name">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+<input type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm" placeholder="Enter phone number">
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Location (Kebele)</label>
+<select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm pr-8">
+<option value="">Select Kebele</option>
+<option>Kebele 01 - Arada</option>
+<option>Kebele 02 - Kirkos</option>
+<option>Kebele 03 - Lideta</option>
+<option>Kebele 04 - Yeka</option>
+<option>Kebele 05 - Nifas Silk</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Nearest Church</label>
+<select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm pr-8">
+<option value="">Select Church</option>
+<option>St. George Cathedral</option>
+<option>Holy Trinity Church</option>
+<option>Medhane Alem Church</option>
+<option>Bete Mariam Church</option>
+<option>Emmanuel Church</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-3">Status</label>
+<div class="flex space-x-6">
+<label class="flex items-center cursor-pointer">
+<div class="relative">
+<input type="radio" name="status" value="win" class="sr-only">
+<div class="w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center">
+<div class="w-2 h-2 bg-green-600 rounded-full hidden"></div>
+</div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Win</span>
+</label>
+<label class="flex items-center cursor-pointer">
+<div class="relative">
+<input type="radio" name="status" value="hope" class="sr-only">
+<div class="w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center">
+<div class="w-2 h-2 bg-yellow-600 rounded-full hidden"></div>
+</div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Hope</span>
+</label>
+<label class="flex items-center cursor-pointer">
+<div class="relative">
+<input type="radio" name="status" value="restored" class="sr-only">
+<div class="w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center">
+<div class="w-2 h-2 bg-blue-600 rounded-full hidden"></div>
+</div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Restored</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Note / Dialogue</label>
+<textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm h-32 resize-none" placeholder="Record conversation details, prayer requests, follow-up notes..."></textarea>
+</div>
+<button type="submit" class="bg-primary text-white px-6 py-2 rounded-button hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">Submit Individual Report</button>
+</form>
+</div>
+</div>
+</div>
+<div class="space-y-6 lg:space-y-8">
+<div class="bg-white rounded-xl shadow-sm border border-gray-200">
+<div class="p-4 sm:p-6 border-b border-gray-200">
+<h2 class="text-lg sm:text-xl font-bold text-gray-900">Quick Actions</h2>
+</div>
+<div class="p-4 sm:p-6 space-y-3">
+<button class="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors">
+<div class="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-lg">
+<i class="ri-map-pin-line ri-lg text-blue-600"></i>
+</div>
+<div>
+<div class="font-medium text-gray-900">View My Missions</div>
+<div class="text-sm text-gray-600">See all registered missions</div>
+</div>
+</button>
+<button class="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors">
+<div class="w-10 h-10 flex items-center justify-center bg-green-100 rounded-lg">
+<i class="ri-file-text-line ri-lg text-green-600"></i>
+</div>
+<div>
+<div class="font-medium text-gray-900">Submit Report</div>
+<div class="text-sm text-gray-600">Quick report submission</div>
+</div>
+</button>
+<button class="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors">
+<div class="w-10 h-10 flex items-center justify-center bg-purple-100 rounded-lg">
+<i class="ri-message-3-line ri-lg text-purple-600"></i>
+</div>
+<div>
+<div class="font-medium text-gray-900">Team Messages</div>
+<div class="text-sm text-gray-600">Chat with your team</div>
+</div>
+</button>
+<button class="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors">
+<div class="w-10 h-10 flex items-center justify-center bg-orange-100 rounded-lg">
+<i class="ri-calendar-line ri-lg text-orange-600"></i>
+</div>
+<div>
+<div class="font-medium text-gray-900">Mission Calendar</div>
+<div class="text-sm text-gray-600">View upcoming events</div>
+</div>
+</button>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border border-gray-200">
+<div class="p-4 sm:p-6 border-b border-gray-200">
+<h2 class="text-lg sm:text-xl font-bold text-gray-900">Calendar</h2>
+<p class="text-gray-600 text-sm">December 2025</p>
+</div>
+<div class="p-4 sm:p-6">
+<div class="grid grid-cols-7 gap-1 mb-4">
+<div class="text-center text-xs font-medium text-gray-500 py-2">Sun</div>
+<div class="text-center text-xs font-medium text-gray-500 py-2">Mon</div>
+<div class="text-center text-xs font-medium text-gray-500 py-2">Tue</div>
+<div class="text-center text-xs font-medium text-gray-500 py-2">Wed</div>
+<div class="text-center text-xs font-medium text-gray-500 py-2">Thu</div>
+<div class="text-center text-xs font-medium text-gray-500 py-2">Fri</div>
+<div class="text-center text-xs font-medium text-gray-500 py-2">Sat</div>
+</div>
+<div class="grid grid-cols-7 gap-1">
+<div class="text-center py-2 text-sm text-gray-400">1</div>
+<div class="text-center py-2 text-sm text-gray-400">2</div>
+<div class="text-center py-2 text-sm text-gray-400">3</div>
+<div class="text-center py-2 text-sm text-gray-400">4</div>
+<div class="text-center py-2 text-sm text-gray-400">5</div>
+<div class="text-center py-2 text-sm bg-primary text-white rounded-lg font-medium">6</div>
+<div class="text-center py-2 text-sm text-gray-700">7</div>
+<div class="text-center py-2 text-sm text-gray-700">8</div>
+<div class="text-center py-2 text-sm text-gray-700">9</div>
+<div class="text-center py-2 text-sm text-gray-700">10</div>
+<div class="text-center py-2 text-sm text-gray-700">11</div>
+<div class="text-center py-2 text-sm bg-green-100 text-green-800 rounded-lg font-medium">12</div>
+<div class="text-center py-2 text-sm text-gray-700">13</div>
+<div class="text-center py-2 text-sm text-gray-700">14</div>
+<div class="text-center py-2 text-sm bg-orange-100 text-orange-800 rounded-lg font-medium">15</div>
+<div class="text-center py-2 text-sm text-gray-700">16</div>
+<div class="text-center py-2 text-sm text-gray-700">17</div>
+<div class="text-center py-2 text-sm text-gray-700">18</div>
+<div class="text-center py-2 text-sm text-gray-700">19</div>
+<div class="text-center py-2 text-sm bg-blue-100 text-blue-800 rounded-lg font-medium">20</div>
+<div class="text-center py-2 text-sm text-gray-700">21</div>
+<div class="text-center py-2 text-sm text-gray-700">22</div>
+<div class="text-center py-2 text-sm text-gray-700">23</div>
+<div class="text-center py-2 text-sm text-gray-700">24</div>
+<div class="text-center py-2 text-sm text-gray-700">25</div>
+<div class="text-center py-2 text-sm text-gray-700">26</div>
+<div class="text-center py-2 text-sm text-gray-700">27</div>
+<div class="text-center py-2 text-sm text-gray-700">28</div>
+<div class="text-center py-2 text-sm text-gray-700">29</div>
+<div class="text-center py-2 text-sm text-gray-700">30</div>
+<div class="text-center py-2 text-sm text-gray-700">31</div>
+</div>
+<div class="mt-4 space-y-2 text-xs">
+<div class="flex items-center space-x-2">
+<div class="w-3 h-3 bg-green-100 rounded"></div>
+<span class="text-gray-600">Team Meeting</span>
+</div>
+<div class="flex items-center space-x-2">
+<div class="w-3 h-3 bg-orange-100 rounded"></div>
+<span class="text-gray-600">Mission Start</span>
+</div>
+<div class="flex items-center space-x-2">
+<div class="w-3 h-3 bg-blue-100 rounded"></div>
+<span class="text-gray-600">Report Due</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border border-gray-200">
+<div class="p-4 sm:p-6 border-b border-gray-200">
+<h2 class="text-lg sm:text-xl font-bold text-gray-900">Messages</h2>
+<p class="text-gray-600 text-sm">Team communications</p>
+</div>
+<div class="p-4 sm:p-6 space-y-4">
+<div class="flex items-start space-x-3">
+<div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-medium">SM</div>
+<div class="flex-1">
+<div class="flex items-center space-x-2 mb-1">
+<span class="font-medium text-gray-900 text-sm">Sarah Mitchell</span>
+<span class="text-xs text-gray-500">2h ago</span>
+</div>
+<p class="text-sm text-gray-700">Team meeting tomorrow at 7 PM. Please confirm your attendance.</p>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-medium">MJ</div>
+<div class="flex-1">
+<div class="flex items-center space-x-2 mb-1">
+<span class="font-medium text-gray-900 text-sm">Michael Johnson</span>
+<span class="text-xs text-gray-500">4h ago</span>
+</div>
+<p class="text-sm text-gray-700">Great work on the outreach report! The numbers look encouraging.</p>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<div class="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-medium">DW</div>
+<div class="flex-1">
+<div class="flex items-center space-x-2 mb-1">
+<span class="font-medium text-gray-900 text-sm">David Wilson</span>
+<span class="text-xs text-gray-500">1d ago</span>
+</div>
+<p class="text-sm text-gray-700">Don't forget to bring your prayer journals for the youth ministry preparation.</p>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-2 px-4 rounded-button hover:bg-primary/90 transition-colors text-sm whitespace-nowrap !rounded-button">View All Messages</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Modals -->
+<!-- Profile Settings Modal -->
+<div id="profileSettingsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+<div class="bg-white rounded-xl shadow-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+<div class="p-6 border-b border-gray-200">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold text-gray-900">Profile Settings</h2>
+<button id="closeProfileSettings" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full">
+<i class="ri-close-line"></i>
+</button>
+</div>
+</div>
+<div class="p-6">
+<form class="space-y-4">
+<div class="flex justify-center mb-6">
+<div class="relative">
+<div class="w-20 h-20 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-medium">JD</div>
+<button type="button" class="absolute bottom-0 right-0 w-6 h-6 bg-gray-600 text-white rounded-full flex items-center justify-center text-xs hover:bg-gray-700">
+<i class="ri-camera-line"></i>
+</button>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+<input type="text" value="John" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+<input type="text" value="Davidson" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+<input type="email" value="john.davidson@mission.org" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+<input type="tel" value="+251-911-123456" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+<input type="text" value="Addis Ababa, Ethiopia" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm">
+</div>
+<div class="flex space-x-3 pt-4">
+<button type="submit" class="flex-1 bg-primary text-white py-2 px-4 rounded-button hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">Save Changes</button>
+<button type="button" id="cancelProfileSettings" class="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-button hover:bg-gray-300 transition-colors whitespace-nowrap !rounded-button">Cancel</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- Account Settings Modal -->
+<div id="accountSettingsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+<div class="bg-white rounded-xl shadow-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+<div class="p-6 border-b border-gray-200">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold text-gray-900">Account Settings</h2>
+<button id="closeAccountSettings" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full">
+<i class="ri-close-line"></i>
+</button>
+</div>
+</div>
+<div class="p-6">
+<form class="space-y-6">
+<div class="border-b border-gray-200 pb-6">
+<h3 class="text-lg font-medium text-gray-900 mb-4">Notification Preferences</h3>
+<div class="space-y-3">
+<label class="flex items-center justify-between cursor-pointer">
+<span class="text-sm text-gray-700">Email notifications</span>
+<div class="relative">
+<input type="checkbox" checked class="sr-only">
+<div class="w-11 h-6 bg-primary rounded-full flex items-center">
+<div class="w-5 h-5 bg-white rounded-full shadow transform translate-x-5 transition-transform"></div>
+</div>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer">
+<span class="text-sm text-gray-700">SMS notifications</span>
+<div class="relative">
+<input type="checkbox" class="sr-only">
+<div class="w-11 h-6 bg-gray-300 rounded-full flex items-center">
+<div class="w-5 h-5 bg-white rounded-full shadow transition-transform"></div>
+</div>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer">
+<span class="text-sm text-gray-700">Mission updates</span>
+<div class="relative">
+<input type="checkbox" checked class="sr-only">
+<div class="w-11 h-6 bg-primary rounded-full flex items-center">
+<div class="w-5 h-5 bg-white rounded-full shadow transform translate-x-5 transition-transform"></div>
+</div>
+</div>
+</label>
+</div>
+</div>
+<div class="border-b border-gray-200 pb-6">
+<h3 class="text-lg font-medium text-gray-900 mb-4">Privacy Settings</h3>
+<div class="space-y-3">
+<label class="flex items-center justify-between cursor-pointer">
+<span class="text-sm text-gray-700">Profile visibility</span>
+<select class="px-3 py-1 border border-gray-300 rounded text-sm pr-8">
+<option>Public</option>
+<option>Team Only</option>
+<option>Private</option>
+</select>
+</label>
+<label class="flex items-center justify-between cursor-pointer">
+<span class="text-sm text-gray-700">Show online status</span>
+<div class="relative">
+<input type="checkbox" checked class="sr-only">
+<div class="w-11 h-6 bg-primary rounded-full flex items-center">
+<div class="w-5 h-5 bg-white rounded-full shadow transform translate-x-5 transition-transform"></div>
+</div>
+</div>
+</label>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-medium text-gray-900 mb-4">Language & Region</h3>
+<div class="space-y-3">
+<div>
+<label class="block text-sm text-gray-700 mb-1">Language</label>
+<select class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm pr-8">
+<option>English</option>
+<option>Amharic</option>
+<option>Tigrinya</option>
+</select>
+</div>
+<div>
+<label class="block text-sm text-gray-700 mb-1">Time Zone</label>
+<select class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm pr-8">
+<option>East Africa Time (UTC+3)</option>
+<option>UTC</option>
+<option>Eastern Time</option>
+</select>
+</div>
+</div>
+</div>
+<div class="flex space-x-3 pt-4">
+<button type="submit" class="flex-1 bg-primary text-white py-2 px-4 rounded-button hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">Save Settings</button>
+<button type="button" id="cancelAccountSettings" class="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-button hover:bg-gray-300 transition-colors whitespace-nowrap !rounded-button">Cancel</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- Change Password Modal -->
+<div id="changePasswordModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+<div class="bg-white rounded-xl shadow-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+<div class="p-6 border-b border-gray-200">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold text-gray-900">Change Password</h2>
+<button id="closeChangePassword" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full">
+<i class="ri-close-line"></i>
+</button>
+</div>
+</div>
+<div class="p-6">
+<form class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
+<div class="relative">
+<input type="password" id="currentPassword" class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm">
+<button type="button" id="toggleCurrentPassword" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+<i class="ri-eye-line"></i>
+</button>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">New Password</label>
+<div class="relative">
+<input type="password" id="newPassword" class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm">
+<button type="button" id="toggleNewPassword" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+<i class="ri-eye-line"></i>
+</button>
+</div>
+<div class="mt-2 text-xs text-gray-500">
+<p>Password must contain:</p>
+<ul class="list-disc list-inside space-y-1">
+<li>At least 8 characters</li>
+<li>One uppercase letter</li>
+<li>One lowercase letter</li>
+<li>One number</li>
+</ul>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
+<div class="relative">
+<input type="password" id="confirmPassword" class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm">
+<button type="button" id="toggleConfirmPassword" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+<i class="ri-eye-line"></i>
+</button>
+</div>
+</div>
+<div class="flex space-x-3 pt-4">
+<button type="submit" class="flex-1 bg-primary text-white py-2 px-4 rounded-button hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">Update Password</button>
+<button type="button" id="cancelChangePassword" class="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-button hover:bg-gray-300 transition-colors whitespace-nowrap !rounded-button">Cancel</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<script id="mobileMenuScript">
+document.addEventListener('DOMContentLoaded', function() {
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+mobileMenuToggle.addEventListener('click', function() {
+mobileMenu.classList.remove('-translate-x-full');
+mobileMenuOverlay.classList.remove('hidden');
+});
+mobileMenuOverlay.addEventListener('click', function() {
+mobileMenu.classList.add('-translate-x-full');
+mobileMenuOverlay.classList.add('hidden');
+});
+});
+</script>
+<script id="profileDropdownScript">
+document.addEventListener('DOMContentLoaded', function() {
+const profileDropdown = document.getElementById('profileDropdown');
+const profileMenu = document.getElementById('profileMenu');
+profileDropdown.addEventListener('click', function(e) {
+e.stopPropagation();
+profileMenu.classList.toggle('hidden');
+});
+document.addEventListener('click', function() {
+profileMenu.classList.add('hidden');
+});
+profileMenu.addEventListener('click', function(e) {
+e.stopPropagation();
+});
+});
+</script>
+<script id="tabSwitchScript">
+document.addEventListener('DOMContentLoaded', function() {
+const groupReportTab = document.getElementById('groupReportTab');
+const individualReportTab = document.getElementById('individualReportTab');
+const groupReportContent = document.getElementById('groupReportContent');
+const individualReportContent = document.getElementById('individualReportContent');
+groupReportTab.addEventListener('click', function() {
+groupReportTab.classList.add('text-primary', 'bg-primary/10');
+groupReportTab.classList.remove('text-gray-600', 'hover:text-gray-900', 'hover:bg-gray-100');
+individualReportTab.classList.remove('text-primary', 'bg-primary/10');
+individualReportTab.classList.add('text-gray-600', 'hover:text-gray-900', 'hover:bg-gray-100');
+groupReportContent.classList.remove('hidden');
+individualReportContent.classList.add('hidden');
+});
+individualReportTab.addEventListener('click', function() {
+individualReportTab.classList.add('text-primary', 'bg-primary/10');
+individualReportTab.classList.remove('text-gray-600', 'hover:text-gray-900', 'hover:bg-gray-100');
+groupReportTab.classList.remove('text-primary', 'bg-primary/10');
+groupReportTab.classList.add('text-gray-600', 'hover:text-gray-900', 'hover:bg-gray-100');
+individualReportContent.classList.remove('hidden');
+groupReportContent.classList.add('hidden');
+});
+});
+</script>
+<script id="radioButtonScript">
+document.addEventListener('DOMContentLoaded', function() {
+const radioInputs = document.querySelectorAll('input[type="radio"][name="status"]');
+const radioDots = document.querySelectorAll('input[type="radio"][name="status"] + div .w-2');
+radioInputs.forEach((input, index) => {
+input.addEventListener('change', function() {
+radioDots.forEach(dot => dot.classList.add('hidden'));
+if (this.checked) {
+radioDots[index].classList.remove('hidden');
+}
+});
+});
+});
+</script>
+<script id="modalScript">
+document.addEventListener('DOMContentLoaded', function() {
+// Profile Settings Modal
+const profileSettingsModal = document.getElementById('profileSettingsModal');
+const profileSettingsBtn = document.getElementById('profileSettingsBtn');
+const closeProfileSettings = document.getElementById('closeProfileSettings');
+const cancelProfileSettings = document.getElementById('cancelProfileSettings');
+const profileMenu = document.getElementById('profileMenu');
+profileSettingsBtn.addEventListener('click', function() {
+profileSettingsModal.classList.remove('hidden');
+profileMenu.classList.add('hidden');
+});
+closeProfileSettings.addEventListener('click', function() {
+profileSettingsModal.classList.add('hidden');
+});
+cancelProfileSettings.addEventListener('click', function() {
+profileSettingsModal.classList.add('hidden');
+});
+// Account Settings Modal
+const accountSettingsModal = document.getElementById('accountSettingsModal');
+const accountSettingsBtn = document.getElementById('accountSettingsBtn');
+const closeAccountSettings = document.getElementById('closeAccountSettings');
+const cancelAccountSettings = document.getElementById('cancelAccountSettings');
+accountSettingsBtn.addEventListener('click', function() {
+accountSettingsModal.classList.remove('hidden');
+profileMenu.classList.add('hidden');
+});
+closeAccountSettings.addEventListener('click', function() {
+accountSettingsModal.classList.add('hidden');
+});
+cancelAccountSettings.addEventListener('click', function() {
+accountSettingsModal.classList.add('hidden');
+});
+// Change Password Modal
+const changePasswordModal = document.getElementById('changePasswordModal');
+const changePasswordBtn = document.getElementById('changePasswordBtn');
+const closeChangePassword = document.getElementById('closeChangePassword');
+const cancelChangePassword = document.getElementById('cancelChangePassword');
+changePasswordBtn.addEventListener('click', function() {
+changePasswordModal.classList.remove('hidden');
+profileMenu.classList.add('hidden');
+});
+closeChangePassword.addEventListener('click', function() {
+changePasswordModal.classList.add('hidden');
+});
+cancelChangePassword.addEventListener('click', function() {
+changePasswordModal.classList.add('hidden');
+});
+// Password visibility toggles
+const toggleCurrentPassword = document.getElementById('toggleCurrentPassword');
+const toggleNewPassword = document.getElementById('toggleNewPassword');
+const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+const currentPassword = document.getElementById('currentPassword');
+const newPassword = document.getElementById('newPassword');
+const confirmPassword = document.getElementById('confirmPassword');
+toggleCurrentPassword.addEventListener('click', function() {
+const type = currentPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+currentPassword.setAttribute('type', type);
+this.querySelector('i').className = type === 'password' ? 'ri-eye-line' : 'ri-eye-off-line';
+});
+toggleNewPassword.addEventListener('click', function() {
+const type = newPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+newPassword.setAttribute('type', type);
+this.querySelector('i').className = type === 'password' ? 'ri-eye-line' : 'ri-eye-off-line';
+});
+toggleConfirmPassword.addEventListener('click', function() {
+const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+confirmPassword.setAttribute('type', type);
+this.querySelector('i').className = type === 'password' ? 'ri-eye-line' : 'ri-eye-off-line';
+});
+// Toggle switches for account settings
+const toggleSwitches = document.querySelectorAll('#accountSettingsModal input[type="checkbox"]');
+toggleSwitches.forEach(toggle => {
+toggle.addEventListener('change', function() {
+const slider = this.nextElementSibling.querySelector('div');
+if (this.checked) {
+this.nextElementSibling.classList.add('bg-primary');
+this.nextElementSibling.classList.remove('bg-gray-300');
+slider.classList.add('translate-x-5');
+} else {
+this.nextElementSibling.classList.remove('bg-primary');
+this.nextElementSibling.classList.add('bg-gray-300');
+slider.classList.remove('translate-x-5');
+}
+});
+});
+// Close modals when clicking outside
+[profileSettingsModal, accountSettingsModal, changePasswordModal].forEach(modal => {
+modal.addEventListener('click', function(e) {
+if (e.target === modal) {
+modal.classList.add('hidden');
+}
+});
+});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports - Grace Community Church</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before {
+content: "\f3c2";
+}
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#4F46E5',
+secondary: '#059669'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<div class="flex h-screen">
+<aside class="w-64 bg-white shadow-lg flex flex-col">
+<div class="p-6 border-b">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-church-line text-white text-lg"></i>
+</div>
+</div>
+<div>
+<h1 class="font-['Pacifico'] text-xl text-primary">Grace Church</h1>
+<p class="text-sm text-gray-600">Mission Management</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 p-4">
+<ul class="space-y-2">
+<li>
+<a href="dashboard.html" data-readdy="true" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-dashboard-line"></i>
+</div>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a href="mission.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-compass-line"></i>
+</div>
+<span>Missions</span>
+</a>
+</li>
+<li>
+<a href="members.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-team-line"></i>
+</div>
+<span>Members</span>
+</a>
+</li>
+<li>
+<a href="report.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary text-white">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-file-text-line"></i>
+</div>
+<span>Reports</span>
+</a>
+</li>
+<li>
+<a href="communication.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-chat-3-line"></i>
+</div>
+<span>Communication</span>
+</a>
+</li>
+<li>
+<a href="pairing.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-robot-line"></i>
+</div>
+<span>pairing</span>
+</a>
+</li>
+<li>
+<a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-gallery-line"></i>
+</div>
+<span>Media Gallery</span>
+</a>
+</li>
+<li>
+<a href="attandance.html" data-readdy="true" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-calendar-check-line"></i>
+</div>
+<span>Attendance</span>
+</a>
+</li>
+<li>
+<a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-map-pin-line"></i>
+</div>
+<span>Mission Map</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-4 border-t">
+<a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-settings-line"></i>
+</div>
+<span>Settings</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col">
+<header class="bg-white shadow-sm border-b px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<h2 class="text-2xl font-semibold text-gray-900">Reports</h2>
+<nav class="text-sm text-gray-500">
+<span>Home</span>
+<span class="mx-2">/</span>
+<span class="text-gray-900">Reports</span>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative">
+<input type="text" placeholder="Search reports, missions..." class="w-80 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+<div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+<i class="ri-search-line text-gray-400"></i>
+</div>
+</div>
+<button class="relative p-2 text-gray-600 hover:text-gray-900">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-notification-line"></i>
+</div>
+<span class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+</button>
+<div class="flex items-center space-x-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20church%20pastor%20headshot%20photo%20with%20warm%20smile%20wearing%20suit%20against%20clean%20white%20background%20modern%20portrait%20photography&width=40&height=40&seq=profile1&orientation=squarish" alt="Profile" class="w-10 h-10 rounded-full object-cover">
+<div>
+<p class="text-sm font-medium text-gray-900">Pastor Michael Johnson</p>
+<p class="text-xs text-gray-500">Mission Leader</p>
+</div>
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="bg-white border-b px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2 whitespace-nowrap !rounded-button" id="generate-report-btn">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-file-add-line"></i>
+</div>
+<span>Generate Report</span>
+</button>
+<div class="flex items-center space-x-1 bg-gray-100 p-1 rounded-lg">
+<button class="px-3 py-1 text-sm rounded-md bg-white text-gray-900 shadow-sm whitespace-nowrap !rounded-button report-filter active" data-filter="overview">Overview</button>
+<button class="px-3 py-1 text-sm rounded-md text-gray-600 hover:text-gray-900 whitespace-nowrap !rounded-button report-filter" data-filter="missions">Missions</button>
+<button class="px-3 py-1 text-sm rounded-md text-gray-600 hover:text-gray-900 whitespace-nowrap !rounded-button report-filter" data-filter="financial">Financial</button>
+<button class="px-3 py-1 text-sm rounded-md text-gray-600 hover:text-gray-900 whitespace-nowrap !rounded-button report-filter" data-filter="attendance">Attendance</button>
+</div>
+</div>
+<div class="flex items-center space-x-3">
+<div class="relative">
+<button class="flex items-center space-x-2 px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button" id="date-range-btn">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-calendar-line text-gray-400"></i>
+</div>
+<span>Last 30 Days</span>
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+</button>
+<div class="absolute right-0 top-full mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10 hidden" id="date-range-dropdown">
+<div class="py-1">
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 date-option" data-range="7">Last 7 Days</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 date-option" data-range="30">Last 30 Days</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 date-option" data-range="90">Last 90 Days</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 date-option" data-range="365">Last Year</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 date-option" data-range="custom">Custom Range</button>
+</div>
+</div>
+</div>
+<button class="flex items-center space-x-2 px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button" id="export-btn">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-download-line text-gray-400"></i>
+</div>
+<span>Export</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex-1 p-6 overflow-y-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white rounded-xl shadow-sm p-6 border">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-600">Total Missions</p>
+<p class="text-3xl font-bold text-gray-900 mt-2">24</p>
+<p class="text-sm text-secondary mt-1">+3 this month</p>
+</div>
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-compass-line text-primary"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm p-6 border">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-600">Active Participants</p>
+<p class="text-3xl font-bold text-gray-900 mt-2">164</p>
+<p class="text-sm text-secondary mt-1">92% attendance</p>
+</div>
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-team-line text-secondary"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm p-6 border">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-600">Total Funds Raised</p>
+<p class="text-3xl font-bold text-gray-900 mt-2">$48,250</p>
+<p class="text-sm text-secondary mt-1">+15% from last month</p>
+</div>
+<div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-money-dollar-circle-line text-green-600"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm p-6 border">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-600">Mission Success Rate</p>
+<p class="text-3xl font-bold text-gray-900 mt-2">89%</p>
+<p class="text-sm text-secondary mt-1">Above target</p>
+</div>
+<div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-trophy-line text-orange-600"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<h3 class="text-lg font-semibold text-gray-900">Mission Performance Trends</h3>
+<p class="text-sm text-gray-600 mt-1">Monthly completion rates and participation</p>
+</div>
+<div class="p-6">
+<div id="mission-performance-chart" style="width: 100%; height: 300px;"></div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<h3 class="text-lg font-semibold text-gray-900">Member Participation</h3>
+<p class="text-sm text-gray-600 mt-1">Active members by mission type</p>
+</div>
+<div class="p-6">
+<div id="participation-chart" style="width: 100%; height: 300px;"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<div class="lg:col-span-2 bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<h3 class="text-lg font-semibold text-gray-900">Financial Summary</h3>
+<p class="text-sm text-gray-600 mt-1">Income vs expenses over time</p>
+</div>
+<div class="p-6">
+<div id="financial-chart" style="width: 100%; height: 350px;"></div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<h3 class="text-lg font-semibold text-gray-900">Mission Types Distribution</h3>
+<p class="text-sm text-gray-600 mt-1">Breakdown by category</p>
+</div>
+<div class="p-6">
+<div id="mission-types-chart" style="width: 100%; height: 350px;"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-semibold text-gray-900">Recent Mission Reports</h3>
+<button class="text-primary hover:text-primary/80 text-sm">View All</button>
+</div>
+</div>
+<div class="divide-y divide-gray-200">
+<div class="p-6">
+<div class="flex items-start justify-between">
+<div class="flex-1">
+<h4 class="font-medium text-gray-900">Downtown Outreach Ministry</h4>
+<p class="text-sm text-gray-600 mt-1">Completed on December 1, 2024</p>
+<div class="flex items-center space-x-4 mt-3">
+<span class="text-xs text-gray-500">Participants: 28</span>
+<span class="text-xs text-gray-500">Budget: $2,400</span>
+<span class="text-xs text-gray-500">Impact: 150 people served</span>
+</div>
+</div>
+<span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Completed</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex items-start justify-between">
+<div class="flex-1">
+<h4 class="font-medium text-gray-900">Medical Mission Honduras</h4>
+<p class="text-sm text-gray-600 mt-1">Completed on November 28, 2024</p>
+<div class="flex items-center space-x-4 mt-3">
+<span class="text-xs text-gray-500">Participants: 15</span>
+<span class="text-xs text-gray-500">Budget: $8,500</span>
+<span class="text-xs text-gray-500">Impact: 300 patients treated</span>
+</div>
+</div>
+<span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Completed</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex items-start justify-between">
+<div class="flex-1">
+<h4 class="font-medium text-gray-900">Youth Evangelism Camp</h4>
+<p class="text-sm text-gray-600 mt-1">In progress since November 15, 2024</p>
+<div class="flex items-center space-x-4 mt-3">
+<span class="text-xs text-gray-500">Participants: 42</span>
+<span class="text-xs text-gray-500">Budget: $5,200</span>
+<span class="text-xs text-gray-500">Expected: 80 youth reached</span>
+</div>
+</div>
+<span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">In Progress</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-semibold text-gray-900">Attendance Tracking</h3>
+<button class="text-primary hover:text-primary/80 text-sm">View Details</button>
+</div>
+</div>
+<div class="p-6">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-calendar-check-line text-primary"></i>
+</div>
+</div>
+<div>
+<p class="font-medium text-gray-900">Weekly Prayer Service</p>
+<p class="text-sm text-gray-600">Every Wednesday 7:00 PM</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-medium text-gray-900">92%</p>
+<p class="text-sm text-gray-600">Avg. Attendance</p>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 bg-secondary/10 rounded-lg flex items-center justify-center">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-heart-line text-secondary"></i>
+</div>
+</div>
+<div>
+<p class="font-medium text-gray-900">Community Service</p>
+<p class="text-sm text-gray-600">Monthly volunteer work</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-medium text-gray-900">78%</p>
+<p class="text-sm text-gray-600">Avg. Attendance</p>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-group-line text-orange-600"></i>
+</div>
+</div>
+<div>
+<p class="font-medium text-gray-900">Youth Ministry</p>
+<p class="text-sm text-gray-600">Friday evening sessions</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-medium text-gray-900">85%</p>
+<p class="text-sm text-gray-600">Avg. Attendance</p>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-book-open-line text-purple-600"></i>
+</div>
+</div>
+<div>
+<p class="font-medium text-gray-900">Bible Study Groups</p>
+<p class="text-sm text-gray-600">Small group sessions</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-medium text-gray-900">96%</p>
+<p class="text-sm text-gray-600">Avg. Attendance</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-semibold text-gray-900">Detailed Mission Reports</h3>
+<div class="flex items-center space-x-2">
+<div class="relative">
+<input type="text" placeholder="Search missions..." class="w-48 pl-8 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+<div class="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+<i class="ri-search-line text-gray-400 text-sm"></i>
+</div>
+</div>
+<button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-filter-line text-gray-600"></i>
+</div>
+</button>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead class="bg-gray-50 border-b">
+<tr>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Mission Name</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Type</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Duration</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Participants</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Budget</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Impact</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Status</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200">
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6">
+<div>
+<h4 class="font-medium text-gray-900">Downtown Outreach Ministry</h4>
+<p class="text-sm text-gray-600">Weekly community service</p>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Outreach</span>
+</td>
+<td class="py-4 px-6 text-sm text-gray-600">Nov 1 - Dec 1, 2024</td>
+<td class="py-4 px-6 text-sm text-gray-900 font-medium">28</td>
+<td class="py-4 px-6 text-sm text-gray-900 font-medium">$2,400</td>
+<td class="py-4 px-6 text-sm text-gray-600">150 people served</td>
+<td class="py-4 px-6">
+<span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Completed</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<button class="text-primary hover:text-primary/80 text-sm">View</button>
+<button class="text-gray-600 hover:text-gray-900 text-sm">Export</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6">
+<div>
+<h4 class="font-medium text-gray-900">Medical Mission Honduras</h4>
+<p class="text-sm text-gray-600">Healthcare outreach program</p>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Medical</span>
+</td>
+<td class="py-4 px-6 text-sm text-gray-600">Nov 20 - Nov 28, 2024</td>
+<td class="py-4 px-6 text-sm text-gray-900 font-medium">15</td>
+<td class="py-4 px-6 text-sm text-gray-900 font-medium">$8,500</td>
+<td class="py-4 px-6 text-sm text-gray-600">300 patients treated</td>
+<td class="py-4 px-6">
+<span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Completed</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<button class="text-primary hover:text-primary/80 text-sm">View</button>
+<button class="text-gray-600 hover:text-gray-900 text-sm">Export</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6">
+<div>
+<h4 class="font-medium text-gray-900">Youth Evangelism Camp</h4>
+<p class="text-sm text-gray-600">Summer youth outreach program</p>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Youth</span>
+</td>
+<td class="py-4 px-6 text-sm text-gray-600">Nov 15 - Dec 15, 2024</td>
+<td class="py-4 px-6 text-sm text-gray-900 font-medium">42</td>
+<td class="py-4 px-6 text-sm text-gray-900 font-medium">$5,200</td>
+<td class="py-4 px-6 text-sm text-gray-600">80 youth reached</td>
+<td class="py-4 px-6">
+<span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">In Progress</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<button class="text-primary hover:text-primary/80 text-sm">View</button>
+<button class="text-gray-600 hover:text-gray-900 text-sm">Export</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6">
+<div>
+<h4 class="font-medium text-gray-900">Prison Ministry Program</h4>
+<p class="text-sm text-gray-600">Weekly prison visitation</p>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Ministry</span>
+</td>
+<td class="py-4 px-6 text-sm text-gray-600">Oct 1 - Nov 30, 2024</td>
+<td class="py-4 px-6 text-sm text-gray-900 font-medium">12</td>
+<td class="py-4 px-6 text-sm text-gray-900 font-medium">$800</td>
+<td class="py-4 px-6 text-sm text-gray-600">45 inmates reached</td>
+<td class="py-4 px-6">
+<span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Completed</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<button class="text-primary hover:text-primary/80 text-sm">View</button>
+<button class="text-gray-600 hover:text-gray-900 text-sm">Export</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6">
+<div>
+<h4 class="font-medium text-gray-900">Thanksgiving Food Drive</h4>
+<p class="text-sm text-gray-600">Community food distribution</p>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Community</span>
+</td>
+<td class="py-4 px-6 text-sm text-gray-600">Nov 20 - Nov 25, 2024</td>
+<td class="py-4 px-6 text-sm text-gray-900 font-medium">35</td>
+<td class="py-4 px-6 text-sm text-gray-900 font-medium">$3,200</td>
+<td class="py-4 px-6 text-sm text-gray-600">200 families fed</td>
+<td class="py-4 px-6">
+<span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Completed</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<button class="text-primary hover:text-primary/80 text-sm">View</button>
+<button class="text-gray-600 hover:text-gray-900 text-sm">Export</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 border-t">
+<div class="flex items-center justify-between">
+<p class="text-sm text-gray-600">Showing 5 of 24 missions</p>
+<div class="flex items-center space-x-2">
+<button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button">Previous</button>
+<button class="px-3 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 text-sm whitespace-nowrap !rounded-button">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" id="generate-report-modal">
+<div class="flex items-center justify-center min-h-screen p-4">
+<div class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-screen overflow-y-auto">
+<div class="p-6 border-b">
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-semibold text-gray-900">Generate Custom Report</h2>
+<button class="p-2 hover:bg-gray-100 rounded-lg" id="close-report-modal">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-close-line text-gray-600"></i>
+</div>
+</button>
+</div>
+</div>
+<div class="p-6">
+<form class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Report Type</label>
+<div class="grid grid-cols-2 gap-3">
+<label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+<input type="radio" name="reportType" value="mission" class="sr-only report-type-radio">
+<div class="w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center radio-custom">
+<div class="w-2 h-2 bg-primary rounded-full hidden radio-dot"></div>
+</div>
+<span class="ml-3 text-sm text-gray-700">Mission Performance</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+<input type="radio" name="reportType" value="financial" class="sr-only report-type-radio">
+<div class="w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center radio-custom">
+<div class="w-2 h-2 bg-primary rounded-full hidden radio-dot"></div>
+</div>
+<span class="ml-3 text-sm text-gray-700">Financial Summary</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+<input type="radio" name="reportType" value="attendance" class="sr-only report-type-radio">
+<div class="w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center radio-custom">
+<div class="w-2 h-2 bg-primary rounded-full hidden radio-dot"></div>
+</div>
+<span class="ml-3 text-sm text-gray-700">Attendance Report</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+<input type="radio" name="reportType" value="member" class="sr-only report-type-radio">
+<div class="w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center radio-custom">
+<div class="w-2 h-2 bg-primary rounded-full hidden radio-dot"></div>
+</div>
+<span class="ml-3 text-sm text-gray-700">Member Statistics</span>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Start Date</label>
+<input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">End Date</label>
+<input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Mission Types</label>
+<div class="grid grid-cols-2 gap-2">
+<label class="flex items-center">
+<input type="checkbox" class="sr-only mission-type-checkbox">
+<div class="w-4 h-4 border-2 border-gray-300 rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-2 h-2 bg-primary rounded-sm hidden checkbox-dot"></div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Outreach</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="sr-only mission-type-checkbox">
+<div class="w-4 h-4 border-2 border-gray-300 rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-2 h-2 bg-primary rounded-sm hidden checkbox-dot"></div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Medical</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="sr-only mission-type-checkbox">
+<div class="w-4 h-4 border-2 border-gray-300 rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-2 h-2 bg-primary rounded-sm hidden checkbox-dot"></div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Youth</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="sr-only mission-type-checkbox">
+<div class="w-4 h-4 border-2 border-gray-300 rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-2 h-2 bg-primary rounded-sm hidden checkbox-dot"></div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Community</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Export Format</label>
+<div class="relative">
+<button type="button" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm text-left flex items-center justify-between" id="export-format-btn">
+<span>Select format</span>
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+</button>
+<div class="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10 hidden" id="export-format-dropdown">
+<div class="py-1">
+<button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 export-format-option" data-format="pdf">PDF Document</button>
+<button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 export-format-option" data-format="excel">Excel Spreadsheet</button>
+<button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 export-format-option" data-format="csv">CSV File</button>
+</div>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Additional Options</label>
+<div class="space-y-2">
+<label class="flex items-center">
+<input type="checkbox" class="sr-only additional-option-checkbox">
+<div class="w-4 h-4 border-2 border-gray-300 rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-2 h-2 bg-primary rounded-sm hidden checkbox-dot"></div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Include charts and graphs</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="sr-only additional-option-checkbox">
+<div class="w-4 h-4 border-2 border-gray-300 rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-2 h-2 bg-primary rounded-sm hidden checkbox-dot"></div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Include member details</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="sr-only additional-option-checkbox">
+<div class="w-4 h-4 border-2 border-gray-300 rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-2 h-2 bg-primary rounded-sm hidden checkbox-dot"></div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Include financial breakdown</span>
+</label>
+</div>
+</div>
+<div class="flex items-center justify-end space-x-3 pt-4">
+<button type="button" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button" id="cancel-report">Cancel</button>
+<button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 text-sm whitespace-nowrap !rounded-button">Generate Report</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+<script id="report-filters">
+document.addEventListener('DOMContentLoaded', function() {
+const filterButtons = document.querySelectorAll('.report-filter');
+filterButtons.forEach(button => {
+button.addEventListener('click', function() {
+filterButtons.forEach(btn => {
+btn.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+btn.classList.add('text-gray-600');
+});
+this.classList.remove('text-gray-600');
+this.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+});
+});
+});
+</script>
+<script id="date-range-dropdown">
+document.addEventListener('DOMContentLoaded', function() {
+const dateButton = document.getElementById('date-range-btn');
+const dateDropdown = document.getElementById('date-range-dropdown');
+const dateOptions = document.querySelectorAll('.date-option');
+dateButton.addEventListener('click', function() {
+dateDropdown.classList.toggle('hidden');
+});
+document.addEventListener('click', function(e) {
+if (!dateButton.contains(e.target) && !dateDropdown.contains(e.target)) {
+dateDropdown.classList.add('hidden');
+}
+});
+dateOptions.forEach(option => {
+option.addEventListener('click', function() {
+const range = this.dataset.range;
+const rangeText = this.textContent;
+dateButton.querySelector('span').textContent = rangeText;
+dateDropdown.classList.add('hidden');
+});
+});
+});
+</script>
+<script id="generate-report-modal">
+document.addEventListener('DOMContentLoaded', function() {
+const generateButton = document.getElementById('generate-report-btn');
+const reportModal = document.getElementById('generate-report-modal');
+const closeReportModal = document.getElementById('close-report-modal');
+const cancelReport = document.getElementById('cancel-report');
+const exportFormatBtn = document.getElementById('export-format-btn');
+const exportFormatDropdown = document.getElementById('export-format-dropdown');
+const exportFormatOptions = document.querySelectorAll('.export-format-option');
+const reportTypeRadios = document.querySelectorAll('.report-type-radio');
+const radioCustoms = document.querySelectorAll('.radio-custom');
+const checkboxCustoms = document.querySelectorAll('.checkbox-custom');
+generateButton.addEventListener('click', function() {
+reportModal.classList.remove('hidden');
+document.body.style.overflow = 'hidden';
+});
+closeReportModal.addEventListener('click', function() {
+reportModal.classList.add('hidden');
+document.body.style.overflow = 'auto';
+});
+cancelReport.addEventListener('click', function() {
+reportModal.classList.add('hidden');
+document.body.style.overflow = 'auto';
+});
+reportModal.addEventListener('click', function(e) {
+if (e.target === reportModal) {
+reportModal.classList.add('hidden');
+document.body.style.overflow = 'auto';
+}
+});
+exportFormatBtn.addEventListener('click', function() {
+exportFormatDropdown.classList.toggle('hidden');
+});
+exportFormatOptions.forEach(option => {
+option.addEventListener('click', function() {
+const formatText = this.textContent;
+exportFormatBtn.querySelector('span').textContent = formatText;
+exportFormatDropdown.classList.add('hidden');
+});
+});
+radioCustoms.forEach((radio, index) => {
+radio.addEventListener('click', function() {
+radioCustoms.forEach(r => {
+const dot = r.querySelector('.radio-dot');
+dot.classList.add('hidden');
+r.classList.remove('border-primary');
+r.classList.add('border-gray-300');
+});
+const radioDot = this.querySelector('.radio-dot');
+radioDot.classList.remove('hidden');
+this.classList.remove('border-gray-300');
+this.classList.add('border-primary');
+});
+});
+checkboxCustoms.forEach((checkbox, index) => {
+checkbox.addEventListener('click', function() {
+const checkboxDot = this.querySelector('.checkbox-dot');
+const isChecked = !checkboxDot.classList.contains('hidden');
+if (isChecked) {
+checkboxDot.classList.add('hidden');
+this.classList.remove('border-primary');
+this.classList.add('border-gray-300');
+} else {
+checkboxDot.classList.remove('hidden');
+this.classList.remove('border-gray-300');
+this.classList.add('border-primary');
+}
+});
+});
+});
+</script>
+<script id="charts-initialization">
+document.addEventListener('DOMContentLoaded', function() {
+const missionChart = echarts.init(document.getElementById('mission-performance-chart'));
+const missionOption = {
+animation: false,
+grid: { top: 0, right: 0, bottom: 0, left: 0 },
+xAxis: {
+type: 'category',
+data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+axisLine: { lineStyle: { color: '#e5e7eb' } },
+axisTick: { show: false },
+axisLabel: { color: '#6b7280', fontSize: 12 }
+},
+yAxis: {
+type: 'value',
+axisLine: { show: false },
+axisTick: { show: false },
+axisLabel: { color: '#6b7280', fontSize: 12 },
+splitLine: { lineStyle: { color: '#f3f4f6' } }
+},
+series: [{
+data: [85, 92, 78, 88, 95, 89, 91, 87, 93, 90, 96, 89],
+type: 'line',
+smooth: true,
+symbol: 'none',
+lineStyle: { color: 'rgba(87, 181, 231, 1)', width: 3 },
+areaStyle: { color: 'rgba(87, 181, 231, 0.1)' }
+}],
+tooltip: {
+trigger: 'axis',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderColor: '#e5e7eb',
+textStyle: { color: '#1f2937' }
+}
+};
+missionChart.setOption(missionOption);
+const participationChart = echarts.init(document.getElementById('participation-chart'));
+const participationOption = {
+animation: false,
+grid: { top: 0, right: 0, bottom: 0, left: 0 },
+tooltip: {
+trigger: 'item',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderColor: '#e5e7eb',
+textStyle: { color: '#1f2937' }
+},
+series: [{
+type: 'pie',
+radius: ['40%', '70%'],
+center: ['50%', '50%'],
+data: [
+{ value: 45, name: 'Outreach', itemStyle: { color: 'rgba(87, 181, 231, 1)' } },
+{ value: 28, name: 'Medical', itemStyle: { color: 'rgba(141, 211, 199, 1)' } },
+{ value: 35, name: 'Youth', itemStyle: { color: 'rgba(251, 191, 114, 1)' } },
+{ value: 22, name: 'Community', itemStyle: { color: 'rgba(252, 141, 98, 1)' } }
+],
+label: { color: '#1f2937', fontSize: 12 },
+emphasis: { itemStyle: { shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0, 0, 0, 0.5)' } }
+}]
+};
+participationChart.setOption(participationOption);
+const financialChart = echarts.init(document.getElementById('financial-chart'));
+const financialOption = {
+animation: false,
+grid: { top: 0, right: 0, bottom: 0, left: 0 },
+xAxis: {
+type: 'category',
+data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+axisLine: { lineStyle: { color: '#e5e7eb' } },
+axisTick: { show: false },
+axisLabel: { color: '#6b7280', fontSize: 12 }
+},
+yAxis: {
+type: 'value',
+axisLine: { show: false },
+axisTick: { show: false },
+axisLabel: { color: '#6b7280', fontSize: 12 },
+splitLine: { lineStyle: { color: '#f3f4f6' } }
+},
+series: [
+{
+name: 'Income',
+type: 'bar',
+data: [4200, 3800, 4500, 5200, 4800, 5500, 4900, 5100, 4700, 5300, 4600, 5000],
+itemStyle: { color: 'rgba(87, 181, 231, 1)', borderRadius: [4, 4, 0, 0] }
+},
+{
+name: 'Expenses',
+type: 'bar',
+data: [3500, 3200, 3800, 4100, 3900, 4200, 4000, 4300, 3700, 4400, 3600, 4100],
+itemStyle: { color: 'rgba(141, 211, 199, 1)', borderRadius: [4, 4, 0, 0] }
+}
+],
+tooltip: {
+trigger: 'axis',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderColor: '#e5e7eb',
+textStyle: { color: '#1f2937' }
+}
+};
+financialChart.setOption(financialOption);
+const missionTypesChart = echarts.init(document.getElementById('mission-types-chart'));
+const missionTypesOption = {
+animation: false,
+grid: { top: 0, right: 0, bottom: 0, left: 0 },
+tooltip: {
+trigger: 'item',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderColor: '#e5e7eb',
+textStyle: { color: '#1f2937' }
+},
+series: [{
+type: 'pie',
+radius: '70%',
+center: ['50%', '50%'],
+data: [
+{ value: 8, name: 'Outreach', itemStyle: { color: 'rgba(87, 181, 231, 1)' } },
+{ value: 5, name: 'Medical', itemStyle: { color: 'rgba(141, 211, 199, 1)' } },
+{ value: 6, name: 'Youth', itemStyle: { color: 'rgba(251, 191, 114, 1)' } },
+{ value: 5, name: 'Community', itemStyle: { color: 'rgba(252, 141, 98, 1)' } }
+],
+label: { color: '#1f2937', fontSize: 12 },
+emphasis: { itemStyle: { shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0, 0, 0, 0.5)' } }
+}]
+};
+missionTypesChart.setOption(missionTypesOption);
+window.addEventListener('resize', function() {
+missionChart.resize();
+participationChart.resize();
+financialChart.resize();
+missionTypesChart.resize();
+});
+});
+</script>
+</body>
+</html>
