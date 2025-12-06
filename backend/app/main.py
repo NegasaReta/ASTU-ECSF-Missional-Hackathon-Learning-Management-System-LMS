@@ -64,6 +64,6 @@ def attendance(request: Request):
 @app.get("/pairing", response_class=HTMLResponse)
 def pairing(request: Request):
     return templates.TemplateResponse("pairing.html", {"request": request})
-@app.get("/")
-def main(user=Depends(get_current_user)):
-    return {"message": "home page"}
+# @app.get("/")
+# def main(user=Depends(get_current_user)):
+#     return {"message": "home page"}
