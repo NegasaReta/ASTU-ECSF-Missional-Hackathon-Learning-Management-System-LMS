@@ -34,7 +34,7 @@ class MisionnaryBase(SQLModel):
     batch: int
     phone: str = Field(max_length=10, min_length=10)
     language: LanguageOption
-    experienced: bool
+    experienced: bool = Field(default=False)
     attendance: bool = Field(default=False)
     verified: bool = Field(default=False)
 
