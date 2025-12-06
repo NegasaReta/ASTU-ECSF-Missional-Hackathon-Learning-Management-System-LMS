@@ -7,11 +7,10 @@ from app.core.dependencies import get_current_user
 app = FastAPI()
 
 # Configure CORS
-origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # can also use ["*"] to allow all
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
