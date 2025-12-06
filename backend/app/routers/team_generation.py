@@ -6,7 +6,7 @@ from sqlmodel import Session
 from app.database.db import get_session
 from app.model.models import Missionary, Site, Team, TeamMember
 
-router = APIRouter()
+router = APIRouter(prefix="/team-generation", tags=["Team Generation"])
 
 def get_categories(missionaries: List[Missionary]):
     bilingual = [m for m in missionaries if m.language == "Both"]

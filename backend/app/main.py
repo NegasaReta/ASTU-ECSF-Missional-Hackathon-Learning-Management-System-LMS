@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from app.database.db import create_db_and_tables
-from app.routers import admin, missionary, recipient, auth
+from app.routers import admin, missionary, recipient, auth, team_generation
 from app.core.dependencies import get_current_user
 
 app = FastAPI()
@@ -27,7 +27,7 @@ app.include_router(auth.router)
 app.include_router(admin.router)
 app.include_router(missionary.router)
 app.include_router(recipient.router)
-
+app.include_router(team_generation.router)
 
 @app.on_event("startup")
 def on_startup():
