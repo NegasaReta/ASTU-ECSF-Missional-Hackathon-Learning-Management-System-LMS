@@ -19,7 +19,6 @@ class RecipientRead(BaseModel):
 class MissionaryRead(BaseModel):
     id: uuid.UUID
     full_name: str
-    email: EmailStr
     batch: int
     phone: str
     language: str
