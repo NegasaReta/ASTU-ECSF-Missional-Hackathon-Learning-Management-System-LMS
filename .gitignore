@@ -94,3 +94,38 @@ docker-compose.override.yml
 *.dockerfile
 
 alembic/
+
+#add git ignore for node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+.pnpm-store/
+.next/
+out/
+.cache/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.next-env.d.ts
+.next/static/
+.next/cache/
+.vercel/
+.vercel/build/
+.now/
+.now/cache/
+.now/static/
+.now/build/
+.now/env/
+*.log
+.DS_Store
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+*.tsbuildinfo
+
+#ignore GoPreach for now for easier commit
+GoPreach/
