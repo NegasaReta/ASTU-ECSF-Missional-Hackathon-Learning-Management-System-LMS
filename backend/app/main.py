@@ -7,12 +7,7 @@ from app.core.dependencies import get_current_user
 app = FastAPI()
 
 # Configure CORS
-origins = [
-    "http://localhost",
-    "http://localhost:5500",  # your frontend port
-    "http://127.0.0.1:5500",
-    # Add your deployed frontend URL if needed
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
