@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from app.database.db import create_db_and_tables
 from app.routers import admin, missionary, recipient, auth
+from app.core.dependencies import get_current_user
 
 app = FastAPI()
 
@@ -17,5 +18,5 @@ def on_startup():
 
 
 @app.get("/")
-def main():
+def main(user=Depends(get_current_user)):
     return {"message": "home page"}

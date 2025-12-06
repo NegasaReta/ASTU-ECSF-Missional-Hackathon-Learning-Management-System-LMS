@@ -15,7 +15,11 @@ router = APIRouter(prefix="/recipient", tags=["Recipient"])
 
 
 @router.get("/", response_model=List[Recipient])
-def read_recipients(db: database_dependency, skip: int = 0, limit: int = 100):
+def read_recipients(
+    db: database_dependency,
+    skip: int = 0,
+    limit: int = 100,
+):
     return get_recipients(db=db, skip=skip, limit=limit)
 
 

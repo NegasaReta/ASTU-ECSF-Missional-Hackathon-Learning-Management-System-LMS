@@ -15,12 +15,19 @@ router = APIRouter(prefix="/missionary", tags=["Missionary"])
 
 
 @router.get("/", response_model=List[Missionary])
-def read_missionarys(db: database_dependency, skip: int = 0, limit: int = 100):
+def read_missionarys(
+    db: database_dependency,
+    skip: int = 0,
+    limit: int = 100,
+):
     return get_missionarys(db=db, skip=skip, limit=limit)
 
 
 @router.get("/{missionary_id}", response_model=Missionary)
-def read_missionary(missionary_id: uuid.UUID, db: database_dependency):
+def read_missionary(
+    missionary_id: uuid.UUID,
+    db: database_dependency,
+):
     missionary = get_missionary(db=db, missionary_id=missionary_id)
     if not missionary:
         raise HTTPException(detail="Not found!", status_code=status.HTTP_404_NOT_FOUND)
@@ -28,7 +35,10 @@ def read_missionary(missionary_id: uuid.UUID, db: database_dependency):
 
 
 @router.post("/", response_model=Missionary)
-def add_missionary(missionary: MissionaryCreate, db: database_dependency):
+def add_missionary(
+    missionary: MissionaryCreate,
+    db: database_dependency,
+):
     return create_missionary(db=db, missionary=missionary)
 
 
