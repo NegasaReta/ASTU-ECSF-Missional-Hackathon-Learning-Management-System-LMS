@@ -49,7 +49,7 @@ class Missionary(MissionaryCreate, table=True):
     updated_at: datetime = Field(default_factory=datetime.now)
     recipients: List["Recipient"] = Relationship(back_populates="missionary")
     teams_led: List["Team"] = Relationship(back_populates="leader")
-    team_members: List["TeamMember"] = Relationship(back_populates="missionary")
+    team_members: Optional["TeamMember"] = Relationship(back_populates="missionary")
 
 
 class RecipientStatus(str, Enum):
@@ -97,23 +97,28 @@ class SiteBase(SQLModel):
     name: str
     location: Optional[str] = None
 
+
 class SiteCreate(SiteBase):
     pass
+
 
 class Site(SiteBase, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
-    teams: List["Team"] = Relationship(back_populates="site")
+    teams: Optional["Team"] = Relationship(back_populates="site")
 
 
 # ---------- Team ----------
 class TeamBase(SQLModel):
     site_id: uuid.UUID = Field(foreign_key="site.id")
+    name: str
     leader_id: Optional[uuid.UUID] = Field(foreign_key="missionary.id", default=None)
+
 
 class TeamCreate(TeamBase):
     pass
+
 
 class Team(TeamBase, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
@@ -133,8 +138,10 @@ class TeamMemberBase(SQLModel):
     experience: bool
     language: LanguageOption
 
+
 class TeamMemberCreate(TeamMemberBase):
     pass
+
 
 class TeamMember(TeamMemberBase, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
