@@ -357,7 +357,7 @@
                 required>
                 <option value="">Preferred Language</option>
                 <option value="Amharic">Amharic</option>
-                <option value="Afan Oromo">Oromic</option>
+                <option value="Afan Oromo">Afan Oromo</option>
                 <option value="Both">Both languages</option>
               </select>
               <div class="absolute right-3 top-3 w-6 h-6 flex items-center justify-center">
@@ -547,11 +547,11 @@
           phone: document.getElementById("phone").value.trim(),
           email: document.getElementById("email").value.trim(),
           batch: document.getElementById("batch").value,
-          experience: document.getElementById("experience").value,
+          experience: document.getElementById("experience").value === "true", //the default value should be false
           language: document.getElementById("language").value,
           password: document.getElementById("password").value,
-          attendance: true,
-          verified: true,
+          attendance: false,
+          verified: false,
         };
         try {
           const apiBase = "https://astu-ecsf-missional-hackathon-mms.onrender.com";
