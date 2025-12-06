@@ -4,6 +4,8 @@ from app.database.db import create_db_and_tables
 from app.routers import admin, missionary, recipient, auth, team_generation, site, team, team_member
 from app.core.dependencies import get_current_user
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
+
 
 templates = Jinja2Templates(directory="app/templates")
 app = FastAPI()
@@ -29,15 +31,15 @@ app.include_router(team.router)
 app.include_router(team_member.router)  
 
 
-
+#enable this to use templates from jinja2
 @app.on_event("startup")
 def on_startup():
     create_db_and_tables()
 
 
-# @app.get("/register-page")
-# def register_page(request: Request):
-#     return templates.TemplateResponse("index.html", {"request": request})
+@app.get("/", response_class=HTMLResponse)
+def register_page(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/")
 def main(user=Depends(get_current_user)):
