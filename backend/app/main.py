@@ -35,9 +35,9 @@ def on_startup():
     create_db_and_tables()
 
 
-@app.get("/register-page")
-def register_page(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+# @app.get("/register-page")
+# def register_page(request: Request):
+#     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/")
 def main(user=Depends(get_current_user)):
