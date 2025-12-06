@@ -4,12 +4,14 @@ from app.model.models import Missionary, MissionaryCreate
 import uuid
 from app.crud.missionary import (
     get_missionary,
+    get_missionary_full,
     get_missionarys,
     create_missionary,
     delete_missionary,
     update_missionary,
 )
 from app.utils.helpers import database_dependency
+from app.schema.schema import MissionaryRead
 
 router = APIRouter(prefix="/missionary", tags=["Missionary"])
 
@@ -21,6 +23,14 @@ def read_missionarys(
     limit: int = 100,
 ):
     return get_missionarys(db=db, skip=skip, limit=limit)
+
+
+@router.get("/{missionary_id}/full", response_model=MissionaryRead)
+def missionary_full(missionary_id: uuid.UUID, db: database_dependency):
+    missionary = get_missionary_full(db, missionary_id)
+    if not missionary:
+        raise HTTPException(status_code=404, detail="Team not found")
+    return missionary
 
 
 @router.get("/{missionary_id}", response_model=Missionary)
