@@ -3,6 +3,9 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class DBSettings(BaseSettings):
     NEON_DB: str = ""
+    SUPABASE_URL: str = ""
+    SUPABASE_KEY: str = ""
+    SUPABASE_JWT_KEY: str = ""
 
     model_config = SettingsConfigDict(
         env_file="../.env",
