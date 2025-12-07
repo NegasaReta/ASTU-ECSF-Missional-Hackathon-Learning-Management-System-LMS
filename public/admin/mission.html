@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Missions - Grace Community Church</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before {
+content: "\f3c2";
+}
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#4F46E5',
+secondary: '#059669'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<div class="flex h-screen">
+<aside class="w-64 bg-white shadow-lg flex flex-col">
+<div class="p-6 border-b">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-church-line text-white text-lg"></i>
+</div>
+</div>
+<div>
+<h1 class="font-['Pacifico'] text-xl text-primary">Go Preach</h1>
+
+</div>
+</div>
+</div>
+<nav class="flex-1 p-4">
+<ul class="space-y-2">
+<li>
+<a href="dashboard.html" data-readdy="true" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-dashboard-line"></i>
+</div>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a href="mission.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary text-white">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-compass-line"></i>
+</div>
+<span>Missions</span>
+</a>
+</li>
+<li>
+<a href="members.html" data-readdy="true" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-team-line"></i>
+</div>
+<span>Members</span>
+</a>
+</li>
+<li>
+<a href="report.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-file-text-line"></i>
+</div>
+<span>Reports</span>
+</a>
+</li>
+<li>
+<a href="communication.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-chat-3-line"></i>
+</div>
+<span>Communication</span>
+</a>
+</li>
+<li>
+<a href="pairing.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-robot-line"></i>
+</div>
+<span>Pairing</span>
+</a>
+</li>
+<li>
+<a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-gallery-line"></i>
+</div>
+<span>Media Gallery</span>
+</a>
+</li>
+<li>
+<a href="attandance.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-calendar-check-line"></i>
+</div>
+<span>Attendance</span>
+</a>
+</li>
+<li>
+<a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-profile-line"></i>
+</div>
+<span>Profile</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-4 border-t">
+  <a href="#" id="logoutBtn" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+    <div class="w-5 h-5 flex items-center justify-center">
+      <i class="ri-logout-box-line"></i>
+    </div>
+    <span>Logout</span>
+  </a>
+</div>
+
+</aside>
+<main class="flex-1 flex flex-col">
+<header class="bg-white shadow-sm border-b px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<h2 class="text-2xl font-semibold text-gray-900">Missions</h2>
+<nav class="text-sm text-gray-500">
+<span>Home</span>
+<span class="mx-2">/</span>
+<span class="text-gray-900">Missions</span>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+
+    <!-- Search -->
+    <div class="relative">
+        <input 
+            id="searchInput"
+            type="text" 
+            placeholder="Search missions, members..." 
+            class="w-80 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+        >
+        <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+            <i class="ri-search-line text-gray-400"></i>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <button class="relative p-2 text-gray-600 hover:text-gray-900">
+        <div class="w-6 h-6 flex items-center justify-center">
+            <i class="ri-notification-line"></i>
+        </div>
+        <span 
+            id="notificationCount" 
+            class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+        </span>
+    </button>
+
+    <!-- Profile -->
+    <div class="flex items-center space-x-3 cursor-pointer">
+        <img 
+            id="profileImage"
+            src="" 
+            alt="Profile"
+            class="w-10 h-10 rounded-full object-cover"
+        >
+
+        <div>
+            <p id="profileName" class="text-sm font-medium text-gray-900"></p>
+            <p id="profileRole" class="text-xs text-gray-500"></p>
+        </div>
+
+        <div class="w-4 h-4 flex items-center justify-center">
+            <i class="ri-arrow-down-s-line text-gray-400"></i>
+        </div>
+    </div>
+
+</div>
+</div>
+</header>
+<div class="bg-white border-b px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2 whitespace-nowrap !rounded-button" id="create-mission-btn">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-add-line"></i>
+</div>
+<span>Create New Mission</span>
+</button>
+<div class="flex items-center space-x-1 bg-gray-100 p-1 rounded-lg">
+<button class="px-3 py-1 text-sm rounded-md bg-white text-gray-900 shadow-sm whitespace-nowrap !rounded-button mission-filter" data-filter="all">All Missions</button>
+<button class="px-3 py-1 text-sm rounded-md text-gray-600 hover:text-gray-900 whitespace-nowrap !rounded-button mission-filter" data-filter="active">Active</button>
+<button class="px-3 py-1 text-sm rounded-md text-gray-600 hover:text-gray-900 whitespace-nowrap !rounded-button mission-filter" data-filter="completed">Completed</button>
+<button class="px-3 py-1 text-sm rounded-md text-gray-600 hover:text-gray-900 whitespace-nowrap !rounded-button mission-filter" data-filter="planning">Planning</button>
+</div>
+</div>
+<div class="flex items-center space-x-3">
+<div class="relative">
+<input type="text" placeholder="Search missions..." class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" id="mission-search">
+<div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+<i class="ri-search-line text-gray-400"></i>
+</div>
+</div>
+<div class="relative">
+<button class="flex items-center space-x-2 px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button" id="sort-dropdown-btn">
+<span>Sort by: Recent</span>
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+</button>
+<div class="absolute right-0 top-full mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10 hidden" id="sort-dropdown">
+<div class="py-1">
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 sort-option" data-sort="recent">Recent</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 sort-option" data-sort="name">Name</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 sort-option" data-sort="progress">Progress</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 sort-option" data-sort="members">Members</button>
+</div>
+</div>
+</div>
+<div class="flex items-center space-x-1 border border-gray-300 rounded-lg p-1">
+<button class="p-1 rounded text-gray-600 hover:bg-gray-100 view-toggle active" data-view="grid">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-grid-line"></i>
+</div>
+</button>
+<button class="p-1 rounded text-gray-600 hover:bg-gray-100 view-toggle" data-view="list">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-list-check"></i>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 p-6 overflow-y-auto">
+<!-- STATS GRID -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" id="mission-stats">
+
+  <!-- Total Missions -->
+  <div class="bg-white rounded-xl shadow-sm p-6 border">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-600">Total Missions</p>
+        <p class="text-3xl font-bold text-gray-900 mt-2" id="totalMissions">0</p>
+        <p class="text-sm text-secondary mt-1" id="newMissions">+0 this month</p>
+      </div>
+      <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+        <i class="ri-compass-line text-primary"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Active Missions -->
+  <div class="bg-white rounded-xl shadow-sm p-6 border">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-600">Active Missions</p>
+        <p class="text-3xl font-bold text-gray-900 mt-2" id="activeMissions">0</p>
+        <p class="text-sm text-secondary mt-1" id="activePercent">0% of total</p>
+      </div>
+      <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center">
+        <i class="ri-play-circle-line text-secondary"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Completed This Month -->
+  <div class="bg-white rounded-xl shadow-sm p-6 border">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-600">Completed This Month</p>
+        <p class="text-3xl font-bold text-gray-900 mt-2" id="completedMissions">0</p>
+        <p class="text-sm text-secondary mt-1" id="completedChange">0 vs last month</p>
+      </div>
+      <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+        <i class="ri-check-circle-line text-green-600"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team Members -->
+  <div class="bg-white rounded-xl shadow-sm p-6 border">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-600">Team Members Involved</p>
+        <p class="text-3xl font-bold text-gray-900 mt-2" id="teamMembers">0</p>
+        <p class="text-sm text-secondary mt-1">Across all missions</p>
+      </div>
+      <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+        <i class="ri-team-line text-purple-600"></i>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="mission-container grid-view">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="missions-grid"></div>
+</div>
+
+<div class="mission-container list-view hidden">
+  <div class="bg-white rounded-xl shadow-sm border">
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-gray-50 border-b">
+          <tr>
+            <th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Mission</th>
+            <th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Status</th>
+            <th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Progress</th>
+            <th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Members</th>
+            <th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Dates</th>
+            <th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200" id="missions-list"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<script>
+const API_URL = "http://localhost:5000/api/missions";
+
+function statusBadge(type) {
+  const map = {
+    "Prison Ministry": "bg-purple-500",
+    "Medical": "bg-green-500",
+    "Youth": "bg-blue-500",
+    "Outreach": "bg-secondary",
+  };
+  return map[type] || "bg-gray-500";
+}
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString();
+}
+
+async function loadMissions() {
+  const res = await fetch(API_URL);
+  const missions = await res.json();
+
+  const grid = document.getElementById("missions-grid");
+  const list = document.getElementById("missions-list");
+
+  grid.innerHTML = "";
+  list.innerHTML = "";
+
+  missions.forEach(m => {
+    // Auto calculate progress
+    const today = new Date();
+    const start = new Date(m.start_date);
+    const end = new Date(m.end_date);
+    let progress = Math.min(100, Math.max(0,
+      ((today - start) / (end - start)) * 100
+    ));
+
+    const status = today > end ? "Completed" : today < start ? "Planning" : "Active";
+
+    // GRID CARD
+    grid.innerHTML += `
+      <div class="mission-card bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition-shadow" data-status="${status.toLowerCase()}">
+        <div class="relative h-48 bg-gray-200 flex items-center justify-center text-gray-400 text-sm">
+          No Image
+          <div class="absolute top-4 left-4">
+            <span class="px-2 py-1 ${statusBadge(m.type)} text-white text-xs rounded-full">${status}</span>
+          </div>
+          <div class="absolute top-4 right-4">
+            <span class="px-2 py-1 bg-orange-500 text-white text-xs rounded-full">${m.priority}</span>
+          </div>
+        </div>
+
+        <div class="p-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">${m.name}</h3>
+          <p class="text-sm text-gray-600 mb-4">${m.description}</p>
+
+          <div class="mb-4">
+            <div class="flex items-center justify-between text-sm mb-2">
+              <span class="text-gray-600">Progress</span>
+              <span class="font-medium text-gray-900">${progress.toFixed(0)}%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+              <div class="bg-secondary h-2 rounded-full" style="width:${progress}%"></div>
+            </div>
+          </div>
+
+          <div class="text-sm text-gray-500 mb-4">
+            <p>Start: ${formatDate(m.start_date)}</p>
+            <p>End: ${formatDate(m.end_date)}</p>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <button class="flex-1 bg-primary text-white py-2 px-3 rounded-lg text-sm">View Details</button>
+            <button class="px-3 py-2 border rounded-lg text-sm">Edit</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // LIST ROW
+    list.innerHTML += `
+      <tr class="hover:bg-gray-50">
+        <td class="py-4 px-6 font-medium text-gray-900">${m.name}</td>
+        <td class="py-4 px-6"><span class="px-2 py-1 ${statusBadge(m.type)}/10 text-xs rounded-full">${status}</span></td>
+        <td class="py-4 px-6 text-sm">${progress.toFixed(0)}%</td>
+        <td class="py-4 px-6 text-sm text-gray-600">--</td>
+        <td class="py-4 px-6 text-sm text-gray-600">
+          ${formatDate(m.start_date)} - ${formatDate(m.end_date)}
+        </td>
+        <td class="py-4 px-6 text-sm text-primary cursor-pointer">View</td>
+      </tr>
+    `;
+  });
+}
+
+loadMissions();
+</script>
+
+
+
+
+
+</div>
+</main>
+</div>
+<div class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" id="mission-modal">
+<div class="flex items-center justify-center min-h-screen p-4">
+<div class="bg-white rounded-xl shadow-xl max-w-4xl w-full max-h-screen overflow-y-auto">
+<div class="p-6 border-b">
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-semibold text-gray-900" id="modal-title">Mission Details</h2>
+<button class="p-2 hover:bg-gray-100 rounded-lg" id="close-modal">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-close-line text-gray-600"></i>
+</div>
+</button>
+</div>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 space-y-6">
+<div>
+<h3 class="text-lg font-semibold text-gray-900 mb-3">Mission Overview</h3>
+<p class="text-gray-600 leading-relaxed" id="modal-description">Detailed mission description will be loaded here...</p>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-gray-900 mb-3">Progress & Milestones</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-600">Overall Progress</span>
+<span class="text-sm font-medium text-gray-900" id="modal-progress">85%</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-3">
+<div class="bg-secondary h-3 rounded-full" id="modal-progress-bar" style="width: 85%"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-check-line text-green-600"></i>
+</div>
+</div>
+<div>
+<p class="text-sm font-medium text-gray-900">Planning Phase</p>
+<p class="text-xs text-gray-600">Completed</p>
+</div>
+</div>
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-play-line text-blue-600"></i>
+</div>
+</div>
+<div>
+<p class="text-sm font-medium text-gray-900">Execution Phase</p>
+<p class="text-xs text-gray-600">In Progress</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-gray-900 mb-3">Recent Activity</h3>
+<div class="space-y-3">
+<div class="flex items-start space-x-3">
+<img src="https://readdy.ai/api/search-image?query=young%20female%20volunteer%20with%20bright%20smile%20wearing%20casual%20church%20t-shirt%20outdoors%20community%20service%20background%20natural%20lighting%20portrait&width=32&height=32&seq=volunteer1&orientation=squarish" alt="Member" class="w-8 h-8 rounded-full object-cover">
+<div class="flex-1">
+<p class="text-sm text-gray-900">Sarah Williams submitted weekly report</p>
+<p class="text-xs text-gray-600">2 hours ago</p>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<img src="https://readdy.ai/api/search-image?query=middle%20aged%20male%20church%20leader%20with%20warm%20expression%20wearing%20button%20up%20shirt%20indoor%20church%20setting%20professional%20portrait&width=32&height=32&seq=leader1&orientation=squarish" alt="Member" class="w-8 h-8 rounded-full object-cover">
+<div class="flex-1">
+<p class="text-sm text-gray-900">David Chen uploaded new photos</p>
+<p class="text-xs text-gray-600">1 day ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div>
+<h3 class="text-lg font-semibold text-gray-900 mb-3">Team Members</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<img src="https://readdy.ai/api/search-image?query=young%20female%20volunteer%20with%20bright%20smile%20wearing%20casual%20church%20t-shirt%20outdoors%20community%20service%20background%20natural%20lighting%20portrait&width=40&height=40&seq=volunteer1&orientation=squarish" alt="Member" class="w-10 h-10 rounded-full object-cover">
+<div>
+<p class="text-sm font-medium text-gray-900">Sarah Williams</p>
+<p class="text-xs text-gray-600">Team Leader</p>
+</div>
+</div>
+<span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Leader</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<img src="https://readdy.ai/api/search-image?query=middle%20aged%20male%20church%20leader%20with%20warm%20expression%20wearing%20button%20up%20shirt%20indoor%20church%20setting%20professional%20portrait&width=40&height=40&seq=leader1&orientation=squarish" alt="Member" class="w-10 h-10 rounded-full object-cover">
+<div>
+<p class="text-sm font-medium text-gray-900">David Chen</p>
+<p class="text-xs text-gray-600">Coordinator</p>
+</div>
+</div>
+<span class="px-2 py-1 bg-secondary/10 text-secondary text-xs rounded-full">Active</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<img src="https://readdy.ai/api/search-image?query=elderly%20female%20church%20volunteer%20with%20kind%20smile%20wearing%20floral%20blouse%20church%20interior%20background%20warm%20lighting%20portrait&width=40&height=40&seq=volunteer2&orientation=squarish" alt="Member" class="w-10 h-10 rounded-full object-cover">
+<div>
+<p class="text-sm font-medium text-gray-900">Mary Thompson</p>
+<p class="text-xs text-gray-600">Volunteer</p>
+</div>
+</div>
+<span class="px-2 py-1 bg-secondary/10 text-secondary text-xs rounded-full">Active</span>
+</div>
+</div>
+<button class="w-full mt-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button">View All Members</button>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-gray-900 mb-3">Mission Stats</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-600">People Reached</span>
+<span class="text-sm font-medium text-gray-900">245</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-600">Meals Served</span>
+<span class="text-sm font-medium text-gray-900">180</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-600">Gospel Presentations</span>
+<span class="text-sm font-medium text-gray-900">32</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-600">Volunteer Hours</span>
+<span class="text-sm font-medium text-gray-900">156</span>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-gray-900 mb-3">Quick Actions</h3>
+<div class="space-y-2">
+<button class="w-full py-2 bg-primary text-white rounded-lg hover:bg-primary/90 text-sm whitespace-nowrap !rounded-button">Submit Report</button>
+<button class="w-full py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button">Upload Photos</button>
+<button class="w-full py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button">Send Message</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<!-- CREATE MISSION MODAL -->
+<div class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" id="create-mission-modal">
+  <div class="flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-screen overflow-y-auto">
+
+      <!-- HEADER -->
+      <div class="p-6 border-b">
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl font-semibold text-gray-900">Create New Mission</h2>
+          <button class="p-2 hover:bg-gray-100 rounded-lg" id="close-create-modal" type="button" aria-label="Close modal">
+            <div class="w-6 h-6 flex items-center justify-center">
+              <i class="ri-close-line text-gray-600"></i>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="p-6">
+        <form class="space-y-6" id="mission-form" onsubmit="return false;">
+
+          <!-- Mission Name -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Mission Name</label>
+            <input id="mission-name" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="Enter mission name">
+          </div>
+
+          <!-- Description -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+            <textarea id="mission-desc" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="Describe the mission objectives and activities"></textarea>
+          </div>
+
+          <!-- Start & End Dates -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Start Date</label>
+              <input id="start-date" type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">End Date</label>
+              <input id="end-date" type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+            </div>
+          </div>
+
+          <!-- Mission Type -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Mission Type</label>
+            <div class="relative" id="mission-type-wrapper">
+              <button
+                type="button"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm text-left flex items-center justify-between"
+                id="mission-type-btn"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+              >
+                <span id="mission-type-label">Select mission type</span>
+                <div class="w-4 h-4 flex items-center justify-center">
+                  <i class="ri-arrow-down-s-line text-gray-400"></i>
+                </div>
+              </button>
+
+              <!-- Hidden input to carry selection to submission -->
+              <input type="hidden" id="mission-type-value" name="mission_type" value="">
+
+              <div
+                class="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 hidden"
+                id="mission-type-dropdown"
+                role="listbox"
+                tabindex="-1"
+              >
+                <div class="py-1">
+                  <button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 mission-type-option" data-type="Community Outreach" tabindex="0">Community Outreach</button>
+                  <button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 mission-type-option" data-type="Youth Ministry" tabindex="0">Youth Ministry</button>
+                  <button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 mission-type-option" data-type="Medical Mission" tabindex="0">Medical Mission</button>
+                  <button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 mission-type-option" data-type="Prison Ministry" tabindex="0">Prison Ministry</button>
+                  <button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 mission-type-option" data-type="International Mission" tabindex="0">International Mission</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Priority -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Priority Level</label>
+            <div class="flex items-center space-x-4">
+              <label class="flex items-center cursor-pointer">
+                <input id="priority-low" type="radio" name="priority" value="low" class="sr-only">
+                <div class="w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center priority-radio">
+                  <div class="w-2 h-2 bg-gray-400 rounded-full hidden priority-dot"></div>
+                </div>
+                <span class="ml-2 text-sm text-gray-700">Low</span>
+              </label>
+              <label class="flex items-center cursor-pointer">
+                <input id="priority-medium" type="radio" name="priority" value="medium" class="sr-only">
+                <div class="w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center priority-radio">
+                  <div class="w-2 h-2 bg-orange-500 rounded-full hidden priority-dot"></div>
+                </div>
+                <span class="ml-2 text-sm text-gray-700">Medium</span>
+              </label>
+              <label class="flex items-center cursor-pointer">
+                <input id="priority-high" type="radio" name="priority" value="high" class="sr-only">
+                <div class="w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center priority-radio">
+                  <div class="w-2 h-2 bg-red-500 rounded-full hidden priority-dot"></div>
+                </div>
+                <span class="ml-2 text-sm text-gray-700">High</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex items-center justify-end space-x-3 pt-4">
+            <button type="button" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm" id="cancel-create">
+              Cancel
+            </button>
+
+            <button type="button" id="submit-mission"
+              class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 text-sm">
+              Create Mission
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("Mission modal JS loaded ✅");
+
+  const modal = document.getElementById("create-mission-modal");
+  const modalContent = modal.querySelector(".bg-white");
+  const closeBtn = document.getElementById("close-create-modal");
+  const cancelBtn = document.getElementById("cancel-create");
+  const submitBtn = document.getElementById("submit-mission");
+  const form = document.getElementById("mission-form");
+
+  // mission type elements
+  const missionTypeBtn = document.getElementById("mission-type-btn");
+  const missionTypeLabel = document.getElementById("mission-type-label");
+  const missionTypeDropdown = document.getElementById("mission-type-dropdown");
+  const missionTypeOptions = document.querySelectorAll(".mission-type-option");
+  const missionTypeValueInput = document.getElementById("mission-type-value");
+
+  // Optional: opening trigger (if you have a separate open button with this id)
+  const openBtn = document.getElementById("create-mission-btn");
+  if (openBtn) {
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    });
+  }
+
+  function closeModal() {
+    modal.classList.add("hidden");
+    document.body.style.overflow = "auto";
+    form.reset();
+    missionTypeLabel.textContent = "Select mission type";
+    missionTypeValueInput.value = "";
+    missionTypeBtn.setAttribute("aria-expanded", "false");
+    missionTypeDropdown.classList.add("hidden");
+    document.querySelectorAll(".priority-dot").forEach(dot => dot.classList.add("hidden"));
+  }
+
+  closeBtn?.addEventListener("click", closeModal);
+  cancelBtn?.addEventListener("click", closeModal);
+
+  // Click outside modal to close
+  modal.addEventListener("click", (e) => {
+    // only close if clicking the backdrop, not content
+    if (!modalContent.contains(e.target)) closeModal();
+  });
+
+  // DROPDOWN: toggle and stop propagation so clicks inside don't immediately close it
+  missionTypeBtn?.addEventListener("click", function (e) {
+    e.stopPropagation();
+    const expanded = this.getAttribute("aria-expanded") === "true";
+    this.setAttribute("aria-expanded", String(!expanded));
+    missionTypeDropdown.classList.toggle("hidden");
+    if (!missionTypeDropdown.classList.contains("hidden")) {
+      // focus first option for keyboard
+      const first = missionTypeDropdown.querySelector(".mission-type-option");
+      if (first) first.focus();
+    }
+  });
+
+  // Prevent clicks inside dropdown from bubbling to document
+  missionTypeDropdown?.addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
+
+  // ESC to close dropdown
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      missionTypeDropdown.classList.add("hidden");
+      missionTypeBtn?.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  // Option selection: click or keyboard Enter/Space
+  missionTypeOptions.forEach(option => {
+    // click handler
+    option.addEventListener("click", function (e) {
+      e.stopPropagation();
+      const type = this.dataset.type;
+      missionTypeLabel.textContent = type;
+      missionTypeValueInput.value = type;
+      missionTypeDropdown.classList.add("hidden");
+      missionTypeBtn.setAttribute("aria-expanded", "false");
+    });
+
+    // keyboard support
+    option.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+
+  // clicking anywhere else closes dropdown
+  document.addEventListener("click", () => {
+    missionTypeDropdown.classList.add("hidden");
+    missionTypeBtn?.setAttribute("aria-expanded", "false");
+  });
+
+  // PRIORITY VISUALS
+  document.querySelectorAll("input[name='priority']").forEach(radio => {
+    radio.addEventListener("change", function () {
+      document.querySelectorAll(".priority-dot").forEach(dot => dot.classList.add("hidden"));
+      this.closest("label").querySelector(".priority-dot").classList.remove("hidden");
+    });
+  });
+
+  // SUBMIT BUTTON — NO PAGE RELOAD
+submitBtn?.addEventListener("click", async function (e) {
+  e.preventDefault();
+
+  const missionData = {
+    name: document.getElementById("mission-name").value.trim(),
+    description: document.getElementById("mission-desc").value.trim(),
+    start_date: document.getElementById("start-date").value,
+    end_date: document.getElementById("end-date").value,
+    type: document.getElementById("mission-type-value").value,
+    priority: document.querySelector("input[name='priority']:checked")?.value
+  };
+
+  try {
+    const res = await fetch("/api/missions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(missionData)
+    });
+
+    console.log("Raw response:", res);
+
+    const data = await res.json();
+    console.log("Parsed data:", data);
+
+    if (res.ok) {
+      alert(data.message || "✅ Mission created successfully!");
+      closeModal();
+    } else {
+      alert(data.error || "❌ Failed to create mission.");
+    }
+
+  } catch (err) {
+    console.error("Frontend fetch error:", err);
+    alert("❌ JavaScript error – check console");
+  }
+});
+
+
+
+
+
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="mission-filters">
+document.addEventListener('DOMContentLoaded', function() {
+const filterButtons = document.querySelectorAll('.mission-filter');
+const missionCards = document.querySelectorAll('.mission-card');
+filterButtons.forEach(button => {
+button.addEventListener('click', function() {
+filterButtons.forEach(btn => {
+btn.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+btn.classList.add('text-gray-600');
+});
+this.classList.remove('text-gray-600');
+this.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+const filter = this.dataset.filter;
+missionCards.forEach(card => {
+if (filter === 'all' || card.dataset.status === filter) {
+card.style.display = 'block';
+} else {
+card.style.display = 'none';
+}
+});
+});
+});
+});
+</script>
+
+
+
+
+
+<script id="view-toggle">
+document.addEventListener('DOMContentLoaded', function() {
+const viewToggleButtons = document.querySelectorAll('.view-toggle');
+const gridView = document.querySelector('.grid-view');
+const listView = document.querySelector('.list-view');
+viewToggleButtons.forEach(button => {
+button.addEventListener('click', function() {
+viewToggleButtons.forEach(btn => btn.classList.remove('active', 'bg-primary', 'text-white'));
+this.classList.add('active', 'bg-primary', 'text-white');
+const view = this.dataset.view;
+if (view === 'grid') {
+gridView.classList.remove('hidden');
+listView.classList.add('hidden');
+} else {
+gridView.classList.add('hidden');
+listView.classList.remove('hidden');
+}
+});
+});
+});
+</script>
+
+
+
+
+<script id="mission-search">
+document.addEventListener('DOMContentLoaded', function() {
+const searchInput = document.getElementById('mission-search');
+const missionCards = document.querySelectorAll('.mission-card');
+searchInput.addEventListener('input', function() {
+const searchTerm = this.value.toLowerCase();
+missionCards.forEach(card => {
+const missionName = card.dataset.name.toLowerCase();
+const missionDescription = card.querySelector('p').textContent.toLowerCase();
+if (missionName.includes(searchTerm) || missionDescription.includes(searchTerm)) {
+card.style.display = 'block';
+} else {
+card.style.display = 'none';
+}
+});
+});
+});
+</script>
+
+
+
+
+<script id="sort-dropdown">
+document.addEventListener('DOMContentLoaded', function() {
+const sortButton = document.getElementById('sort-dropdown-btn');
+const sortDropdown = document.getElementById('sort-dropdown');
+const sortOptions = document.querySelectorAll('.sort-option');
+sortButton.addEventListener('click', function() {
+sortDropdown.classList.toggle('hidden');
+});
+document.addEventListener('click', function(e) {
+if (!sortButton.contains(e.target) && !sortDropdown.contains(e.target)) {
+sortDropdown.classList.add('hidden');
+}
+});
+sortOptions.forEach(option => {
+option.addEventListener('click', function() {
+const sortType = this.dataset.sort;
+const sortText = this.textContent;
+sortButton.querySelector('span').textContent = `Sort by: ${sortText}`;
+sortDropdown.classList.add('hidden');
+});
+});
+});
+</script>
+
+
+
+<script id="mission-modal">
+document.addEventListener('DOMContentLoaded', function() {
+const modal = document.getElementById('mission-modal');
+const closeModal = document.getElementById('close-modal');
+const detailButtons = document.querySelectorAll('.mission-detail-btn');
+detailButtons.forEach(button => {
+button.addEventListener('click', function() {
+modal.classList.remove('hidden');
+document.body.style.overflow = 'hidden';
+});
+});
+closeModal.addEventListener('click', function() {
+modal.classList.add('hidden');
+document.body.style.overflow = 'auto';
+});
+modal.addEventListener('click', function(e) {
+if (e.target === modal) {
+modal.classList.add('hidden');
+document.body.style.overflow = 'auto';
+}
+});
+});
+</script>
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("/api/admin-info")
+        .then(res => res.json())
+        .then(data => {
+            if (!data.success) return;
+
+            // Dynamic name
+            document.getElementById("profileName").textContent = data.full_name;
+
+            // Dynamic role
+            document.getElementById("profileRole").textContent = data.role;
+
+            // Dynamic profile image
+            document.getElementById("profileImage").src =
+                data.profile_image 
+                || "https://ui-avatars.com/api/?name=" + encodeURIComponent(data.full_name);
+
+            // Notifications
+            const noti = document.getElementById("notificationCount");
+            noti.textContent = data.notifications;
+
+            if (data.notifications === 0) {
+                noti.classList.add("hidden");
+            }
+        });
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const logoutBtn = document.getElementById('logoutBtn'); // make sure <a> has id="logoutBtn"
+    
+    logoutBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch('/admin/logout', { method: 'POST' });
+            const data = await res.json();
+            if (data.success) {
+                window.location.href = '/'; // redirect to login page
+            } else {
+                alert(data.message || 'Failed to logout');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Server error. Try again.');
+        }
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("/api/mission-stats")
+    .then(res => res.json())
+    .then(data => {
+      const total = data.total || 0;
+      const active = data.active || 0;
+      const completed = data.completed || 0;
+      const team = data.teamMembers || 0;
+
+      document.getElementById("totalMissions").textContent = total;
+      document.getElementById("newMissions").textContent = `+${completed} this month`;
+
+      document.getElementById("activeMissions").textContent = active;
+      document.getElementById("activePercent").textContent =
+        total ? Math.round((active / total) * 100) + "% of total" : "0% of total";
+
+      document.getElementById("completedMissions").textContent = completed;
+      document.getElementById("completedChange").textContent = `+${completed} vs last month`;
+
+      document.getElementById("teamMembers").textContent = team;
+    })
+    .catch(err => {
+      console.error("Stats load error:", err);
+    });
+});
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
