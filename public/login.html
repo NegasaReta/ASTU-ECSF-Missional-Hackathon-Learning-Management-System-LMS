@@ -215,28 +215,59 @@ toggleIcon.className = 'ri-eye-off-line text-gray-400';
 </script>
 <script id="form-submission">
 document.addEventListener('DOMContentLoaded', function() {
-const form = document.getElementById('login-form');
-const submitButton = form.querySelector('button[type="submit"]');
-form.addEventListener('submit', function(e) {
-e.preventDefault();
-const email = document.getElementById('email').value;
-const password = document.getElementById('password').value;
-if (!email || !password) {
-alert('Please fill in all fields');
-return;
-}
-submitButton.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i>Signing In...';
-submitButton.disabled = true;
-setTimeout(() => {
-submitButton.innerHTML = '<i class="ri-check-line mr-2"></i>Welcome Back!';
-submitButton.classList.remove('from-primary', 'to-purple-600');
-submitButton.classList.add('from-green-500', 'to-green-600');
-setTimeout(() => {
-window.location.href = 'userdashboard.html';
-}, 1500);
-}, 2000);
-});
+    const form = document.getElementById('login-form');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!email || !password) {
+            alert('Please fill in all fields');
+            return;
+        }
+
+        submitButton.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i>Signing In...';
+        submitButton.disabled = true;
+
+        try {
+            const response = await fetch('/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // important to store session cookie
+                body: JSON.stringify({ email, password })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                alert(result.message || 'Login failed!');
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Sign In';
+                return;
+            }
+
+            // Success animation
+            submitButton.innerHTML = '<i class="ri-check-line mr-2"></i>Welcome Back!';
+            submitButton.classList.remove('from-primary', 'to-purple-600');
+            submitButton.classList.add('from-green-500', 'to-green-600');
+
+            // Redirect to dashboard
+            setTimeout(() => {
+                window.location.href = '/dashboard';
+            }, 1500);
+
+        } catch (error) {
+            alert('Network error — try again!');
+            console.error(error);
+            submitButton.disabled = false;
+            submitButton.innerHTML = 'Sign In';
+        }
+    });
 });
 </script>
+
 </body>
 </html>
