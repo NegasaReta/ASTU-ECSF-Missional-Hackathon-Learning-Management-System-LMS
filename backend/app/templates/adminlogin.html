@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Astute - Student Portal Management</title>
+<title>Go Preach Admin Portal</title>
 <script src="https://cdn.tailwindcss.com/3.4.16"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,7 +88,7 @@ padding: 2rem;
             Sign In
           </button>
           <div class="text-center">
-            <a href="#" id="forgotPasswordLink" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Forgot your password?</a>
+            <a href="/password-reset" id="forgotPasswordLink" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Forgot your password?</a>
           </div>
         </div>
       </form>
@@ -146,7 +146,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const password = document.getElementById('password').value;
 
     try {
-      const res = await fetch('/adminlogin', {
+    const apiBase = "https://astu-ecsf-missional-hackathon-mms.onrender.com";
+       
+      const res = await fetch(apiBase + '/adminlogin', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ email, password })

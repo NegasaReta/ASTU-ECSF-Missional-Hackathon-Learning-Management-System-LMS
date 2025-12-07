@@ -64,6 +64,40 @@ def attendance(request: Request):
 @app.get("/pairing", response_class=HTMLResponse)
 def pairing(request: Request):
     return templates.TemplateResponse("pairing.html", {"request": request})
+
+@app.get("/media", response_class=HTMLResponse)
+def media(request: Request):
+    return templates.TemplateResponse("media.html", {"request": request})
+
+@app.get("/members", response_class=HTMLResponse)
+def members(request: Request):
+    return templates.TemplateResponse("members.html", {"request": request})
+
+@app.get("/mission", response_class=HTMLResponse)
+def mission(request: Request):
+    return templates.TemplateResponse("mission.html", {"request": request})
+
+@app.get("/report", response_class=HTMLResponse)
+def report(request: Request):
+    return templates.TemplateResponse("report.html", {"request": request})
+
+@app.get("/password-reset", response_class=HTMLResponse)
+def password_reset(request: Request):
+    return templates.TemplateResponse("password-reset.html", {"request": request})
+
+@app.get("/userdashboard", response_class=HTMLResponse)
+def userdashboard(request: Request):
+    return templates.TemplateResponse("userdashboard.html", {"request": request})
+
+@app.get("/adminlogin", response_class=HTMLResponse)
+def adminlogin(request: Request):
+    return templates.TemplateResponse("adminlogin.html", {"request": request})
+
+
+
+
+
+
 # @app.get("/")
 # def main(user=Depends(get_current_user)):
 #     return {"message": "home page"}
