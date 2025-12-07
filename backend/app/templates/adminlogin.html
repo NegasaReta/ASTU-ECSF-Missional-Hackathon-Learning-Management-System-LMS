@@ -88,7 +88,7 @@ padding: 2rem;
             Sign In
           </button>
           <div class="text-center">
-            <a href="#" id="forgotPasswordLink" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Forgot your password?</a>
+            <a href="/password-reset" id="forgotPasswordLink" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Forgot your password?</a>
           </div>
         </div>
       </form>
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const password = document.getElementById('password').value;
 
     try {
-      const res = await fetch('/adminlogin', {
+      const res = await fetch('/auth/login', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ email, password })
@@ -155,11 +155,11 @@ document.addEventListener('DOMContentLoaded', function() {
       const data = await res.json();
       loginLoading.classList.add('hidden');
 
-      if (data.success) {
+      if (res.ok) {
         // Show dashboard
-        window.location.href ="/admindashboard";
+        window.location.href ="/dashboard";
       } else {
-        loginError.textContent = data.message || 'Invalid email or password';
+        loginError.textContent = data.detail || 'Invalid email or password';
         loginError.classList.remove('hidden');
       }
     } catch (err) {

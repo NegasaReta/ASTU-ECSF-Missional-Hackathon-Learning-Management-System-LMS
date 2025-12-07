@@ -120,7 +120,7 @@ animation: float 3s ease-in-out infinite;
 </div>
 <span class="font-pacifico text-xl text-primary">Go Preach</span>
 </div>
-<a href="index.html" class="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors">
+<a href="/" class="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors">
 <i class="ri-arrow-left-line"></i>
 <span>Back to Home</span>
 </a>
@@ -320,7 +320,7 @@ Create Account<i class="ri-check-line ml-2"></i>
 </div>
 </div>
 <div class="text-center text-sm text-gray-500">
-Already have an account? <a href="login.html" data-readdy="true" class="text-primary hover:underline">Sign in here</a>
+Already have an account? <a href="/login" data-readdy="true" class="text-primary hover:underline">Sign in here</a>
 </div>
 </div>
 </main>
@@ -421,52 +421,57 @@ document.addEventListener('DOMContentLoaded', function() {
      const full_name = 
     document.getElementById("firstName").value.trim() + " " +
     document.getElementById("lastName").value.trim();
-
-const formData = {
+let formData = {
     full_name: full_name,
     phone: document.getElementById("phone").value.trim(),
     email: document.getElementById("email").value.trim(),
     batch: document.getElementById("batch").value,
-    experience: document.getElementById("experience").value,
     language: document.getElementById("language").value,
+    experienced: document.getElementById("experience").value,
+    attendance: true,
+    verified: false,
     password: document.getElementById("password").value
 };
 
+// Convert types BEFORE sending
+formData.experienced = formData.experienced === "true";
+formData.batch = parseInt(formData.batch);
 
-        try {
-            const apiBaseUrl = "https://astu-ecsf-missional-hackathon-mms.onrender.com"
-            const response = await fetch(`${apiBaseUrl}/auth/register`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
+console.log("Sending:", formData); // Debug
 
-            const result = await response.json();
+try {
+    const response = await fetch("/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+    });
 
-            if (!response.ok) {
-                alert(result.message || "Registration failed!");
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = "Create Account";
-                return;
-            }
+    const result = await response.json();
+    console.log("Response:", response.status, result);
 
-            // Success animation
-            submitBtn.innerHTML = '<i class="ri-check-line mr-2"></i>Account Created!';
-            submitBtn.classList.add('from-green-600', 'to-green-700');
+    if (!response.ok) {
+        alert(result.detail || result.message || "Registration failed!");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "Create Account";
+        return;
+    }
 
-            document.querySelector('.step-card').classList.add('celebration-animation');
+    // Success animation
+    submitBtn.innerHTML = '<i class="ri-check-line mr-2"></i>Account Created!';
+    submitBtn.classList.add('from-green-600', 'to-green-700');
 
-            setTimeout(() => {
-                window.location.href = "/dashboard";
-            }, 1500);
+    document.querySelector('.step-card').classList.add('celebration-animation');
 
-        } catch (error) {
-            alert("Network error — try again!");
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = "Create Account";
-        }
+    setTimeout(() => {
+        window.location.href = "/dashboard";
+    }, 1500);
+
+} catch (error) {
+    alert("Network error — try again!");
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = "Create Account";
+}
+
     });
 
     updateUI();

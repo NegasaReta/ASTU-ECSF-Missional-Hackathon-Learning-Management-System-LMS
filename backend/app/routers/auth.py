@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, EmailStr
 from sqlalchemy.orm import Session
 from uuid import UUID
@@ -12,6 +14,24 @@ from app.database.db import get_session
 from app.utils.helpers import add_to_db
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
+templates = Jinja2Templates(directory="app/templates")
+
+
+@router.get("/register", response_class=HTMLResponse)
+async def register_page(request: Request):
+    return templates.TemplateResponse("register.html", {"request": request})
+
+
+@router.get("/login", response_class=HTMLResponse)
+async def login_page(request: Request):
+    return templates.TemplateResponse("login.html", {"request": request})
+
+
+@router.get("/logout")
+async def logout(request: Request):
+    response = RedirectResponse(url="/auth/login", status_code=302)
+    response.delete_cookie(key="access_token")
+    return response
 
 
 # ----------------------
@@ -54,39 +74,40 @@ class SignupMissionary(BaseModel):
     password: str
 
 
+from fastapi import Form
+
+
 @router.post("/register")
-def register_user(data: SignupMissionary, session: Session = Depends(get_session)):
+def register_user(
+    user_data: SignupMissionary,
+    session: Session = Depends(get_session),
+):
     try:
-        # Start a database transaction
-        with session.begin():  # SQLAlchemy automatically handles commit/rollback
-            # 1. Create user in Supabase
-            supa_id = supa_register(data.email, data.password)  # type: ignore
+        with session.begin():
+            supa_id = supa_register(user_data.email, user_data.password)
+
             if not supa_id:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,
                     detail="Failed to register in Supabase",
                 )
 
-            # 2. Save additional info in your DB
             missionary = Missionary(
                 id=supa_id,  # type: ignore
-                full_name=data.full_name,
-                attendance=data.attendance,
-                batch=data.batch,
-                phone=data.phone,
-                language=data.language,  # type: ignore
-                experienced=data.experienced,
-                verified=data.verified,
+                full_name=user_data.full_name,
+                attendance=user_data.attendance,
+                batch=user_data.batch,
+                phone=user_data.phone,
+                language=user_data.language,  # type: ignore
+                experienced=user_data.experienced,
+                verified=user_data.verified,
             )
 
             session.add(missionary)
-            # session.commit() is **not** needed here; handled by `with session.begin()`
 
-        # If we reach here, everything succeeded (Atomic + Consistent + Durable)
         return {"message": "User registered successfully", "supabase_id": supa_id}
 
     except Exception as e:
-        # SQLAlchemy automatically rolls back on exception in `session.begin()`
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Registration failed: {str(e)}",
