@@ -236,8 +236,8 @@ background: white;
 <a href="#contact" class="nav-link text-white hover:text-gray-200 font-medium">Contact</a>
 </div>
 <div class="hidden md:flex items-center space-x-4">
-<button onclick="window.location='login.html'" class="text-white hover:text-gray-200 font-medium transition-colors">Login</button>
-<button onclick="window.location='register.html'" class="btn-primary text-white px-4 py-2 !rounded-button font-medium whitespace-nowrap">Register</button>
+<button onclick="window.location='auth/login.html'" class="text-white hover:text-gray-200 font-medium transition-colors">Login</button>
+<button onclick="window.location='auth/register.html'" class="btn-primary text-white px-4 py-2 !rounded-button font-medium whitespace-nowrap">Register</button>
 </div>
 <button onclick="toggleMobileMenu()" class="md:hidden w-6 h-6 flex items-center justify-center text-white">
 <i class="ri-menu-line text-xl"></i>
@@ -313,7 +313,7 @@ We need 25 volunteers for this life-changing mission.
 <i class="ri-information-line mr-2"></i>
 Learn More
 </button>
-<button onclick="window.location.href='register.html'" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 !rounded-button font-semibold whitespace-nowrap transition-colors">
+<button onclick="window.location.href='auth/register.html'" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 !rounded-button font-semibold whitespace-nowrap transition-colors">
 <i class="ri-user-add-line mr-2"></i>
 Register Now
 </button>
@@ -485,7 +485,7 @@ Tegucigalpa, Honduras
 15/25 volunteers
 </div>
 </div>
-<button onclick="window.location.href='register.html'" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+<button onclick="window.location.href='auth/register.html'" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
 <i class="ri-user-add-line mr-2"></i>
 Register Now
 </button>
@@ -512,7 +512,7 @@ Nairobi, Kenya
 8/20 volunteers
 </div>
 </div>
-<button onclick="window.location.href='register.html'" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+<button onclick="window.location.href='auth/register.html'" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
 <i class="ri-user-add-line mr-2"></i>
 Register Now
 </button>
@@ -539,7 +539,7 @@ Quetzaltenango, Guatemala
 12/30 volunteers
 </div>
 </div>
-<button onclick="window.location.href='register.html'" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+<button onclick="window.location.href='auth/register.html'" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
 <i class="ri-user-add-line mr-2"></i>
 Register Now
 </button>
@@ -566,7 +566,7 @@ Cebu, Philippines
 5/15 volunteers
 </div>
 </div>
-<button onclick="window.location.href='register.html'" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+<button onclick="window.location.href='auth/register.html'" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
 <i class="ri-user-add-line mr-2"></i>
 Register Now
 </button>
@@ -1937,10 +1937,10 @@ behavior: 'smooth'
 }
 // Modal Functions
 function showLoginModal() {
-window.location.href='login.html'
+window.location.href='auth/login.html'
 }
 function showRegisterModal() {
-window.location.href='register.html'
+window.location.href='auth/register.html'
 }
 function showVolunteerModal() {
 document.getElementById('volunteerModal').classList.add('active');
