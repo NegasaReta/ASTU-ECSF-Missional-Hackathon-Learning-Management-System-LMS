@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission Management System - Grace Community Church</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before {
+content: "\f3c2";
+}
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#4F46E5',
+secondary: '#059669'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<div class="flex h-screen">
+<aside class="w-64 bg-white shadow-lg flex flex-col">
+<div class="p-6 border-b">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-church-line text-white text-lg"></i>
+</div>
+</div>
+<div>
+<h1 class="font-['Pacifico'] text-xl text-primary">      Go Preach</h1>
+
+</div>
+</div>
+</div>
+<nav class="flex-1 p-4">
+<ul class="space-y-2">
+<li>
+<a href="dashboard.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary text-white">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-dashboard-line"></i>
+</div>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a href="mission.html" data-readdy="true" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-compass-line"></i>
+</div>
+<span>Missions</span>
+</a>
+</li>
+<li>
+<a href="members.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-team-line"></i>
+</div>
+<span>Members</span>
+</a>
+</li>
+<li>
+<a href="report.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-file-text-line"></i>
+</div>
+<span>Reports</span>
+</a>
+</li>
+<li>
+<a href="communication.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-chat-3-line"></i>
+</div>
+<span>Communication</span>
+</a>
+</li>
+<li>
+<a href="pairing.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-user-add-line"></i>
+</div>
+<span>Pairing</span>
+</a>
+</li>
+<li>
+<a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-gallery-line"></i>
+</div>
+<span>Media Gallery</span>
+</a>
+</li>
+<li>
+<a href="attandance.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-calendar-check-line"></i>
+</div>
+<span>Attendance</span>
+</a>
+</li>
+<li>
+<a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-profile-line"></i>
+</div>
+<span>Profile</span>
+</a>
+</li>
+</ul>
+</nav>
+
+<div class="p-4 border-t">
+  <a href="#" id="logoutBtn" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+    <div class="w-5 h-5 flex items-center justify-center">
+      <i class="ri-logout-box-line"></i>
+    </div>
+    <span>Logout</span>
+  </a>
+</div>
+
+
+
+</aside>
+<main class="flex-1 flex flex-col">
+<header class="bg-white shadow-sm border-b px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<h2 class="text-2xl font-semibold text-gray-900">Dashboard</h2>
+<nav class="text-sm text-gray-500">
+<span onclick="window.location.href='index.html'" style="cursor: pointer;">Home</span>
+<span class="mx-2">/</span>
+<span class="text-gray-900">Dashboard</span>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+
+    <!-- Search -->
+    <div class="relative">
+        <input 
+            id="searchInput"
+            type="text" 
+            placeholder="Search missions, members..." 
+            class="w-80 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+        >
+        <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+            <i class="ri-search-line text-gray-400"></i>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <button class="relative p-2 text-gray-600 hover:text-gray-900">
+        <div class="w-6 h-6 flex items-center justify-center">
+            <i class="ri-notification-line"></i>
+        </div>
+        <span 
+            id="notificationCount" 
+            class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+        </span>
+    </button>
+
+    <!-- Profile -->
+    <div class="flex items-center space-x-3 cursor-pointer">
+        <img 
+            id="profileImage"
+            src="" 
+            alt="Profile"
+            class="w-10 h-10 rounded-full object-cover"
+        >
+
+        <div>
+            <p id="profileName" class="text-sm font-medium text-gray-900"></p>
+            <p id="profileRole" class="text-xs text-gray-500"></p>
+        </div>
+
+        <div class="w-4 h-4 flex items-center justify-center">
+            <i class="ri-arrow-down-s-line text-gray-400"></i>
+        </div>
+    </div>
+
+</div>
+
+</div>
+</header>
+<div class="flex-1 p-6 overflow-y-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white rounded-xl shadow-sm p-6 border">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-600">Active Missions</p>
+<p class="text-3xl font-bold text-gray-900 mt-2">12</p>
+<p class="text-sm text-secondary mt-1">+2 this month</p>
+</div>
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-compass-line text-primary"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm p-6 border">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-600">Total Members</p>
+<p class="text-3xl font-bold text-gray-900 mt-2">247</p>
+<p class="text-sm text-secondary mt-1">+15 this month</p>
+</div>
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-team-line text-secondary"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm p-6 border">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-600">Pending Reports</p>
+<p class="text-3xl font-bold text-gray-900 mt-2">8</p>
+<p class="text-sm text-orange-600 mt-1">Needs review</p>
+</div>
+<div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-file-text-line text-orange-600"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm p-6 border">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-600">Souls Reached</p>
+<p class="text-3xl font-bold text-gray-900 mt-2">1,284</p>
+<p class="text-sm text-secondary mt-1">This quarter</p>
+</div>
+<div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-heart-line text-purple-600"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<div class="lg:col-span-2 bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-semibold text-gray-900">Recent Mission Activities</h3>
+<button class="text-primary hover:text-primary/80 text-sm font-medium whitespace-nowrap !rounded-button">View All</button>
+</div>
+</div>
+<div class="p-6">
+<div class="space-y-4">
+<div class="flex items-start space-x-4">
+<img src="https://readdy.ai/api/search-image?query=young%20female%20volunteer%20with%20bright%20smile%20wearing%20casual%20church%20t-shirt%20outdoors%20community%20service%20background%20natural%20lighting%20portrait&width=48&height=48&seq=volunteer1&orientation=squarish" alt="Sarah" class="w-12 h-12 rounded-full object-cover">
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<p class="font-medium text-gray-900">Sarah Williams submitted a report</p>
+<span class="text-sm text-gray-500">2 hours ago</span>
+</div>
+<p class="text-sm text-gray-600 mt-1">Downtown Outreach Mission - Served 45 meals and shared the gospel with 12 people</p>
+<div class="flex items-center space-x-2 mt-2">
+<span class="px-2 py-1 bg-secondary/10 text-secondary text-xs rounded-full">Outreach</span>
+<span class="px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">Report Submitted</span>
+</div>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<img src="https://readdy.ai/api/search-image?query=middle%20aged%20male%20church%20leader%20with%20warm%20expression%20wearing%20button%20up%20shirt%20indoor%20church%20setting%20professional%20portrait&width=48&height=48&seq=leader1&orientation=squarish" alt="David" class="w-12 h-12 rounded-full object-cover">
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<p class="font-medium text-gray-900">David Chen started new mission</p>
+<span class="text-sm text-gray-500">5 hours ago</span>
+</div>
+<p class="text-sm text-gray-600 mt-1">Youth Evangelism Camp - 3-day program for local high schools</p>
+<div class="flex items-center space-x-2 mt-2">
+<span class="px-2 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">Youth</span>
+<span class="px-2 py-1 bg-green-100 text-green-600 text-xs rounded-full">Mission Started</span>
+</div>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<img src="https://readdy.ai/api/search-image?query=elderly%20female%20church%20volunteer%20with%20kind%20smile%20wearing%20floral%20blouse%20church%20interior%20background%20warm%20lighting%20portrait&width=48&height=48&seq=volunteer2&orientation=squarish" alt="Mary" class="w-12 h-12 rounded-full object-cover">
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<p class="font-medium text-gray-900">Mary Thompson uploaded photos</p>
+<span class="text-sm text-gray-500">1 day ago</span>
+</div>
+<p class="text-sm text-gray-600 mt-1">Medical Mission Trip - 24 new photos from the clinic in Honduras</p>
+<div class="flex items-center space-x-2 mt-2">
+<span class="px-2 py-1 bg-red-100 text-red-600 text-xs rounded-full">Medical</span>
+<span class="px-2 py-1 bg-yellow-100 text-yellow-600 text-xs rounded-full">Media Added</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<h3 class="text-lg font-semibold text-gray-900">Quick Actions</h3>
+</div>
+<div class="p-6">
+<div class="space-y-3">
+<button class="w-full flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 text-left whitespace-nowrap !rounded-button">
+<div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-add-line text-primary"></i>
+</div>
+</div>
+<span class="font-medium text-gray-900">Create New Mission</span>
+</button>
+<button class="w-full flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 text-left whitespace-nowrap !rounded-button">
+<div class="w-8 h-8 bg-secondary/10 rounded-lg flex items-center justify-center">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-user-add-line text-secondary"></i>
+</div>
+</div>
+<span class="font-medium text-gray-900">Add New Member</span>
+</button>
+<button class="w-full flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 text-left whitespace-nowrap !rounded-button">
+<div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-file-check-line text-orange-600"></i>
+</div>
+</div>
+<span class="font-medium text-gray-900">Review Reports</span>
+</button>
+<button class="w-full flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 text-left whitespace-nowrap !rounded-button">
+<div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-robot-line text-purple-600"></i>
+</div>
+</div>
+<span class="font-medium text-gray-900">pairing</span>
+</button>
+<button class="w-full flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 text-left whitespace-nowrap !rounded-button">
+<div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-message-line text-blue-600"></i>
+</div>
+</div>
+<span class="font-medium text-gray-900">Send Announcement</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<h3 class="text-lg font-semibold text-gray-900">Active Missions</h3>
+</div>
+<div class="p-6">
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-heart-line text-white"></i>
+</div>
+</div>
+<div>
+<h4 class="font-medium text-gray-900">Downtown Outreach</h4>
+<p class="text-sm text-gray-600">15 members • Ongoing</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-medium text-gray-900">85% Complete</p>
+<div class="w-20 h-2 bg-gray-200 rounded-full mt-1">
+<div class="w-4/5 h-2 bg-secondary rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-graduation-cap-line text-white"></i>
+</div>
+</div>
+<div>
+<h4 class="font-medium text-gray-900">Youth Camp 2024</h4>
+<p class="text-sm text-gray-600">28 members • Planning</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-medium text-gray-900">35% Complete</p>
+<div class="w-20 h-2 bg-gray-200 rounded-full mt-1">
+<div class="w-1/3 h-2 bg-orange-500 rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-hospital-line text-white"></i>
+</div>
+</div>
+<div>
+<h4 class="font-medium text-gray-900">Medical Mission</h4>
+<p class="text-sm text-gray-600">12 members • Ongoing</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-medium text-gray-900">92% Complete</p>
+<div class="w-20 h-2 bg-gray-200 rounded-full mt-1">
+<div class="w-11/12 h-2 bg-secondary rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<h3 class="text-lg font-semibold text-gray-900">Upcoming Events</h3>
+</div>
+<div class="p-6">
+<div class="space-y-4">
+<div class="flex items-start space-x-4">
+<div class="text-center">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex flex-col items-center justify-center">
+<span class="text-xs text-primary font-medium">DEC</span>
+<span class="text-sm font-bold text-primary">08</span>
+</div>
+</div>
+<div class="flex-1">
+<h4 class="font-medium text-gray-900">Mission Planning Meeting</h4>
+<p class="text-sm text-gray-600">Youth Evangelism Camp preparation</p>
+<p class="text-xs text-gray-500 mt-1">2:00 PM - 4:00 PM</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="text-center">
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex flex-col items-center justify-center">
+<span class="text-xs text-secondary font-medium">DEC</span>
+<span class="text-sm font-bold text-secondary">12</span>
+</div>
+</div>
+<div class="flex-1">
+<h4 class="font-medium text-gray-900">Community Food Drive</h4>
+<p class="text-sm text-gray-600">Monthly outreach program</p>
+<p class="text-xs text-gray-500 mt-1">9:00 AM - 3:00 PM</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="text-center">
+<div class="w-12 h-12 bg-purple-100 rounded-lg flex flex-col items-center justify-center">
+<span class="text-xs text-purple-600 font-medium">DEC</span>
+<span class="text-sm font-bold text-purple-600">15</span>
+</div>
+</div>
+<div class="flex-1">
+<h4 class="font-medium text-gray-900">Medical Team Training</h4>
+<p class="text-sm text-gray-600">Preparation for Honduras trip</p>
+<p class="text-xs text-gray-500 mt-1">10:00 AM - 12:00 PM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="p-6 border-b">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-semibold text-gray-900">Mission Impact Overview</h3>
+<div class="flex items-center space-x-2">
+<button class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 whitespace-nowrap !rounded-button">This Month</button>
+<button class="px-3 py-1 text-sm bg-primary text-white rounded-full whitespace-nowrap !rounded-button">This Quarter</button>
+<button class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 whitespace-nowrap !rounded-button">This Year</button>
+</div>
+</div>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="text-center">
+<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-heart-line text-blue-600 text-xl"></i>
+</div>
+</div>
+<p class="text-2xl font-bold text-gray-900">1,284</p>
+<p class="text-sm text-gray-600">Souls Reached</p>
+</div>
+<div class="text-center">
+<div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-restaurant-line text-green-600 text-xl"></i>
+</div>
+</div>
+<p class="text-2xl font-bold text-gray-900">3,450</p>
+<p class="text-sm text-gray-600">Meals Served</p>
+</div>
+<div class="text-center">
+<div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-hospital-line text-purple-600 text-xl"></i>
+</div>
+</div>
+<p class="text-2xl font-bold text-gray-900">892</p>
+<p class="text-sm text-gray-600">Medical Treatments</p>
+</div>
+<div class="text-center">
+<div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-graduation-cap-line text-orange-600 text-xl"></i>
+</div>
+</div>
+<p class="text-2xl font-bold text-gray-900">156</p>
+<p class="text-sm text-gray-600">Youth Engaged</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script id="sidebar-navigation">
+document.addEventListener('DOMContentLoaded', function() {
+const sidebarLinks = document.querySelectorAll('aside nav a');
+sidebarLinks.forEach(link => {
+link.addEventListener('click', function(e) {
+
+sidebarLinks.forEach(l => {
+l.classList.remove('bg-primary', 'text-white');
+l.classList.add('text-gray-700', 'hover:bg-gray-100');
+});
+this.classList.remove('text-gray-700', 'hover:bg-gray-100');
+this.classList.add('bg-primary', 'text-white');
+});
+});
+});
+</script>
+<script id="quick-actions">
+document.addEventListener('DOMContentLoaded', function() {
+const quickActionButtons = document.querySelectorAll('[class*="Quick Actions"] button, .space-y-3 button');
+quickActionButtons.forEach(button => {
+button.addEventListener('click', function() {
+const buttonText = this.querySelector('span').textContent;
+console.log(`Quick action clicked: ${buttonText}`);
+});
+});
+});
+</script>
+<script id="notification-system">
+document.addEventListener('DOMContentLoaded', function() {
+const notificationButton = document.querySelector('[class*="ri-notification-line"]').closest('button');
+notificationButton.addEventListener('click', function() {
+console.log('Notifications opened');
+});
+});
+</script>
+<script id="search-functionality">
+document.addEventListener('DOMContentLoaded', function() {
+const searchInput = document.querySelector('input[placeholder*="Search"]');
+searchInput.addEventListener('input', function() {
+const searchTerm = this.value.toLowerCase();
+console.log(`Searching for: ${searchTerm}`);
+});
+});
+</script>
+
+
+
+
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("/api/admin-info")
+        .then(res => res.json())
+        .then(data => {
+            if (!data.success) return;
+
+            // Dynamic name
+            document.getElementById("profileName").textContent = data.full_name;
+
+            // Dynamic role
+            document.getElementById("profileRole").textContent = data.role;
+
+            // Dynamic profile image
+            document.getElementById("profileImage").src =
+                data.profile_image 
+                || "https://ui-avatars.com/api/?name=" + encodeURIComponent(data.full_name);
+
+            // Notifications
+            const noti = document.getElementById("notificationCount");
+            noti.textContent = data.notifications;
+
+            if (data.notifications === 0) {
+                noti.classList.add("hidden");
+            }
+        });
+});
+</script>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const logoutBtn = document.getElementById('logoutBtn'); // make sure <a> has id="logoutBtn"
+    
+    logoutBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch('/admin/logout', { method: 'POST' });
+            const data = await res.json();
+            if (data.success) {
+                window.location.href = '/'; // redirect to login page
+            } else {
+                alert(data.message || 'Failed to logout');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Server error. Try again.');
+        }
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
