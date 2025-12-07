@@ -1,0 +1,2370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grace Community Church - Mission & Ministry</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#4F46E5',
+secondary: '#7C3AED'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before {
+content: "\f3c2";
+}
+.glass-effect {
+background: rgba(255, 255, 255, 0.1);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.glass-card {
+background: rgba(255, 255, 255, 0.9);
+backdrop-filter: blur(20px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.animate-float {
+animation: float 6s ease-in-out infinite;
+}
+.animate-pulse-slow {
+animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.animate-slide-up {
+animation: slideUp 0.8s ease-out;
+}
+.animate-fade-in {
+animation: fadeIn 1s ease-out;
+}
+@keyframes float {
+0%, 100% { transform: translateY(0px); }
+50% { transform: translateY(-20px); }
+}
+@keyframes slideUp {
+from { transform: translateY(50px); opacity: 0; }
+to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+}
+.hover-lift {
+transition: all 0.3s ease;
+}
+.hover-lift:hover {
+transform: translateY(-8px);
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+.gradient-bg {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.hero-bg {
+background-image: url('https://readdy.ai/api/search-image?query=Beautiful%20modern%20church%20interior%20with%20stained%20glass%20windows%2C%20warm%20golden%20lighting%2C%20peaceful%20atmosphere%2C%20contemporary%20architecture%2C%20people%20praying%20together%2C%20community%20gathering%2C%20spiritual%20environment%2C%20soft%20natural%20light%20streaming%20through%20windows%2C%20wooden%20pews%2C%20cross%20at%20altar%2C%20serene%20and%20welcoming%20space&width=1920&height=1080&seq=hero-church&orientation=landscape');
+background-size: cover;
+background-position: center;
+position: relative;
+}
+.hero-bg::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: linear-gradient(135deg, rgba(79, 70, 229, 0.8) 0%, rgba(124, 58, 237, 0.6) 100%);
+}
+.mission-card {
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.mission-card:hover {
+transform: translateY(-12px) scale(1.02);
+}
+.nav-link {
+position: relative;
+transition: all 0.3s ease;
+}
+.nav-link::after {
+content: '';
+position: absolute;
+bottom: -4px;
+left: 0;
+width: 0;
+height: 2px;
+background: #4F46E5;
+transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+width: 100%;
+}
+.gallery-item {
+overflow: hidden;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+.gallery-item:hover {
+transform: scale(1.05);
+}
+.gallery-item img {
+transition: all 0.3s ease;
+}
+.gallery-item:hover img {
+transform: scale(1.1);
+}
+.counter {
+font-variant-numeric: tabular-nums;
+}
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.8);
+z-index: 1000;
+backdrop-filter: blur(5px);
+}
+.modal.active {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.mobile-menu {
+transform: translateX(-100%);
+transition: transform 0.3s ease;
+}
+.mobile-menu.active {
+transform: translateX(0);
+}
+.form-input {
+transition: all 0.3s ease;
+}
+.form-input:focus {
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(79, 70, 229, 0.15);
+}
+.btn-primary {
+background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+transition: all 0.3s ease;
+}
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+}
+.form-step {
+display: none;
+opacity: 0;
+transform: translateX(50px);
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.form-step.active {
+display: block;
+opacity: 1;
+transform: translateX(0);
+}
+.form-step.prev {
+transform: translateX(-50px);
+}
+.custom-radio {
+appearance: none;
+width: 18px;
+height: 18px;
+border: 2px solid #d1d5db;
+border-radius: 50%;
+background: white;
+cursor: pointer;
+position: relative;
+transition: all 0.2s ease;
+}
+.custom-radio:checked {
+background: #4F46E5;
+border-color: #4F46E5;
+}
+.custom-radio:checked::after {
+content: '';
+position: absolute;
+top: 3px;
+left: 3px;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background: white;
+}
+</style>
+</head>
+<body class="font-['Inter'] bg-gray-50 overflow-x-hidden">
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 glass-effect animate-fade-in">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-16">
+<div class="flex items-center space-x-2">
+<div class="w-8 h-8 flex items-center justify-center bg-primary rounded-lg">
+<i class="ri-church-line text-white text-lg"></i>
+</div>
+<span class="font-['Pacifico'] text-xl text-white">Go Preach</span>
+</div>
+<div class="hidden md:flex items-center space-x-8">
+<a href="#home" class="nav-link text-white hover:text-gray-200 font-medium">Home</a>
+<a href="#about" class="nav-link text-white hover:text-gray-200 font-medium">About Us</a>
+<a href="#services" class="nav-link text-white hover:text-gray-200 font-medium">Services</a>
+<a href="#missions" class="nav-link text-white hover:text-gray-200 font-medium">Missions</a>
+<a href="#events" class="nav-link text-white hover:text-gray-200 font-medium">Events</a>
+<a href="#gallery" class="nav-link text-white hover:text-gray-200 font-medium">Gallery</a>
+<a href="#contact" class="nav-link text-white hover:text-gray-200 font-medium">Contact</a>
+</div>
+<div class="hidden md:flex items-center space-x-4">
+<button onclick="window.location='login.html'" class="text-white hover:text-gray-200 font-medium transition-colors">Login</button>
+<button onclick="window.location='register.html'" class="btn-primary text-white px-4 py-2 !rounded-button font-medium whitespace-nowrap">Register</button>
+</div>
+<button onclick="toggleMobileMenu()" class="md:hidden w-6 h-6 flex items-center justify-center text-white">
+<i class="ri-menu-line text-xl"></i>
+</button>
+</div>
+</div>
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu md:hidden fixed top-16 left-0 w-full h-screen glass-effect">
+<div class="px-4 py-6 space-y-4">
+<a href="#home" class="block text-white hover:text-red-800 font-medium py-2">Home</a>
+<a href="#about" class="block text-white hover:text-gray-200 font-medium py-2">About Us</a>
+<a href="#services" class="block text-white hover:text-gray-200 font-medium py-2">Services</a>
+<a href="#missions" class="block text-white hover:text-gray-200 font-medium py-2">Missions</a>
+<a href="#events" class="block text-white hover:text-gray-200 font-medium py-2">Events</a>
+<a href="#gallery" class="block text-white hover:text-gray-200 font-medium py-2">Gallery</a>
+<a href="#contact" class="block text-white hover:text-gray-200 font-medium py-2">Contact</a>
+<div class="pt-4 border-t border-white/20">
+<button onclick="showLoginModal()" class="block w-full text-left text-white hover:text-gray-200 font-medium py-2">Login</button>
+<button onclick="showRegisterModal()" class="block w-full text-left text-white hover:text-gray-200 font-medium py-2">Register</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section id="home" class="hero-bg min-h-screen flex items-center">
+<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+<div class="text-center animate-slide-up">
+<h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+Transforming Lives<br>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-300">Through Mission</span>
+</h1>
+<p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
+Join us in spreading hope, love, and faith across communities worldwide. Together, we can make a lasting impact through our mission work.
+</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+<button onclick="scrollToSection('missions')" class="btn-primary text-white px-8 py-4 !rounded-button font-semibold text-lg whitespace-nowrap animate-pulse-slow">
+<i class="ri-heart-line mr-2"></i>
+Join Our Mission
+</button>
+<button onclick="showVolunteerModal()" class="glass-effect text-white px-8 py-4 !rounded-button font-semibold text-lg whitespace-nowrap hover-lift">
+<i class="ri-user-add-line mr-2"></i>
+Volunteer Today
+</button>
+</div>
+</div>
+</div>
+<!-- Floating Elements -->
+<div class="absolute top-20 left-10 animate-float">
+<div class="w-16 h-16 glass-effect rounded-full flex items-center justify-center">
+<i class="ri-heart-line text-white text-2xl"></i>
+</div>
+</div>
+<div class="absolute bottom-32 right-10 animate-float" style="animation-delay: -2s;">
+<div class="w-20 h-20 glass-effect rounded-full flex items-center justify-center">
+<i class="ri-global-line text-white text-2xl"></i>
+</div>
+</div>
+</section>
+<!-- Mission Banner -->
+<section class="py-16 gradient-bg relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<div class="glass-card rounded-2xl p-8 animate-slide-up">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+<i class="ri-calendar-event-line mr-3 text-primary"></i>
+Upcoming Mission: Honduras Water Project
+</h2>
+<p class="text-lg text-gray-600 mb-6">
+Join us from March 15-22, 2025, as we bring clean water to remote villages in Honduras.
+We need 25 volunteers for this life-changing mission.
+</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+<button onclick="showMissionModal('honduras')" class="btn-primary text-white px-6 py-3 !rounded-button font-semibold whitespace-nowrap">
+<i class="ri-information-line mr-2"></i>
+Learn More
+</button>
+<button onclick="window.location.href='register.html'" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 !rounded-button font-semibold whitespace-nowrap transition-colors">
+<i class="ri-user-add-line mr-2"></i>
+Register Now
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- About Us Section -->
+<section id="about" class="py-20 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 animate-fade-in">
+<h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">About Our Mission</h2>
+<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+For over 30 years, Grace Community Church has been dedicated to serving communities
+worldwide through compassionate mission work and spiritual guidance.
+</p>
+</div>
+<div class="grid md:grid-cols-2 gap-12 items-center">
+<div class="animate-slide-up">
+<img src="https://readdy.ai/api/search-image?query=Diverse%20group%20of%20volunteers%20working%20together%20in%20community%20service%2C%20building%20houses%2C%20helping%20families%2C%20international%20mission%20work%2C%20people%20of%20different%20ethnicities%20collaborating%2C%20construction%20tools%2C%20happy%20faces%2C%20teamwork%2C%20outdoor%20setting%2C%20bright%20natural%20lighting%2C%20modern%20documentary%20photography%20style&width=600&height=400&seq=about-mission&orientation=landscape"
+alt="Mission Work" class="rounded-2xl shadow-lg w-full h-80 object-cover">
+</div>
+<div class="space-y-6 animate-slide-up">
+<div class="glass-card rounded-xl p-6 hover-lift">
+<div class="w-12 h-12 flex items-center justify-center bg-primary rounded-lg mb-4">
+<i class="ri-global-line text-white text-xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Global Reach</h3>
+<p class="text-gray-600">We've served in over 40 countries, bringing hope and practical assistance to communities in need.</p>
+</div>
+<div class="glass-card rounded-xl p-6 hover-lift">
+<div class="w-12 h-12 flex items-center justify-center bg-secondary rounded-lg mb-4">
+<i class="ri-team-line text-white text-xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Strong Community</h3>
+<p class="text-gray-600">Our 2,500+ active members work together to create lasting change in local and international communities.</p>
+</div>
+<div class="glass-card rounded-xl p-6 hover-lift">
+<div class="w-12 h-12 flex items-center justify-center bg-orange-500 rounded-lg mb-4">
+<i class="ri-heart-line text-white text-xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Compassionate Care</h3>
+<p class="text-gray-600">Every mission is guided by love, respect, and a commitment to sustainable community development.</p>
+</div>
+</div>
+</div>
+<!-- Statistics -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
+<div class="text-center glass-card rounded-xl p-6 hover-lift">
+<div class="text-3xl font-bold text-primary counter" data-target="40">0</div>
+<div class="text-gray-600 font-medium">Countries Served</div>
+</div>
+<div class="text-center glass-card rounded-xl p-6 hover-lift">
+<div class="text-3xl font-bold text-secondary counter" data-target="2500">0</div>
+<div class="text-gray-600 font-medium">Active Members</div>
+</div>
+<div class="text-center glass-card rounded-xl p-6 hover-lift">
+<div class="text-3xl font-bold text-orange-500 counter" data-target="150">0</div>
+<div class="text-gray-600 font-medium">Annual Missions</div>
+</div>
+<div class="text-center glass-card rounded-xl p-6 hover-lift">
+<div class="text-3xl font-bold text-green-500 counter" data-target="50000">0</div>
+<div class="text-gray-600 font-medium">Lives Impacted</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section id="services" class="py-20 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 animate-fade-in">
+<h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Our Services</h2>
+<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+We offer comprehensive spiritual and community services designed to nurture faith and serve others.
+</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="glass-card rounded-2xl p-8 text-center hover-lift animate-slide-up">
+<div class="w-16 h-16 flex items-center justify-center bg-primary rounded-full mx-auto mb-6">
+<i class="ri-book-open-line text-white text-2xl"></i>
+</div>
+<h3 class="text-2xl font-semibold text-gray-800 mb-4">Worship Services</h3>
+<p class="text-gray-600 mb-6">Join us every Sunday at 9:00 AM and 11:00 AM for inspiring worship, powerful messages, and community fellowship.</p>
+<button class="text-primary font-semibold hover:text-primary/80 transition-colors">
+Learn More <i class="ri-arrow-right-line ml-1"></i>
+</button>
+</div>
+<div class="glass-card rounded-2xl p-8 text-center hover-lift animate-slide-up" style="animation-delay: 0.1s;">
+<div class="w-16 h-16 flex items-center justify-center bg-secondary rounded-full mx-auto mb-6">
+<i class="ri-group-line text-white text-2xl"></i>
+</div>
+<h3 class="text-2xl font-semibold text-gray-800 mb-4">Small Groups</h3>
+<p class="text-gray-600 mb-6">Connect with others through our weekly small groups focused on Bible study, prayer, and building meaningful relationships.</p>
+<button class="text-secondary font-semibold hover:text-secondary/80 transition-colors">
+Join a Group <i class="ri-arrow-right-line ml-1"></i>
+</button>
+</div>
+<div class="glass-card rounded-2xl p-8 text-center hover-lift animate-slide-up" style="animation-delay: 0.2s;">
+<div class="w-16 h-16 flex items-center justify-center bg-orange-500 rounded-full mx-auto mb-6">
+<i class="ri-heart-line text-white text-2xl"></i>
+</div>
+<h3 class="text-2xl font-semibold text-gray-800 mb-4">Community Outreach</h3>
+<p class="text-gray-600 mb-6">Serve our local community through food drives, homeless assistance, youth programs, and family support services.</p>
+<button class="text-orange-500 font-semibold hover:text-orange-600 transition-colors">
+Get Involved <i class="ri-arrow-right-line ml-1"></i>
+</button>
+</div>
+<div class="glass-card rounded-2xl p-8 text-center hover-lift animate-slide-up" style="animation-delay: 0.3s;">
+<div class="w-16 h-16 flex items-center justify-center bg-green-500 rounded-full mx-auto mb-6">
+<i class="ri-seedling-line text-white text-2xl"></i>
+</div>
+<h3 class="text-2xl font-semibold text-gray-800 mb-4">Youth Ministry</h3>
+<p class="text-gray-600 mb-6">Engaging programs for children and teens including Sunday school, youth groups, summer camps, and leadership development.</p>
+<button class="text-green-500 font-semibold hover:text-green-600 transition-colors">
+Youth Programs <i class="ri-arrow-right-line ml-1"></i>
+</button>
+</div>
+<div class="glass-card rounded-2xl p-8 text-center hover-lift animate-slide-up" style="animation-delay: 0.4s;">
+<div class="w-16 h-16 flex items-center justify-center bg-blue-500 rounded-full mx-auto mb-6">
+<i class="ri-hand-heart-line text-white text-2xl"></i>
+</div>
+<h3 class="text-2xl font-semibold text-gray-800 mb-4">Pastoral Care</h3>
+<p class="text-gray-600 mb-6">Compassionate support during life's challenges including counseling, hospital visits, grief support, and spiritual guidance.</p>
+<button class="text-blue-500 font-semibold hover:text-blue-600 transition-colors">
+Request Care <i class="ri-arrow-right-line ml-1"></i>
+</button>
+</div>
+<div class="glass-card rounded-2xl p-8 text-center hover-lift animate-slide-up" style="animation-delay: 0.5s;">
+<div class="w-16 h-16 flex items-center justify-center bg-purple-500 rounded-full mx-auto mb-6">
+<i class="ri-music-line text-white text-2xl"></i>
+</div>
+<h3 class="text-2xl font-semibold text-gray-800 mb-4">Music Ministry</h3>
+<p class="text-gray-600 mb-6">Join our choir, worship band, or children's music programs to use your musical talents in service and worship.</p>
+<button class="text-purple-500 font-semibold hover:text-purple-600 transition-colors">
+Join Music Team <i class="ri-arrow-right-line ml-1"></i>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Missions Section -->
+<section id="missions" class="py-20 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 animate-fade-in">
+<h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Current Missions</h2>
+<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+Join us in making a difference around the world. Each mission is carefully planned to create lasting impact in communities that need it most.
+</p>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Mission Card 1 -->
+<div class="mission-card glass-card rounded-2xl overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Clean%20water%20well%20construction%20project%20in%20rural%20Honduras%20village%2C%20volunteers%20working%20with%20local%20community%20members%2C%20drilling%20equipment%2C%20happy%20children%20with%20clean%20water%2C%20tropical%20landscape%2C%20community%20development%2C%20international%20aid%20work%2C%20bright%20sunny%20day%2C%20documentary%20photography%20style&width=400&height=250&seq=mission-honduras&orientation=landscape"
+alt="Honduras Water Project" class="w-full h-48 object-cover">
+<div class="p-6">
+<div class="flex items-center justify-between mb-3">
+<span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Water Access</span>
+<span class="text-sm text-gray-500">March 15-22, 2025</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-3">Honduras Water Project</h3>
+<p class="text-gray-600 mb-4">Building clean water wells and sanitation systems for 5 remote villages in Honduras. Providing sustainable access to clean water for over 2,000 people.</p>
+<div class="flex items-center justify-between mb-4">
+<div class="text-sm text-gray-500">
+<i class="ri-map-pin-line mr-1"></i>
+Tegucigalpa, Honduras
+</div>
+<div class="text-sm text-gray-500">
+<i class="ri-team-line mr-1"></i>
+15/25 volunteers
+</div>
+</div>
+<button onclick="window.location.href='register.html'" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+<i class="ri-user-add-line mr-2"></i>
+Register Now
+</button>
+</div>
+</div>
+<!-- Mission Card 2 -->
+<div class="mission-card glass-card rounded-2xl overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Medical%20mission%20clinic%20in%20rural%20Kenya%2C%20doctors%20and%20nurses%20treating%20patients%2C%20mobile%20medical%20equipment%2C%20African%20children%20receiving%20healthcare%2C%20outdoor%20medical%20tent%2C%20volunteers%20in%20scrubs%2C%20community%20health%20outreach%2C%20compassionate%20care%2C%20bright%20natural%20lighting&width=400&height=250&seq=mission-kenya&orientation=landscape"
+alt="Kenya Medical Mission" class="w-full h-48 object-cover">
+<div class="p-6">
+<div class="flex items-center justify-between mb-3">
+<span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">Medical Care</span>
+<span class="text-sm text-gray-500">April 8-18, 2025</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-3">Kenya Medical Mission</h3>
+<p class="text-gray-600 mb-4">Providing essential medical care and health education to underserved communities in rural Kenya. Mobile clinics serving 8 villages.</p>
+<div class="flex items-center justify-between mb-4">
+<div class="text-sm text-gray-500">
+<i class="ri-map-pin-line mr-1"></i>
+Nairobi, Kenya
+</div>
+<div class="text-sm text-gray-500">
+<i class="ri-team-line mr-1"></i>
+8/20 volunteers
+</div>
+</div>
+<button onclick="window.location.href='register.html'" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+<i class="ri-user-add-line mr-2"></i>
+Register Now
+</button>
+</div>
+</div>
+<!-- Mission Card 3 -->
+<div class="mission-card glass-card rounded-2xl overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=School%20construction%20project%20in%20rural%20Guatemala%2C%20volunteers%20building%20classroom%2C%20children%20watching%20construction%2C%20educational%20materials%2C%20concrete%20blocks%2C%20construction%20tools%2C%20community%20involvement%2C%20tropical%20setting%2C%20hope%20and%20education%2C%20bright%20daylight%20photography&width=400&height=250&seq=mission-guatemala&orientation=landscape"
+alt="Guatemala Education Mission" class="w-full h-48 object-cover">
+<div class="p-6">
+<div class="flex items-center justify-between mb-3">
+<span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">Education</span>
+<span class="text-sm text-gray-500">May 20-30, 2025</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-3">Guatemala Education Mission</h3>
+<p class="text-gray-600 mb-4">Building classrooms and providing educational resources for children in rural Guatemala. Creating opportunities for 300+ students.</p>
+<div class="flex items-center justify-between mb-4">
+<div class="text-sm text-gray-500">
+<i class="ri-map-pin-line mr-1"></i>
+Quetzaltenango, Guatemala
+</div>
+<div class="text-sm text-gray-500">
+<i class="ri-team-line mr-1"></i>
+12/30 volunteers
+</div>
+</div>
+<button onclick="window.location.href='register.html'" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+<i class="ri-user-add-line mr-2"></i>
+Register Now
+</button>
+</div>
+</div>
+<!-- Mission Card 4 -->
+<div class="mission-card glass-card rounded-2xl overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Disaster%20relief%20work%20in%20Philippines%20after%20typhoon%2C%20volunteers%20distributing%20food%20and%20supplies%2C%20emergency%20shelter%20construction%2C%20community%20support%2C%20relief%20workers%20helping%20families%2C%20recovery%20efforts%2C%20hope%20and%20resilience%2C%20natural%20disaster%20response&width=400&height=250&seq=mission-philippines&orientation=landscape"
+alt="Philippines Relief Mission" class="w-full h-48 object-cover">
+<div class="p-6">
+<div class="flex items-center justify-between mb-3">
+<span class="bg-red-100 text-red-800 text-sm font-medium px-3 py-1 rounded-full">Disaster Relief</span>
+<span class="text-sm text-gray-500">June 5-15, 2025</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-3">Philippines Relief Mission</h3>
+<p class="text-gray-600 mb-4">Emergency relief and rebuilding efforts following recent typhoon damage. Providing shelter, food, and hope to affected families.</p>
+<div class="flex items-center justify-between mb-4">
+<div class="text-sm text-gray-500">
+<i class="ri-map-pin-line mr-1"></i>
+Cebu, Philippines
+</div>
+<div class="text-sm text-gray-500">
+<i class="ri-team-line mr-1"></i>
+5/15 volunteers
+</div>
+</div>
+<button onclick="window.location.href='register.html'" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+<i class="ri-user-add-line mr-2"></i>
+Register Now
+</button>
+</div>
+</div>
+<!-- Mission Card 5 -->
+<div class="mission-card glass-card rounded-2xl overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Local%20homeless%20shelter%20volunteer%20work%2C%20volunteers%20serving%20meals%2C%20food%20preparation%2C%20community%20kitchen%2C%20diverse%20volunteers%20helping%20homeless%20individuals%2C%20indoor%20shelter%20environment%2C%20compassionate%20service%2C%20local%20community%20outreach%2C%20warm%20and%20welcoming%20atmosphere&width=400&height=250&seq=mission-local&orientation=landscape"
+alt="Local Outreach Mission" class="w-full h-48 object-cover">
+<div class="p-6">
+<div class="flex items-center justify-between mb-3">
+<span class="bg-orange-100 text-orange-800 text-sm font-medium px-3 py-1 rounded-full">Local Outreach</span>
+<span class="text-sm text-gray-500">Ongoing</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-3">Local Homeless Outreach</h3>
+<p class="text-gray-600 mb-4">Weekly service at local homeless shelters providing meals, clothing, and support. Making a difference in our own community.</p>
+<div class="flex items-center justify-between mb-4">
+<div class="text-sm text-gray-500">
+<i class="ri-map-pin-line mr-1"></i>
+Local Community
+</div>
+<div class="text-sm text-gray-500">
+<i class="ri-team-line mr-1"></i>
+25+ volunteers
+</div>
+</div>
+<button onclick="showRegistrationModal('local')" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+<i class="ri-user-add-line mr-2"></i>
+Join Weekly
+</button>
+</div>
+</div>
+<!-- Mission Card 6 -->
+<div class="mission-card glass-card rounded-2xl overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Youth%20mission%20trip%20preparation%2C%20young%20people%20packing%20supplies%2C%20mission%20training%20session%2C%20teenagers%20learning%20about%20cross-cultural%20ministry%2C%20group%20prayer%20circle%2C%20youth%20pastor%20leading%20discussion%2C%20church%20youth%20room%2C%20excitement%20and%20preparation%20for%20service&width=400&height=250&seq=mission-youth&orientation=landscape"
+alt="Youth Mission Trip" class="w-full h-48 object-cover">
+<div class="p-6">
+<div class="flex items-center justify-between mb-3">
+<span class="bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">Youth Mission</span>
+<span class="text-sm text-gray-500">July 12-19, 2025</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-3">Youth Mission Trip</h3>
+<p class="text-gray-600 mb-4">Special mission trip designed for teenagers to experience cross-cultural ministry and service. Building character and faith through service.</p>
+<div class="flex items-center justify-between mb-4">
+<div class="text-sm text-gray-500">
+<i class="ri-map-pin-line mr-1"></i>
+Mexico Border
+</div>
+<div class="text-sm text-gray-500">
+<i class="ri-team-line mr-1"></i>
+18/25 youth
+</div>
+</div>
+<button onclick="showRegistrationModal('youth')" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+<i class="ri-user-add-line mr-2"></i>
+Register Youth
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Events Section -->
+<section id="events" class="py-20 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 animate-fade-in">
+<h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Upcoming Events</h2>
+<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+Stay connected with our community through worship services, special events, and fellowship opportunities.
+</p>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="glass-card rounded-2xl p-6 hover-lift animate-slide-up">
+<div class="flex items-start space-x-4">
+<div class="bg-primary text-white rounded-lg p-3 text-center min-w-16">
+<div class="text-lg font-bold">15</div>
+<div class="text-xs">DEC</div>
+</div>
+<div class="flex-1">
+<h3 class="text-lg font-semibold text-gray-800 mb-2">Christmas Service</h3>
+<p class="text-gray-600 text-sm mb-3">Join us for our special Christmas celebration with music, message, and fellowship.</p>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<i class="ri-time-line mr-1"></i>
+10:00 AM - 12:00 PM
+</div>
+<div class="flex items-center text-sm text-gray-500">
+<i class="ri-map-pin-line mr-1"></i>
+Main Sanctuary
+</div>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-6 hover-lift animate-slide-up" style="animation-delay: 0.1s;">
+<div class="flex items-start space-x-4">
+<div class="bg-secondary text-white rounded-lg p-3 text-center min-w-16">
+<div class="text-lg font-bold">22</div>
+<div class="text-xs">DEC</div>
+</div>
+<div class="flex-1">
+<h3 class="text-lg font-semibold text-gray-800 mb-2">Youth Winter Retreat</h3>
+<p class="text-gray-600 text-sm mb-3">Three-day retreat for teens featuring worship, activities, and spiritual growth.</p>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<i class="ri-time-line mr-1"></i>
+Friday 6 PM - Sunday 2 PM
+</div>
+<div class="flex items-center text-sm text-gray-500">
+<i class="ri-map-pin-line mr-1"></i>
+Mountain View Camp
+</div>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-6 hover-lift animate-slide-up" style="animation-delay: 0.2s;">
+<div class="flex items-start space-x-4">
+<div class="bg-orange-500 text-white rounded-lg p-3 text-center min-w-16">
+<div class="text-lg font-bold">31</div>
+<div class="text-xs">DEC</div>
+</div>
+<div class="flex-1">
+<h3 class="text-lg font-semibold text-gray-800 mb-2">New Year's Eve Service</h3>
+<p class="text-gray-600 text-sm mb-3">Welcome 2025 with prayer, reflection, and community celebration.</p>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<i class="ri-time-line mr-1"></i>
+10:30 PM - 12:30 AM
+</div>
+<div class="flex items-center text-sm text-gray-500">
+<i class="ri-map-pin-line mr-1"></i>
+Main Sanctuary
+</div>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-6 hover-lift animate-slide-up" style="animation-delay: 0.3s;">
+<div class="flex items-start space-x-4">
+<div class="bg-green-500 text-white rounded-lg p-3 text-center min-w-16">
+<div class="text-lg font-bold">05</div>
+<div class="text-xs">JAN</div>
+</div>
+<div class="flex-1">
+<h3 class="text-lg font-semibold text-gray-800 mb-2">Mission Training Workshop</h3>
+<p class="text-gray-600 text-sm mb-3">Preparation workshop for upcoming mission trips and volunteer opportunities.</p>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<i class="ri-time-line mr-1"></i>
+9:00 AM - 4:00 PM
+</div>
+<div class="flex items-center text-sm text-gray-500">
+<i class="ri-map-pin-line mr-1"></i>
+Fellowship Hall
+</div>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-6 hover-lift animate-slide-up" style="animation-delay: 0.4s;">
+<div class="flex items-start space-x-4">
+<div class="bg-blue-500 text-white rounded-lg p-3 text-center min-w-16">
+<div class="text-lg font-bold">12</div>
+<div class="text-xs">JAN</div>
+</div>
+<div class="flex-1">
+<h3 class="text-lg font-semibold text-gray-800 mb-2">Community Food Drive</h3>
+<p class="text-gray-600 text-sm mb-3">Monthly food collection for local food banks and families in need.</p>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<i class="ri-time-line mr-1"></i>
+8:00 AM - 6:00 PM
+</div>
+<div class="flex items-center text-sm text-gray-500">
+<i class="ri-map-pin-line mr-1"></i>
+Church Parking Lot
+</div>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-6 hover-lift animate-slide-up" style="animation-delay: 0.5s;">
+<div class="flex items-start space-x-4">
+<div class="bg-purple-500 text-white rounded-lg p-3 text-center min-w-16">
+<div class="text-lg font-bold">19</div>
+<div class="text-xs">JAN</div>
+</div>
+<div class="flex-1">
+<h3 class="text-lg font-semibold text-gray-800 mb-2">Marriage Enrichment Seminar</h3>
+<p class="text-gray-600 text-sm mb-3">Special seminar for couples to strengthen relationships and build lasting marriages.</p>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<i class="ri-time-line mr-1"></i>
+7:00 PM - 9:00 PM
+</div>
+<div class="flex items-center text-sm text-gray-500">
+<i class="ri-map-pin-line mr-1"></i>
+Conference Room
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Gallery Section -->
+<section id="gallery" class="py-20 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 animate-fade-in">
+<h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Mission Gallery</h2>
+<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+Witness the impact of our mission work through photos from recent trips and community outreach events.
+</p>
+</div>
+<!-- Gallery Filter -->
+<div class="flex flex-wrap justify-center gap-4 mb-12">
+<button onclick="filterGallery('all', this)" class="gallery-filter active bg-primary text-white px-6 py-2 !rounded-button font-medium whitespace-nowrap transition-colors">All</button>
+<button onclick="filterGallery('international', this)" class="gallery-filter bg-gray-200 text-gray-700 hover:bg-gray-300 px-6 py-2 !rounded-button font-medium whitespace-nowrap transition-colors">International</button>
+<button onclick="filterGallery('local', this)" class="gallery-filter bg-gray-200 text-gray-700 hover:bg-gray-300 px-6 py-2 !rounded-button font-medium whitespace-nowrap transition-colors">Local Outreach</button>
+<button onclick="filterGallery('youth', this)" class="gallery-filter bg-gray-200 text-gray-700 hover:bg-gray-300 px-6 py-2 !rounded-button font-medium whitespace-nowrap transition-colors">Youth Missions</button>
+<button onclick="filterGallery('events', this)" class="gallery-filter bg-gray-200 text-gray-700 hover:bg-gray-300 px-6 py-2 !rounded-button font-medium whitespace-nowrap transition-colors">Church Events</button>
+</div>
+<!-- Gallery Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="galleryGrid">
+<div class="gallery-item international rounded-lg overflow-hidden" onclick="openGalleryModal(this)">
+<img src="https://readdy.ai/api/search-image?query=International%20mission%20team%20building%20water%20well%20in%20rural%20African%20village%2C%20volunteers%20working%20with%20local%20community%20members%2C%20construction%20equipment%2C%20happy%20children%20watching%2C%20bright%20sunny%20day%2C%20community%20development%2C%20hope%20and%20progress%2C%20documentary%20photography&width=300&height=300&seq=gallery-1&orientation=squarish"
+alt="Water Well Construction" class="w-full h-full object-cover">
+</div>
+<div class="gallery-item local rounded-lg overflow-hidden" onclick="openGalleryModal(this)">
+<img src="https://readdy.ai/api/search-image?query=Local%20church%20volunteers%20serving%20meals%20at%20homeless%20shelter%2C%20diverse%20group%20of%20people%20helping%2C%20food%20service%20line%2C%20warm%20indoor%20environment%2C%20compassionate%20care%2C%20community%20outreach%2C%20smiling%20volunteers%20and%20recipients%2C%20heartwarming%20scene&width=300&height=300&seq=gallery-2&orientation=squarish"
+alt="Local Food Service" class="w-full h-full object-cover">
+</div>
+<div class="gallery-item youth rounded-lg overflow-hidden" onclick="openGalleryModal(this)">
+<img src="https://readdy.ai/api/search-image?query=Youth%20mission%20team%20painting%20and%20renovating%20community%20center%2C%20teenagers%20working%20together%2C%20paint%20brushes%20and%20supplies%2C%20colorful%20walls%2C%20teamwork%20and%20service%2C%20young%20volunteers%20having%20fun%20while%20serving%2C%20bright%20and%20energetic%20atmosphere&width=300&height=300&seq=gallery-3&orientation=squarish"
+alt="Youth Mission Work" class="w-full h-full object-cover">
+</div>
+<div class="gallery-item international rounded-lg overflow-hidden" onclick="openGalleryModal(this)">
+<img src="https://readdy.ai/api/search-image?query=Medical%20mission%20clinic%20in%20rural%20Guatemala%2C%20doctors%20and%20nurses%20treating%20patients%2C%20outdoor%20medical%20tent%2C%20medical%20equipment%2C%20healthcare%20volunteers%2C%20patients%20receiving%20care%2C%20compassionate%20medical%20service%2C%20tropical%20setting&width=300&height=300&seq=gallery-4&orientation=squarish"
+alt="Medical Mission" class="w-full h-full object-cover">
+</div>
+<div class="gallery-item events rounded-lg overflow-hidden" onclick="openGalleryModal(this)">
+<img src="https://readdy.ai/api/search-image?query=Church%20Christmas%20service%20celebration%2C%20decorated%20sanctuary%20with%20Christmas%20tree%2C%20congregation%20singing%20carols%2C%20warm%20lighting%2C%20festive%20atmosphere%2C%20families%20worshipping%20together%2C%20holiday%20joy%20and%20community%20spirit%2C%20beautiful%20church%20interior&width=300&height=300&seq=gallery-5&orientation=squarish"
+alt="Christmas Service" class="w-full h-full object-cover">
+</div>
+<div class="gallery-item local rounded-lg overflow-hidden" onclick="openGalleryModal(this)">
+<img src="https://readdy.ai/api/search-image?query=Community%20food%20drive%20volunteers%20sorting%20donations%2C%20boxes%20of%20food%20items%2C%20volunteers%20organizing%20supplies%2C%20church%20fellowship%20hall%2C%20community%20support%2C%20food%20bank%20preparation%2C%20people%20working%20together%20for%20local%20families%20in%20need&width=300&height=300&seq=gallery-6&orientation=squarish"
+alt="Food Drive" class="w-full h-full object-cover">
+</div>
+<div class="gallery-item international rounded-lg overflow-hidden" onclick="openGalleryModal(this)">
+<img src="https://readdy.ai/api/search-image?query=School%20construction%20project%20in%20Honduras%2C%20volunteers%20building%20classroom%20walls%2C%20concrete%20blocks%20and%20construction%20tools%2C%20local%20children%20watching%20excitedly%2C%20tropical%20landscape%2C%20educational%20development%2C%20international%20cooperation%2C%20hope%20for%20education&width=300&height=300&seq=gallery-7&orientation=squarish"
+alt="School Construction" class="w-full h-full object-cover">
+</div>
+<div class="gallery-item youth rounded-lg overflow-hidden" onclick="openGalleryModal(this)">
+<img src="https://readdy.ai/api/search-image?query=Youth%20group%20prayer%20circle%20during%20mission%20trip%2C%20teenagers%20holding%20hands%20in%20prayer%2C%20outdoor%20setting%2C%20spiritual%20moment%2C%20young%20people%20growing%20in%20faith%2C%20mission%20trip%20bonding%2C%20sunset%20lighting%2C%20peaceful%20and%20reflective%20atmosphere&width=300&height=300&seq=gallery-8&orientation=squarish"
+alt="Youth Prayer Circle" class="w-full h-full object-cover">
+</div>
+<div class="gallery-item events rounded-lg overflow-hidden" onclick="openGalleryModal(this)">
+<img src="https://readdy.ai/api/search-image?query=Church%20baptism%20ceremony%20in%20beautiful%20outdoor%20setting%2C%20pastor%20baptizing%20new%20believer%20in%20natural%20water%2C%20congregation%20watching%2C%20spiritual%20celebration%2C%20new%20life%20in%20Christ%2C%20peaceful%20water%20setting%2C%20joyful%20religious%20ceremony&width=300&height=300&seq=gallery-9&orientation=squarish"
+alt="Baptism Ceremony" class="w-full h-full object-cover">
+</div>
+<div class="gallery-item local rounded-lg overflow-hidden" onclick="openGalleryModal(this)">
+<img src="https://readdy.ai/api/search-image?query=Volunteers%20distributing%20winter%20coats%20and%20warm%20clothing%20to%20homeless%20individuals%2C%20outdoor%20distribution%20event%2C%20volunteers%20helping%20people%20try%20on%20coats%2C%20warm%20clothing%20donations%2C%20community%20care%2C%20cold%20weather%20assistance%2C%20compassionate%20outreach&width=300&height=300&seq=gallery-10&orientation=squarish"
+alt="Winter Clothing Drive" class="w-full h-full object-cover">
+</div>
+<div class="gallery-item international rounded-lg overflow-hidden" onclick="openGalleryModal(this)">
+<img src="https://readdy.ai/api/search-image?query=Mission%20team%20teaching%20children%20in%20rural%20Philippines%20classroom%2C%20volunteers%20with%20local%20students%2C%20educational%20materials%20and%20books%2C%20bright%20classroom%20setting%2C%20cross-cultural%20learning%2C%20children%20eager%20to%20learn%2C%20educational%20mission%20work&width=300&height=300&seq=gallery-11&orientation=squarish"
+alt="Education Mission" class="w-full h-full object-cover">
+</div>
+<div class="gallery-item events rounded-lg overflow-hidden" onclick="openGalleryModal(this)">
+<img src="https://readdy.ai/api/search-image?query=Church%20worship%20service%20with%20contemporary%20music%20band%2C%20musicians%20playing%20guitars%20and%20keyboards%2C%20congregation%20with%20raised%20hands%20in%20worship%2C%20modern%20church%20sanctuary%2C%20passionate%20worship%2C%20spiritual%20atmosphere%2C%20community%20praise&width=300&height=300&seq=gallery-12&orientation=squarish"
+alt="Worship Service" class="w-full h-full object-cover">
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 animate-fade-in">
+<h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Get In Touch</h2>
+<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+Ready to join our mission? Have questions about our programs? We'd love to hear from you and help you get involved.
+</p>
+</div>
+<div class="grid lg:grid-cols-2 gap-12">
+<!-- Contact Form -->
+<div class="glass-card rounded-2xl p-8 animate-slide-up">
+<h3 class="text-2xl font-semibold text-gray-800 mb-6">Send us a Message</h3>
+<form class="space-y-6" onsubmit="submitContactForm(event)">
+<div class="grid md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+<input type="text" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+<input type="text" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+<input type="email" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+<input type="tel" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Interest Area</label>
+<div class="relative">
+<button type="button" onclick="toggleDropdown('interestDropdown')" class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm text-left bg-white flex items-center justify-between">
+<span id="selectedInterest">Select your interest</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div id="interestDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+<div onclick="selectInterest('Mission Trips')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Mission Trips</div>
+<div onclick="selectInterest('Local Outreach')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Local Outreach</div>
+<div onclick="selectInterest('Youth Ministry')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Youth Ministry</div>
+<div onclick="selectInterest('Worship Team')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Worship Team</div>
+<div onclick="selectInterest('Small Groups')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Small Groups</div>
+<div onclick="selectInterest('General Information')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">General Information</div>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+<textarea required rows="4" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm resize-none"></textarea>
+</div>
+<button type="submit" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+<i class="ri-send-plane-line mr-2"></i>
+Send Message
+</button>
+</form>
+</div>
+<!-- Contact Information -->
+<div class="space-y-8 animate-slide-up">
+<div class="glass-card rounded-2xl p-8">
+<h3 class="text-2xl font-semibold text-gray-800 mb-6">Contact Information</h3>
+<div class="space-y-6">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 flex items-center justify-center bg-primary rounded-lg">
+<i class="ri-map-pin-line text-white text-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-800 mb-1">Address</h4>
+<p class="text-gray-600">1234 Faith Avenue<br>Springfield, IL 62701<br>United States</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 flex items-center justify-center bg-secondary rounded-lg">
+<i class="ri-phone-line text-white text-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-800 mb-1">Phone</h4>
+<p class="text-gray-600">(217) 555-0123<br>Emergency: (217) 555-0124</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 flex items-center justify-center bg-orange-500 rounded-lg">
+<i class="ri-mail-line text-white text-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-800 mb-1">Email</h4>
+<p class="text-gray-600">info@gracecommunity.org<br>missions@gracecommunity.org</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 flex items-center justify-center bg-green-500 rounded-lg">
+<i class="ri-time-line text-white text-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-800 mb-1">Office Hours</h4>
+<p class="text-gray-600">Monday - Friday: 9:00 AM - 5:00 PM<br>Saturday: 10:00 AM - 2:00 PM<br>Sunday: After Services</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Social Media -->
+<div class="glass-card rounded-2xl p-8">
+<h3 class="text-xl font-semibold text-gray-800 mb-4">Follow Our Mission</h3>
+<div class="flex space-x-4">
+<a href="#" class="w-12 h-12 flex items-center justify-center bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+<i class="ri-facebook-fill text-xl"></i>
+</a>
+<a href="#" class="w-12 h-12 flex items-center justify-center bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition-colors">
+<i class="ri-twitter-fill text-xl"></i>
+</a>
+<a href="#" class="w-12 h-12 flex items-center justify-center bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors">
+<i class="ri-instagram-fill text-xl"></i>
+</a>
+<a href="#" class="w-12 h-12 flex items-center justify-center bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+<i class="ri-youtube-fill text-xl"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-16">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid md:grid-cols-4 gap-8 mb-8">
+<div>
+<div class="flex items-center space-x-2 mb-4">
+<div class="w-8 h-8 flex items-center justify-center bg-primary rounded-lg">
+<i class="ri-church-line text-white text-lg"></i>
+</div>
+<span class="font-['Pacifico'] text-xl">Go Preach</span>
+</div>
+<p class="text-gray-400 mb-4">Transforming lives through mission work and spreading hope across communities worldwide.</p>
+<div class="flex space-x-3">
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-lg hover:bg-primary transition-colors">
+<i class="ri-facebook-fill"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-lg hover:bg-primary transition-colors">
+<i class="ri-twitter-fill"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-lg hover:bg-primary transition-colors">
+<i class="ri-instagram-fill"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-lg hover:bg-primary transition-colors">
+<i class="ri-youtube-fill"></i>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+<ul class="space-y-2">
+<li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+<li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Services</a></li>
+<li><a href="#missions" class="text-gray-400 hover:text-white transition-colors">Missions</a></li>
+<li><a href="#events" class="text-gray-400 hover:text-white transition-colors">Events</a></li>
+<li><a href="#gallery" class="text-gray-400 hover:text-white transition-colors">Gallery</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Missions</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">International Trips</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Local Outreach</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Youth Missions</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Volunteer Opportunities</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Mission Training</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+<p class="text-gray-400 mb-4">Stay updated on our latest missions and events.</p>
+<div class="flex">
+<input type="email" placeholder="Your email" class="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 !rounded-l-button focus:outline-none focus:ring-2 focus:ring-primary text-sm">
+<button class="bg-primary hover:bg-primary/80 px-4 py-2 !rounded-r-button transition-colors whitespace-nowrap">
+<i class="ri-send-plane-line"></i>
+</button>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-400 text-sm">© 2024 Grace Community Church. All rights reserved.</p>
+<div class="flex space-x-6 mt-4 md:mt-0">
+<a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
+<a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
+<a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Cookie Policy</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Modals -->
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+<div class="glass-card rounded-2xl p-8 max-w-md w-full mx-4">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-2xl font-semibold text-gray-800">Login</h2>
+<button onclick="closeModal('loginModal')" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700">
+<i class="ri-close-line text-xl"></i>
+</button>
+</div>
+<form onsubmit="handleLogin(event)">
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+<input type="email" required class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+<input type="password" required class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div class="flex items-center justify-between">
+<label class="flex items-center">
+<input type="checkbox" class="custom-checkbox mr-2">
+<span class="text-sm text-gray-600">Remember me</span>
+</label>
+<a href="#" class="text-sm text-primary hover:text-primary/80">Forgot password?</a>
+</div>
+<button type="submit" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+Login
+</button>
+</div>
+</form>
+<div class="mt-6 text-center">
+<p class="text-sm text-gray-600">Don't have an account?
+<button onclick="switchModal('loginModal', 'registerModal')" class="text-primary hover:text-primary/80 font-medium">Sign up</button>
+</p>
+</div>
+</div>
+</div>
+<!-- Register Modal -->
+<div id="registerModal" class="modal">
+<div class="glass-card rounded-2xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-2xl font-semibold text-gray-800">Create Your Account</h2>
+<button onclick="closeModal('registerModal')" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700">
+<i class="ri-close-line text-xl"></i>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="mb-8">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium text-primary">Step <span id="currentStep">1</span> of 5</span>
+<span class="text-sm text-gray-500"><span id="currentProgress">20</span>% Complete</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-2">
+<div id="progressBar" class="bg-gradient-to-r from-primary to-secondary h-2 rounded-full transition-all duration-500 ease-out" style="width: 20%"></div>
+</div>
+</div>
+<form id="multiStepForm">
+<!-- Step 1: Personal Information -->
+<div class="form-step active" data-step="1">
+<div class="text-center mb-6">
+<div class="w-16 h-16 flex items-center justify-center bg-primary rounded-full mx-auto mb-4">
+<i class="ri-user-line text-white text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Personal Information</h3>
+<p class="text-gray-600">Let's start with your basic information</p>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+<input type="text" name="firstName" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+<input type="text" name="lastName" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth *</label>
+<input type="date" name="dateOfBirth" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Gender *</label>
+<div class="grid grid-cols-3 gap-4">
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="radio" name="gender" value="male" required class="custom-radio mr-3">
+<span class="text-sm">Male</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="radio" name="gender" value="female" required class="custom-radio mr-3">
+<span class="text-sm">Female</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="radio" name="gender" value="other" required class="custom-radio mr-3">
+<span class="text-sm">Other</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 2: Contact Information -->
+<div class="form-step" data-step="2">
+<div class="text-center mb-6">
+<div class="w-16 h-16 flex items-center justify-center bg-secondary rounded-full mx-auto mb-4">
+<i class="ri-phone-line text-white text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Contact Information</h3>
+<p class="text-gray-600">How can we reach you?</p>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+<input type="email" name="email" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+<input type="tel" name="phone" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Address *</label>
+<input type="text" name="address" required placeholder="Street Address" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm mb-3">
+<div class="grid grid-cols-2 gap-4">
+<input type="text" name="city" required placeholder="City" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+<input type="text" name="zipCode" required placeholder="ZIP Code" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Emergency Contact *</label>
+<input type="text" name="emergencyContact" required placeholder="Name and relationship" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm mb-3">
+<input type="tel" name="emergencyPhone" required placeholder="Emergency contact phone" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+</div>
+</div>
+<!-- Step 3: Experience & Skills -->
+<div class="form-step" data-step="3">
+<div class="text-center mb-6">
+<div class="w-16 h-16 flex items-center justify-center bg-orange-500 rounded-full mx-auto mb-4">
+<i class="ri-trophy-line text-white text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Experience & Skills</h3>
+<p class="text-gray-600">Tell us about your background and abilities</p>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Mission Experience Level *</label>
+<div class="space-y-3">
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="radio" name="experienceLevel" value="beginner" required class="custom-radio mr-3">
+<div>
+<span class="font-medium text-sm">Beginner</span>
+<p class="text-xs text-gray-500">No previous mission experience</p>
+</div>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="radio" name="experienceLevel" value="intermediate" required class="custom-radio mr-3">
+<div>
+<span class="font-medium text-sm">Intermediate</span>
+<p class="text-xs text-gray-500">1-3 mission trips or volunteer work</p>
+</div>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="radio" name="experienceLevel" value="experienced" required class="custom-radio mr-3">
+<div>
+<span class="font-medium text-sm">Experienced</span>
+<p class="text-xs text-gray-500">4+ mission trips or extensive volunteer work</p>
+</div>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Professional Skills *</label>
+<div class="grid grid-cols-2 gap-3">
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="medical" class="custom-checkbox mr-2">
+<span class="text-sm">Medical/Healthcare</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="construction" class="custom-checkbox mr-2">
+<span class="text-sm">Construction/Building</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="education" class="custom-checkbox mr-2">
+<span class="text-sm">Education/Teaching</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="childcare" class="custom-checkbox mr-2">
+<span class="text-sm">Childcare</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="music" class="custom-checkbox mr-2">
+<span class="text-sm">Music/Arts</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="technology" class="custom-checkbox mr-2">
+<span class="text-sm">Technology/IT</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="leadership" class="custom-checkbox mr-2">
+<span class="text-sm">Leadership</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="translation" class="custom-checkbox mr-2">
+<span class="text-sm">Translation</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Additional Experience</label>
+<textarea name="additionalExperience" rows="4" maxlength="500" placeholder="Describe any relevant volunteer work, professional experience, or special skills..." class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm resize-none"></textarea>
+<div class="text-xs text-gray-500 mt-1">
+<span id="experienceCount">0</span>/500 characters
+</div>
+</div>
+</div>
+</div>
+<!-- Step 4: Languages & Preferences -->
+<div class="form-step" data-step="4">
+<div class="text-center mb-6">
+<div class="w-16 h-16 flex items-center justify-center bg-green-500 rounded-full mx-auto mb-4">
+<i class="ri-global-line text-white text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Languages & Preferences</h3>
+<p class="text-gray-600">Help us match you with the right opportunities</p>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Languages Spoken *</label>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 border border-gray-300 !rounded-button">
+<span class="text-sm font-medium">English</span>
+<div class="flex space-x-4">
+<label class="flex items-center">
+<input type="radio" name="englishLevel" value="native" required class="custom-radio mr-2">
+<span class="text-xs">Native</span>
+</label>
+<label class="flex items-center">
+<input type="radio" name="englishLevel" value="fluent" required class="custom-radio mr-2">
+<span class="text-xs">Fluent</span>
+</label>
+<label class="flex items-center">
+<input type="radio" name="englishLevel" value="conversational" required class="custom-radio mr-2">
+<span class="text-xs">Basic</span>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="languages" value="spanish" class="custom-checkbox mr-3">
+<span class="text-sm">Spanish</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="languages" value="french" class="custom-checkbox mr-3">
+<span class="text-sm">French</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="languages" value="portuguese" class="custom-checkbox mr-3">
+<span class="text-sm">Portuguese</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="languages" value="mandarin" class="custom-checkbox mr-3">
+<span class="text-sm">Mandarin</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="languages" value="arabic" class="custom-checkbox mr-3">
+<span class="text-sm">Arabic</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="languages" value="other" class="custom-checkbox mr-3">
+<span class="text-sm">Other</span>
+</label>
+</div>
+<input type="text" name="otherLanguage" placeholder="Specify other languages..." class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Mission Type Preference *</label>
+<div class="space-y-3">
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="missionTypes" value="international" class="custom-checkbox mr-3">
+<div>
+<span class="font-medium text-sm">International Missions</span>
+<p class="text-xs text-gray-500">Overseas mission trips</p>
+</div>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="missionTypes" value="local" class="custom-checkbox mr-3">
+<div>
+<span class="font-medium text-sm">Local Outreach</span>
+<p class="text-xs text-gray-500">Community service projects</p>
+</div>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="missionTypes" value="youth" class="custom-checkbox mr-3">
+<div>
+<span class="font-medium text-sm">Youth Ministry</span>
+<p class="text-xs text-gray-500">Working with children and teenagers</p>
+</div>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="missionTypes" value="disaster" class="custom-checkbox mr-3">
+<div>
+<span class="font-medium text-sm">Disaster Relief</span>
+<p class="text-xs text-gray-500">Emergency response missions</p>
+</div>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Availability *</label>
+<div class="grid grid-cols-2 gap-4">
+<div class="relative">
+<button type="button" onclick="toggleDropdown('availabilityDropdown')" class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm text-left bg-white flex items-center justify-between">
+<span id="selectedAvailability">Select availability</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div id="availabilityDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+<div onclick="selectAvailability('Weekends only')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Weekends only</div>
+<div onclick="selectAvailability('Weekdays available')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Weekdays available</div>
+<div onclick="selectAvailability('Full week available')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Full week available</div>
+<div onclick="selectAvailability('Flexible schedule')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Flexible schedule</div>
+</div>
+</div>
+<div class="relative">
+<button type="button" onclick="toggleDropdown('durationDropdown')" class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm text-left bg-white flex items-center justify-between">
+<span id="selectedDuration">Select duration</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div id="durationDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+<div onclick="selectDuration('1-2 weeks')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">1-2 weeks</div>
+<div onclick="selectDuration('3-4 weeks')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">3-4 weeks</div>
+<div onclick="selectDuration('1-3 months')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">1-3 months</div>
+<div onclick="selectDuration('6+ months')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">6+ months</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 5: Account & Final Details -->
+<div class="form-step" data-step="5">
+<div class="text-center mb-6">
+<div class="w-16 h-16 flex items-center justify-center bg-purple-500 rounded-full mx-auto mb-4">
+<i class="ri-shield-check-line text-white text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Account Security</h3>
+<p class="text-gray-600">Secure your account and review your information</p>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Password *</label>
+<input type="password" name="password" required minlength="8" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+<div class="text-xs text-gray-500 mt-1">
+Password must be at least 8 characters long
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password *</label>
+<input type="password" name="confirmPassword" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">How did you hear about us? *</label>
+<div class="relative">
+<button type="button" onclick="toggleDropdown('referralDropdown')" class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm text-left bg-white flex items-center justify-between">
+<span id="selectedReferral">Select option</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div id="referralDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+<div onclick="selectReferral('Friend/Family member')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Friend/Family member</div>
+<div onclick="selectReferral('Church member')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Church member</div>
+<div onclick="selectReferral('Social media')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Social media</div>
+<div onclick="selectReferral('Website/Internet')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Website/Internet</div>
+<div onclick="selectReferral('Community event')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Community event</div>
+<div onclick="selectReferral('Other')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Other</div>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Additional Comments</label>
+<textarea name="comments" rows="3" maxlength="500" placeholder="Any additional information you'd like to share..." class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm resize-none"></textarea>
+<div class="text-xs text-gray-500 mt-1">
+<span id="commentsCount">0</span>/500 characters
+</div>
+</div>
+<div class="space-y-3">
+<label class="flex items-start">
+<input type="checkbox" name="agreement" required class="custom-checkbox mt-1 mr-3">
+<span class="text-sm text-gray-600">I agree to the Terms of Service and Privacy Policy *</span>
+</label>
+<label class="flex items-start">
+<input type="checkbox" name="newsletter" class="custom-checkbox mt-1 mr-3">
+<span class="text-sm text-gray-600">I would like to receive updates about mission opportunities and church events</span>
+</label>
+<label class="flex items-start">
+<input type="checkbox" name="background" required class="custom-checkbox mt-1 mr-3">
+<span class="text-sm text-gray-600">I consent to a background check if selected for mission trips *</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Navigation Buttons -->
+<div class="flex justify-between mt-8">
+<button type="button" id="prevBtn" onclick="changeStep(-1)" class="px-6 py-3 border border-gray-300 !rounded-button text-gray-700 font-medium hover:bg-gray-50 transition-colors whitespace-nowrap" style="display: none;">
+<i class="ri-arrow-left-line mr-2"></i>
+Previous
+</button>
+<div class="flex space-x-4 ml-auto">
+<button type="button" id="nextBtn" onclick="changeStep(1)" class="btn-primary text-white px-6 py-3 !rounded-button font-medium whitespace-nowrap">
+Next
+<i class="ri-arrow-right-line ml-2"></i>
+</button>
+<button type="submit" id="submitBtn" onclick="handleRegister(event)" class="btn-primary text-white px-6 py-3 !rounded-button font-medium whitespace-nowrap" style="display: none;">
+<i class="ri-check-line mr-2"></i>
+Create Account
+</button>
+</div>
+</div>
+</form>
+<div class="mt-6 text-center">
+<p class="text-sm text-gray-600">Already have an account?
+<button onclick="switchModal('registerModal', 'loginModal')" class="text-primary hover:text-primary/80 font-medium">Sign in</button>
+</p>
+</div>
+</div>
+</div>
+</修改前>
+<修改后>
+<!-- Register Modal -->
+<div id="registerModal" class="modal">
+<div class="glass-card rounded-2xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-2xl font-semibold text-gray-800">Create Your Account</h2>
+<button onclick="closeModal('registerModal')" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700">
+<i class="ri-close-line text-xl"></i>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="mb-8">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium text-primary">Step <span id="currentStep">1</span> of 5</span>
+<span class="text-sm text-gray-500"><span id="currentProgress">20</span>% Complete</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-2">
+<div id="progressBar" class="bg-gradient-to-r from-primary to-secondary h-2 rounded-full transition-all duration-500 ease-out" style="width: 20%"></div>
+</div>
+</div>
+<form id="multiStepForm">
+<!-- Step 1: Personal Information -->
+<div class="form-step active" data-step="1">
+<div class="text-center mb-6">
+<div class="w-16 h-16 flex items-center justify-center bg-primary rounded-full mx-auto mb-4">
+<i class="ri-user-line text-white text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Personal Information</h3>
+<p class="text-gray-600">Let's start with your basic information</p>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+<input type="text" name="firstName" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+<input type="text" name="lastName" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth *</label>
+<input type="date" name="dateOfBirth" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Gender *</label>
+<div class="grid grid-cols-3 gap-4">
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="radio" name="gender" value="male" required class="custom-radio mr-3">
+<span class="text-sm">Male</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="radio" name="gender" value="female" required class="custom-radio mr-3">
+<span class="text-sm">Female</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="radio" name="gender" value="other" required class="custom-radio mr-3">
+<span class="text-sm">Other</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 2: Contact Information -->
+<div class="form-step" data-step="2">
+<div class="text-center mb-6">
+<div class="w-16 h-16 flex items-center justify-center bg-secondary rounded-full mx-auto mb-4">
+<i class="ri-phone-line text-white text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Contact Information</h3>
+<p class="text-gray-600">How can we reach you?</p>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+<input type="email" name="email" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+<input type="tel" name="phone" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Address *</label>
+<input type="text" name="address" required placeholder="Street Address" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm mb-3">
+<div class="grid grid-cols-2 gap-4">
+<input type="text" name="city" required placeholder="City" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+<input type="text" name="zipCode" required placeholder="ZIP Code" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Emergency Contact *</label>
+<input type="text" name="emergencyContact" required placeholder="Name and relationship" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm mb-3">
+<input type="tel" name="emergencyPhone" required placeholder="Emergency contact phone" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+</div>
+</div>
+<!-- Step 3: Experience & Skills -->
+<div class="form-step" data-step="3">
+<div class="text-center mb-6">
+<div class="w-16 h-16 flex items-center justify-center bg-orange-500 rounded-full mx-auto mb-4">
+<i class="ri-trophy-line text-white text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Experience & Skills</h3>
+<p class="text-gray-600">Tell us about your background and abilities</p>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Mission Experience Level *</label>
+<div class="space-y-3">
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="radio" name="experienceLevel" value="beginner" required class="custom-radio mr-3">
+<div>
+<span class="font-medium text-sm">Beginner</span>
+<p class="text-xs text-gray-500">No previous mission experience</p>
+</div>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="radio" name="experienceLevel" value="intermediate" required class="custom-radio mr-3">
+<div>
+<span class="font-medium text-sm">Intermediate</span>
+<p class="text-xs text-gray-500">1-3 mission trips or volunteer work</p>
+</div>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="radio" name="experienceLevel" value="experienced" required class="custom-radio mr-3">
+<div>
+<span class="font-medium text-sm">Experienced</span>
+<p class="text-xs text-gray-500">4+ mission trips or extensive volunteer work</p>
+</div>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Professional Skills *</label>
+<div class="grid grid-cols-2 gap-3">
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="medical" class="custom-checkbox mr-2">
+<span class="text-sm">Medical/Healthcare</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="construction" class="custom-checkbox mr-2">
+<span class="text-sm">Construction/Building</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="education" class="custom-checkbox mr-2">
+<span class="text-sm">Education/Teaching</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="childcare" class="custom-checkbox mr-2">
+<span class="text-sm">Childcare</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="music" class="custom-checkbox mr-2">
+<span class="text-sm">Music/Arts</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="technology" class="custom-checkbox mr-2">
+<span class="text-sm">Technology/IT</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="leadership" class="custom-checkbox mr-2">
+<span class="text-sm">Leadership</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" name="skills" value="translation" class="custom-checkbox mr-2">
+<span class="text-sm">Translation</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Additional Experience</label>
+<textarea name="additionalExperience" rows="4" maxlength="500" placeholder="Describe any relevant volunteer work, professional experience, or special skills..." class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm resize-none"></textarea>
+<div class="text-xs text-gray-500 mt-1">
+<span id="experienceCount">0</span>/500 characters
+</div>
+</div>
+</div>
+</div>
+<!-- Step 4: Languages & Preferences -->
+<div class="form-step" data-step="4">
+<div class="text-center mb-6">
+<div class="w-16 h-16 flex items-center justify-center bg-green-500 rounded-full mx-auto mb-4">
+<i class="ri-global-line text-white text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Languages & Preferences</h3>
+<p class="text-gray-600">Help us match you with the right opportunities</p>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Languages Spoken *</label>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 border border-gray-300 !rounded-button">
+<span class="text-sm font-medium">English</span>
+<div class="flex space-x-4">
+<label class="flex items-center">
+<input type="radio" name="englishLevel" value="native" required class="custom-radio mr-2">
+<span class="text-xs">Native</span>
+</label>
+<label class="flex items-center">
+<input type="radio" name="englishLevel" value="fluent" required class="custom-radio mr-2">
+<span class="text-xs">Fluent</span>
+</label>
+<label class="flex items-center">
+<input type="radio" name="englishLevel" value="conversational" required class="custom-radio mr-2">
+<span class="text-xs">Basic</span>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="languages" value="spanish" class="custom-checkbox mr-3">
+<span class="text-sm">Spanish</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="languages" value="french" class="custom-checkbox mr-3">
+<span class="text-sm">French</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="languages" value="portuguese" class="custom-checkbox mr-3">
+<span class="text-sm">Portuguese</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="languages" value="mandarin" class="custom-checkbox mr-3">
+<span class="text-sm">Mandarin</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="languages" value="arabic" class="custom-checkbox mr-3">
+<span class="text-sm">Arabic</span>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="languages" value="other" class="custom-checkbox mr-3">
+<span class="text-sm">Other</span>
+</label>
+</div>
+<input type="text" name="otherLanguage" placeholder="Specify other languages..." class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Mission Type Preference *</label>
+<div class="space-y-3">
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="missionTypes" value="international" class="custom-checkbox mr-3">
+<div>
+<span class="font-medium text-sm">International Missions</span>
+<p class="text-xs text-gray-500">Overseas mission trips</p>
+</div>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="missionTypes" value="local" class="custom-checkbox mr-3">
+<div>
+<span class="font-medium text-sm">Local Outreach</span>
+<p class="text-xs text-gray-500">Community service projects</p>
+</div>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="missionTypes" value="youth" class="custom-checkbox mr-3">
+<div>
+<span class="font-medium text-sm">Youth Ministry</span>
+<p class="text-xs text-gray-500">Working with children and teenagers</p>
+</div>
+</label>
+<label class="flex items-center p-3 border border-gray-300 !rounded-button cursor-pointer hover:bg-gray-50 transition-colors">
+<input type="checkbox" name="missionTypes" value="disaster" class="custom-checkbox mr-3">
+<div>
+<span class="font-medium text-sm">Disaster Relief</span>
+<p class="text-xs text-gray-500">Emergency response missions</p>
+</div>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Availability *</label>
+<div class="grid grid-cols-2 gap-4">
+<div class="relative">
+<button type="button" onclick="toggleDropdown('availabilityDropdown')" class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm text-left bg-white flex items-center justify-between">
+<span id="selectedAvailability">Select availability</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div id="availabilityDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+<div onclick="selectAvailability('Weekends only')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Weekends only</div>
+<div onclick="selectAvailability('Weekdays available')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Weekdays available</div>
+<div onclick="selectAvailability('Full week available')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Full week available</div>
+<div onclick="selectAvailability('Flexible schedule')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Flexible schedule</div>
+</div>
+</div>
+<div class="relative">
+<button type="button" onclick="toggleDropdown('durationDropdown')" class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm text-left bg-white flex items-center justify-between">
+<span id="selectedDuration">Select duration</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div id="durationDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+<div onclick="selectDuration('1-2 weeks')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">1-2 weeks</div>
+<div onclick="selectDuration('3-4 weeks')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">3-4 weeks</div>
+<div onclick="selectDuration('1-3 months')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">1-3 months</div>
+<div onclick="selectDuration('6+ months')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">6+ months</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 5: Account & Final Details -->
+<div class="form-step" data-step="5">
+<div class="text-center mb-6">
+<div class="w-16 h-16 flex items-center justify-center bg-purple-500 rounded-full mx-auto mb-4">
+<i class="ri-shield-check-line text-white text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Account Security</h3>
+<p class="text-gray-600">Secure your account and review your information</p>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Password *</label>
+<input type="password" name="password" required minlength="8" class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+<div class="text-xs text-gray-500 mt-1">
+Password must be at least 8 characters long
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password *</label>
+<input type="password" name="confirmPassword" required class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">How did you hear about us? *</label>
+<div class="relative">
+<button type="button" onclick="toggleDropdown('referralDropdown')" class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm text-left bg-white flex items-center justify-between">
+<span id="selectedReferral">Select option</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div id="referralDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+<div onclick="selectReferral('Friend/Family member')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Friend/Family member</div>
+<div onclick="selectReferral('Church member')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Church member</div>
+<div onclick="selectReferral('Social media')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Social media</div>
+<div onclick="selectReferral('Website/Internet')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Website/Internet</div>
+<div onclick="selectReferral('Community event')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Community event</div>
+<div onclick="selectReferral('Other')" class="px-4 py-2 hover:bg-gray-50 cursor-pointer">Other</div>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Additional Comments</label>
+<textarea name="comments" rows="3" maxlength="500" placeholder="Any additional information you'd like to share..." class="form-input w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm resize-none"></textarea>
+<div class="text-xs text-gray-500 mt-1">
+<span id="commentsCount">0</span>/500 characters
+</div>
+</div>
+<div class="space-y-3">
+<label class="flex items-start">
+<input type="checkbox" name="agreement" required class="custom-checkbox mt-1 mr-3">
+<span class="text-sm text-gray-600">I agree to the Terms of Service and Privacy Policy *</span>
+</label>
+<label class="flex items-start">
+<input type="checkbox" name="newsletter" class="custom-checkbox mt-1 mr-3">
+<span class="text-sm text-gray-600">I would like to receive updates about mission opportunities and church events</span>
+</label>
+<label class="flex items-start">
+<input type="checkbox" name="background" required class="custom-checkbox mt-1 mr-3">
+<span class="text-sm text-gray-600">I consent to a background check if selected for mission trips *</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Navigation Buttons -->
+<div class="flex justify-between mt-8">
+<button type="button" id="prevBtn" onclick="changeStep(-1)" class="px-6 py-3 border border-gray-300 !rounded-button text-gray-700 font-medium hover:bg-gray-50 transition-colors whitespace-nowrap" style="display: none;">
+<i class="ri-arrow-left-line mr-2"></i>
+Previous
+</button>
+<div class="flex space-x-4 ml-auto">
+<button type="button" id="nextBtn" onclick="changeStep(1)" class="btn-primary text-white px-6 py-3 !rounded-button font-medium whitespace-nowrap">
+Next
+<i class="ri-arrow-right-line ml-2"></i>
+</button>
+<button type="submit" id="submitBtn" onclick="handleRegister(event)" class="btn-primary text-white px-6 py-3 !rounded-button font-medium whitespace-nowrap" style="display: none;">
+<i class="ri-check-line mr-2"></i>
+Create Account
+</button>
+</div>
+</div>
+</form>
+<div class="mt-6 text-center">
+<p class="text-sm text-gray-600">Already have an account?
+<button onclick="switchModal('registerModal', 'loginModal')" class="text-primary hover:text-primary/80 font-medium">Sign in</button>
+</p>
+</div>
+</div>
+</div>
+<!-- Mission Registration Modal -->
+<div id="missionRegistrationModal" class="modal">
+<div class="glass-card rounded-2xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-2xl font-semibold text-gray-800">Mission Registration</h2>
+<button onclick="closeModal('missionRegistrationModal')" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700">
+<i class="ri-close-line text-xl"></i>
+</button>
+</div>
+<div id="missionRegistrationContent">
+<!-- Content will be populated by JavaScript -->
+</div>
+</div>
+</div>
+<!-- Volunteer Modal -->
+<div id="volunteerModal" class="modal">
+<div class="glass-card rounded-2xl p-8 max-w-lg w-full mx-4">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-2xl font-semibold text-gray-800">Volunteer Sign-Up</h2>
+<button onclick="closeModal('volunteerModal')" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700">
+<i class="ri-close-line text-xl"></i>
+</button>
+</div>
+<form onsubmit="handleVolunteerSignup(event)">
+<div class="space-y-4">
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+<input type="text" required class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+<input type="text" required class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+<input type="email" required class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+<input type="tel" required class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Areas of Interest</label>
+<div class="space-y-2">
+<label class="flex items-center">
+<input type="checkbox" class="custom-checkbox mr-3" value="international">
+<span class="text-sm">International Missions</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="custom-checkbox mr-3" value="local">
+<span class="text-sm">Local Outreach</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="custom-checkbox mr-3" value="youth">
+<span class="text-sm">Youth Ministry</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="custom-checkbox mr-3" value="events">
+<span class="text-sm">Event Support</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Special Skills or Experience</label>
+<textarea rows="3" class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm resize-none"></textarea>
+</div>
+<button type="submit" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+<i class="ri-heart-line mr-2"></i>
+Sign Up to Volunteer
+</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Gallery Modal -->
+<div id="galleryModal" class="modal">
+<div class="relative max-w-4xl w-full mx-4">
+<button onclick="closeModal('galleryModal')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-black/50 text-white rounded-full z-10">
+<i class="ri-close-line text-xl"></i>
+</button>
+<img id="galleryModalImage" src="" alt="" class="w-full h-auto rounded-2xl">
+</div>
+</div>
+<script>
+// Mobile Menu Toggle
+function toggleMobileMenu() {
+const mobileMenu = document.getElementById('mobileMenu');
+mobileMenu.classList.toggle('active');
+}
+// Smooth Scrolling
+function scrollToSection(sectionId) {
+document.getElementById(sectionId).scrollIntoView({
+behavior: 'smooth'
+});
+}
+// Modal Functions
+function showLoginModal() {
+window.location.href='login.html'
+}
+function showRegisterModal() {
+window.location.href='register.html'
+}
+function showVolunteerModal() {
+document.getElementById('volunteerModal').classList.add('active');
+}
+function closeModal(modalId) {
+document.getElementById(modalId).classList.remove('active');
+}
+function switchModal(currentModalId, newModalId) {
+closeModal(currentModalId);
+document.getElementById(newModalId).classList.add('active');
+}
+// Mission Registration
+function showMissionModal(missionType) {
+showRegistrationModal(missionType);
+}
+
+function showRegistrationModal(missionType) {
+const modal = document.getElementById('missionRegistrationModal');
+const content = document.getElementById('missionRegistrationContent');
+const missionData = {
+honduras: {
+title: 'Honduras Water Project',
+date: 'March 15-22, 2025',
+location: 'Tegucigalpa, Honduras',
+description: 'Join us in bringing clean water to remote villages in Honduras.',
+cost: '$1,200 (includes flights, accommodation, meals)',
+requirements: ['Valid passport', 'Physical fitness', 'Mission training completion']
+},
+kenya: {
+title: 'Kenya Medical Mission',
+date: 'April 8-18, 2025',
+location: 'Nairobi, Kenya',
+description: 'Provide essential medical care to underserved communities.',
+cost: '$1,800 (includes flights, accommodation, meals)',
+requirements: ['Medical background preferred', 'Valid passport', 'Vaccinations required']
+},
+guatemala: {
+title: 'Guatemala Education Mission',
+date: 'May 20-30, 2025',
+location: 'Quetzaltenango, Guatemala',
+description: 'Build classrooms and provide educational resources.',
+cost: '$900 (includes flights, accommodation, meals)',
+requirements: ['Construction experience helpful', 'Valid passport', 'Spanish helpful but not required']
+}
+};
+const mission = missionData[missionType] || missionData.honduras;
+content.innerHTML = `
+<div class="mb-6">
+<h3 class="text-xl font-semibold text-gray-800 mb-2">${mission.title}</h3>
+<p class="text-gray-600 mb-4">${mission.description}</p>
+<div class="grid md:grid-cols-2 gap-4 mb-4">
+<div>
+<strong>Date:</strong> ${mission.date}
+</div>
+<div>
+<strong>Location:</strong> ${mission.location}
+</div>
+<div class="md:col-span-2">
+<strong>Cost:</strong> ${mission.cost}
+</div>
+</div>
+<div class="mb-4">
+<strong>Requirements:</strong>
+<ul class="list-disc list-inside mt-2 text-gray-600">
+${mission.requirements.map(req => `<li>${req}</li>`).join('')}
+</ul>
+</div>
+</div>
+<form onsubmit="handleMissionRegistration(event, '${missionType}')">
+<div class="space-y-4">
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+<input type="text" required class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+<input type="text" required class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+<input type="email" required class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+<input type="tel" required class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Emergency Contact</label>
+<input type="text" required placeholder="Name and phone number" class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Relevant Experience</label>
+<textarea rows="3" placeholder="Any relevant skills, experience, or why you want to join this mission" class="w-full px-4 py-3 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm resize-none"></textarea>
+</div>
+<label class="flex items-start">
+<input type="checkbox" required class="custom-checkbox mt-1 mr-3">
+<span class="text-sm text-gray-600">I understand the requirements and commit to attending all pre-mission training sessions</span>
+</label>
+<button type="submit" class="w-full btn-primary text-white py-3 !rounded-button font-semibold whitespace-nowrap">
+<i class="ri-user-add-line mr-2"></i>
+Register for Mission
+</button>
+</div>
+</form>
+`;
+modal.classList.add('active');
+}
+// Gallery Functions
+function filterGallery(category, element) {
+const items = document.querySelectorAll('.gallery-item');
+const filters = document.querySelectorAll('.gallery-filter');
+// Update filter buttons
+filters.forEach(filter => {
+filter.classList.remove('active', 'bg-primary', 'text-white');
+filter.classList.add('bg-gray-200', 'text-gray-700');
+});
+element.classList.remove('bg-gray-200', 'text-gray-700');
+element.classList.add('active', 'bg-primary', 'text-white');
+// Filter items
+items.forEach(item => {
+if (category === 'all' || item.classList.contains(category)) {
+item.style.display = 'block';
+} else {
+item.style.display = 'none';
+}
+});
+}
+function openGalleryModal(element) {
+const img = element.querySelector('img');
+const modal = document.getElementById('galleryModal');
+const modalImg = document.getElementById('galleryModalImage');
+modalImg.src = img.src;
+modalImg.alt = img.alt;
+modal.classList.add('active');
+}
+// Dropdown Functions
+function toggleDropdown(dropdownId) {
+const dropdown = document.getElementById(dropdownId);
+dropdown.classList.toggle('hidden');
+}
+function selectInterest(interest) {
+document.getElementById('selectedInterest').textContent = interest;
+document.getElementById('interestDropdown').classList.add('hidden');
+}
+// Form Handlers
+function handleLogin(event) {
+event.preventDefault();
+alert('Login functionality would be implemented here');
+closeModal('loginModal');
+}
+function handleRegister(event) {
+event.preventDefault();
+if (!validateCurrentStep()) {
+return;
+}
+// Collect all form data
+const formData = new FormData(document.getElementById('multiStepForm'));
+const registrationData = {};
+for (let [key, value] of formData.entries()) {
+if (registrationData[key]) {
+// Handle multiple values (checkboxes)
+if (Array.isArray(registrationData[key])) {
+registrationData[key].push(value);
+} else {
+registrationData[key] = [registrationData[key], value];
+}
+} else {
+registrationData[key] = value;
+}
+}
+// Show success message
+const messageEl = document.createElement('div');
+messageEl.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg z-50 text-sm font-medium';
+messageEl.innerHTML = '<i class="ri-check-line mr-2"></i>Registration completed successfully! Welcome to Grace Community Church.';
+document.body.appendChild(messageEl);
+setTimeout(() => {
+messageEl.remove();
+closeModal('registerModal');
+// Reset form
+document.getElementById('multiStepForm').reset();
+currentStepNumber = 1;
+document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+document.querySelector('[data-step="1"]').classList.add('active');
+updateProgress();
+updateButtons();
+// Reset dropdowns
+document.getElementById('selectedAvailability').textContent = 'Select availability';
+document.getElementById('selectedDuration').textContent = 'Select duration';
+document.getElementById('selectedReferral').textContent = 'Select option';
+}, 3000);
+}
+function handleMissionRegistration(event, missionType) {
+event.preventDefault();
+alert(`Registration for ${missionType} mission submitted successfully!`);
+closeModal('missionRegistrationModal');
+}
+function handleVolunteerSignup(event) {
+event.preventDefault();
+alert('Volunteer sign-up submitted successfully!');
+closeModal('volunteerModal');
+}
+function submitContactForm(event) {
+event.preventDefault();
+alert('Message sent successfully! We will get back to you soon.');
+}
+// Counter Animation
+function animateCounters() {
+const counters = document.querySelectorAll('.counter');
+counters.forEach(counter => {
+const target = parseInt(counter.getAttribute('data-target'));
+const increment = target / 100;
+let current = 0;
+const updateCounter = () => {
+if (current < target) {
+current += increment;
+counter.textContent = Math.ceil(current);
+setTimeout(updateCounter, 20);
+} else {
+counter.textContent = target;
+}
+};
+updateCounter();
+});
+}
+// Initialize animations on scroll
+function handleScrollAnimations() {
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+if (entry.target.querySelector('.counter')) {
+animateCounters();
+}
+}
+});
+});
+document.querySelectorAll('section').forEach(section => {
+observer.observe(section);
+});
+}
+</script>
+<script>
+// Custom checkbox styles
+const style = document.createElement('style');
+style.textContent = `
+.custom-checkbox {
+appearance: none;
+width: 18px;
+height: 18px;
+border: 2px solid #d1d5db;
+border-radius: 4px;
+background: white;
+cursor: pointer;
+position: relative;
+transition: all 0.2s ease;
+}
+.custom-checkbox:checked {
+background: #4F46E5;
+border-color: #4F46E5;
+}
+.custom-checkbox:checked::after {
+content: '✓';
+position: absolute;
+top: -2px;
+left: 2px;
+color: white;
+font-size: 12px;
+font-weight: bold;
+}
+`;
+document.head.appendChild(style);
+// Multi-step form variables
+let currentStepNumber = 1;
+const totalSteps = 5;
+// Multi-step form functions
+function changeStep(direction) {
+const currentStep = document.querySelector('.form-step.active');
+const nextStepNumber = currentStepNumber + direction;
+if (nextStepNumber < 1 || nextStepNumber > totalSteps) return;
+if (direction === 1 && !validateCurrentStep()) return;
+// Add transition class
+if (direction === 1) {
+currentStep.classList.add('prev');
+} else {
+currentStep.classList.remove('prev');
+}
+setTimeout(() => {
+currentStep.classList.remove('active');
+if (direction === 1) {
+currentStep.classList.remove('prev');
+}
+const nextStep = document.querySelector(`[data-step="${nextStepNumber}"]`);
+nextStep.classList.add('active');
+currentStepNumber = nextStepNumber;
+updateProgress();
+updateButtons();
+}, 200);
+}
+function updateProgress() {
+const progress = (currentStepNumber / totalSteps) * 100;
+document.getElementById('currentStep').textContent = currentStepNumber;
+document.getElementById('currentProgress').textContent = Math.round(progress);
+document.getElementById('progressBar').style.width = progress + '%';
+}
+function updateButtons() {
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+if (currentStepNumber === 1) {
+prevBtn.style.display = 'none';
+} else {
+prevBtn.style.display = 'block';
+}
+if (currentStepNumber === totalSteps) {
+nextBtn.style.display = 'none';
+submitBtn.style.display = 'block';
+} else {
+nextBtn.style.display = 'block';
+submitBtn.style.display = 'none';
+}
+}
+function validateCurrentStep() {
+const currentStep = document.querySelector('.form-step.active');
+const requiredInputs = currentStep.querySelectorAll('input[required], select[required]');
+for (let input of requiredInputs) {
+if (input.type === 'radio') {
+const radioGroup = currentStep.querySelectorAll(`input[name="${input.name}"]`);
+const checked = Array.from(radioGroup).some(radio => radio.checked);
+if (!checked) {
+input.focus();
+showValidationMessage('Please select an option');
+return false;
+}
+} else if (input.type === 'checkbox' && input.hasAttribute('required')) {
+if (!input.checked) {
+input.focus();
+showValidationMessage('This field is required');
+return false;
+}
+} else if (!input.value.trim()) {
+input.focus();
+showValidationMessage('This field is required');
+return false;
+}
+}
+// Validate password confirmation on step 5
+if (currentStepNumber === 5) {
+const password = currentStep.querySelector('input[name="password"]').value;
+const confirmPassword = currentStep.querySelector('input[name="confirmPassword"]').value;
+if (password !== confirmPassword) {
+currentStep.querySelector('input[name="confirmPassword"]').focus();
+showValidationMessage('Passwords do not match');
+return false;
+}
+}
+return true;
+}
+function showValidationMessage(message) {
+// Create or update validation message
+let messageEl = document.querySelector('.validation-message');
+if (!messageEl) {
+messageEl = document.createElement('div');
+messageEl.className = 'validation-message fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-lg z-50 text-sm';
+document.body.appendChild(messageEl);
+}
+messageEl.textContent = message;
+messageEl.style.display = 'block';
+setTimeout(() => {
+messageEl.style.display = 'none';
+}, 3000);
+}
+// Dropdown functions for registration form
+function selectAvailability(value) {
+document.getElementById('selectedAvailability').textContent = value;
+document.getElementById('availabilityDropdown').classList.add('hidden');
+}
+function selectDuration(value) {
+document.getElementById('selectedDuration').textContent = value;
+document.getElementById('durationDropdown').classList.add('hidden');
+}
+function selectReferral(value) {
+document.getElementById('selectedReferral').textContent = value;
+document.getElementById('referralDropdown').classList.add('hidden');
+}
+// Character counting for textareas
+document.addEventListener('input', function(e) {
+if (e.target.name === 'additionalExperience') {
+const count = e.target.value.length;
+document.getElementById('experienceCount').textContent = count;
+if (count > 500) {
+e.target.value = e.target.value.substring(0, 500);
+document.getElementById('experienceCount').textContent = 500;
+}
+}
+if (e.target.name === 'comments') {
+const count = e.target.value.length;
+document.getElementById('commentsCount').textContent = count;
+if (count > 500) {
+e.target.value = e.target.value.substring(0, 500);
+document.getElementById('commentsCount').textContent = 500;
+}
+}
+});
+</script>
+<script>
+// Initialize page
+document.addEventListener('DOMContentLoaded', function() {
+handleScrollAnimations();
+// Close dropdowns when clicking outside
+document.addEventListener('click', function(event) {
+if (!event.target.closest('.relative')) {
+document.querySelectorAll('[id$="Dropdown"]').forEach(dropdown => {
+dropdown.classList.add('hidden');
+});
+}
+});
+// Close mobile menu when clicking nav links
+document.querySelectorAll('#mobileMenu a').forEach(link => {
+link.addEventListener('click', () => {
+document.getElementById('mobileMenu').classList.remove('active');
+});
+});
+});
+</script>
+</body>
+</html>
