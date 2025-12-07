@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Members - Grace Community Church</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before {
+content: "\f3c2";
+}
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#4F46E5',
+secondary: '#059669'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<div class="flex h-screen">
+<aside class="w-64 bg-white shadow-lg flex flex-col">
+<div class="p-6 border-b">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-church-line text-white text-lg"></i>
+</div>
+</div>
+<div>
+<h1 class="font-['Pacifico'] text-xl text-primary">Go Preach</h1>
+</div>
+</div>
+</div>
+<nav class="flex-1 p-4">
+<ul class="space-y-2">
+<li>
+<a href="dashboard.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-dashboard-line"></i>
+</div>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a href="mission.html" data-readdy="true" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-compass-line"></i>
+</div>
+<span>Missions</span>
+</a>
+</li>
+<li>
+<a href="members.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary text-white">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-team-line"></i>
+</div>
+<span>Members</span>
+</a>
+</li>
+<li>
+<a href="report.html" data-readdy="true" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-file-text-line"></i>
+</div>
+<span>Reports</span>
+</a>
+</li>
+<li>
+<a href="communication.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-chat-3-line"></i>
+</div>
+<span>Communication</span>
+</a>
+</li>
+<li>
+<a href="pairing.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-robot-line"></i>
+</div>
+<span>Pairing</span>
+</a>
+</li>
+<li>
+<a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-gallery-line"></i>
+</div>
+<span>Media Gallery</span>
+</a>
+</li>
+<li>
+<a href="attandance.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-calendar-check-line"></i>
+</div>
+<span>Attendance</span>
+</a>
+</li>
+<li>
+<a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-profile-line"></i>
+</div>
+<span>Profile</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-4 border-t">
+  <a href="#" id="logoutBtn" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+    <div class="w-5 h-5 flex items-center justify-center">
+      <i class="ri-logout-box-line"></i>
+    </div>
+    <span>Logout</span>
+  </a>
+</div>
+
+</aside>
+<main class="flex-1 flex flex-col">
+<header class="bg-white shadow-sm border-b px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<h2 class="text-2xl font-semibold text-gray-900">Members</h2>
+<nav class="text-sm text-gray-500">
+<span>Home</span>
+<span class="mx-2">/</span>
+<span class="text-gray-900">Members</span>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+
+    <!-- Search -->
+    <div class="relative">
+        <input 
+            id="searchInput"
+            type="text" 
+            placeholder="Search missions, members..." 
+            class="w-80 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+        >
+        <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+            <i class="ri-search-line text-gray-400"></i>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <button class="relative p-2 text-gray-600 hover:text-gray-900">
+        <div class="w-6 h-6 flex items-center justify-center">
+            <i class="ri-notification-line"></i>
+        </div>
+        <span 
+            id="notificationCount" 
+            class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+        </span>
+    </button>
+
+    <!-- Profile -->
+    <div class="flex items-center space-x-3 cursor-pointer">
+        <img 
+            id="profileImage"
+            src="" 
+            alt="Profile"
+            class="w-10 h-10 rounded-full object-cover"
+        >
+
+        <div>
+            <p id="profileName" class="text-sm font-medium text-gray-900"></p>
+            <p id="profileRole" class="text-xs text-gray-500"></p>
+        </div>
+
+        <div class="w-4 h-4 flex items-center justify-center">
+            <i class="ri-arrow-down-s-line text-gray-400"></i>
+        </div>
+    </div>
+
+</div>
+</div>
+</header>
+<div class="bg-white border-b px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2 whitespace-nowrap !rounded-button" id="add-member-btn">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-add-line"></i>
+</div>
+<span>Add New Member</span>
+</button>
+<div class="flex items-center space-x-1 bg-gray-100 p-1 rounded-lg">
+<button class="px-3 py-1 text-sm rounded-md bg-white text-gray-900 shadow-sm whitespace-nowrap !rounded-button member-filter" data-filter="all">All Members</button>
+<button class="px-3 py-1 text-sm rounded-md text-gray-600 hover:text-gray-900 whitespace-nowrap !rounded-button member-filter" data-filter="active">Active</button>
+<button class="px-3 py-1 text-sm rounded-md text-gray-600 hover:text-gray-900 whitespace-nowrap !rounded-button member-filter" data-filter="leader">Mission Leaders</button>
+<button class="px-3 py-1 text-sm rounded-md text-gray-600 hover:text-gray-900 whitespace-nowrap !rounded-button member-filter" data-filter="volunteer">Volunteers</button>
+<button class="px-3 py-1 text-sm rounded-md text-gray-600 hover:text-gray-900 whitespace-nowrap !rounded-button member-filter" data-filter="inactive">Inactive</button>
+</div>
+</div>
+<div class="flex items-center space-x-3">
+<div class="relative">
+<input type="text" placeholder="Search members..." class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" id="member-search">
+<div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+<i class="ri-search-line text-gray-400"></i>
+</div>
+</div>
+<div class="relative">
+<button class="flex items-center space-x-2 px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button" id="sort-dropdown-btn">
+<span>Sort by: Name</span>
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+</button>
+<div class="absolute right-0 top-full mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10 hidden" id="sort-dropdown">
+<div class="py-1">
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 sort-option" data-sort="name">Name</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 sort-option" data-sort="join-date">Join Date</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 sort-option" data-sort="role">Role</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 sort-option" data-sort="mission-count">Mission Count</button>
+</div>
+</div>
+</div>
+<div class="flex items-center space-x-1 border border-gray-300 rounded-lg p-1">
+<button class="p-1 rounded text-gray-600 hover:bg-gray-100 view-toggle active" data-view="grid">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-grid-line"></i>
+</div>
+</button>
+<button class="p-1 rounded text-gray-600 hover:bg-gray-100 view-toggle" data-view="list">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-list-check"></i>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 p-6 overflow-y-auto">
+
+    
+
+    <div id="dashboard-stats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+  <div class="bg-white rounded-xl shadow-sm p-6 border transform transition-transform hover:scale-105">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-600">Total Members</p>
+        <p id="total-members" class="text-3xl font-bold text-gray-900 mt-2">0</p>
+        <p id="total-month" class="text-sm text-gray-500 mt-1">+0 this month</p>
+      </div>
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-tr from-primary/20 to-primary/10">
+        <i class="ri-team-line text-primary text-lg"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm p-6 border transform transition-transform hover:scale-105">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-600">Active Members</p>
+        <p id="active-members" class="text-3xl font-bold text-gray-900 mt-2">0</p>
+        <p id="active-percent" class="text-sm text-gray-500 mt-1">0% of total</p>
+      </div>
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-tr from-secondary/20 to-secondary/10">
+        <i class="ri-user-star-line text-secondary text-lg"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm p-6 border transform transition-transform hover:scale-105">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-600">Mission Leaders</p>
+        <p id="mission-leaders" class="text-3xl font-bold text-gray-900 mt-2">0</p>
+        <p id="mission-percent" class="text-sm text-gray-500 mt-1">0% of active</p>
+      </div>
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center bg-purple-100">
+        <i class="ri-shield-star-line text-purple-600 text-lg"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm p-6 border transform transition-transform hover:scale-105">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-600">New This Month</p>
+        <p id="new-members" class="text-3xl font-bold text-gray-900 mt-2">0</p>
+        <p class="text-sm text-gray-500 mt-1">Welcome new faces</p>
+      </div>
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center bg-orange-100">
+        <i class="ri-user-add-line text-orange-600 text-lg"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    async function loadDashboardStats() {
+  try {
+    const res = await fetch('/api/members');
+    const members = await res.json();
+
+    const totalMembers = members.length;
+    const activeMembers = members.filter(m => m.availability !== 'Inactive').length;
+    const missionLeaders = members.filter(m => m.role.toLowerCase().includes('leader')).length;
+
+    // Assuming `created_at` is a proper date string
+    const now = new Date();
+    const newThisMonth = members.filter(m => {
+      const created = new Date(m.created_at);
+      return created.getMonth() === now.getMonth() && created.getFullYear() === now.getFullYear();
+    }).length;
+
+    // Update DOM
+    document.getElementById('total-members').innerText = totalMembers;
+    document.getElementById('active-members').innerText = activeMembers;
+    document.getElementById('mission-leaders').innerText = missionLeaders;
+    document.getElementById('new-members').innerText = newThisMonth;
+
+    document.getElementById('active-percent').innerText = `${Math.round((activeMembers/totalMembers)*100)}% of total`;
+    document.getElementById('mission-percent').innerText = `${Math.round((missionLeaders/activeMembers)*100)}% of active`;
+
+  } catch (err) {
+    console.error('Failed to load dashboard stats:', err);
+  }
+}
+
+// Call on page load
+loadDashboardStats();
+
+</script>
+
+
+
+<div class="member-container grid-view">
+  <div id="members-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+
+
+
+  <!-- Your header, navbar, etc. -->
+
+  <div id="members-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <!-- Member cards will be injected here via JS -->
+  </div>
+
+  <!-- Modal Overlay -->
+  <div id="member-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-xl w-full max-w-lg p-6 relative shadow-lg" style="margin-top: 200px; margin-left:450px;">
+      <!-- Close Button -->
+      <button id="modal-close" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+
+      <!-- Modal Content -->
+      <div id="modal-content" class="space-y-4 overflow-y-auto max-h-[80vh]">
+        <!-- Dynamic content will be injected here -->
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+</div>
+
+<script>
+const membersGrid = document.getElementById('members-grid');
+const modal = document.getElementById('member-modal');
+const modalContent = document.getElementById('modal-content');
+const modalClose = document.getElementById('modal-close');
+
+const availabilityColors = {
+  Available: "green-500",
+  Busy: "red-500",
+  Limited: "yellow-500",
+  Inactive: "gray-400"
+};
+
+// Fetch members from API
+fetch('/api/members')
+  .then(res => res.json())
+  .then(members => {
+    members.forEach(member => {
+      const fullName = member.first_name + ' ' + member.last_name;
+      const missions = member.missions ? member.missions.split(',') : [];
+      const skills = member.skills ? member.skills.split(',') : [];
+      const availability = member.availability || "Inactive";
+
+      const card = document.createElement('div');
+      card.className = "member-card bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition-shadow p-6 mb-4";
+      card.dataset.id = member.id;
+      card.dataset.name = fullName;
+      card.dataset.role = member.role;
+      card.dataset.email = member.email;
+      card.dataset.phone = member.phone;
+      card.dataset.missions = missions.join(', ');
+      card.dataset.skills = skills.join(', ');
+      card.dataset.availability = availability;
+
+      card.innerHTML = `
+        <div class="flex items-center space-x-4 mb-4">
+          <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&size=64" alt="${fullName}" class="w-16 h-16 rounded-full object-cover">
+          <div class="flex-1">
+           <h3 class="member-name text-lg font-semibold text-gray-900">${fullName}</h3>
+<p class="member-role text-sm text-gray-600">${member.role}</p>
+
+            <span class="inline-block px-2 py-1 bg-${availability.toLowerCase()}/10 text-${availability.toLowerCase()} text-xs rounded-full mt-1">${availability}</span>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <button class="flex-1 bg-primary text-white py-2 px-3 rounded-lg hover:bg-primary/90 text-sm whitespace-nowrap member-profile-btn">View Profile</button>
+          <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm edit-btn">
+            <i class="ri-edit-line text-gray-600"></i>
+          </button>
+          <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm chat-btn">
+            <i class="ri-message-line text-gray-600"></i>
+          </button>
+        </div>
+      `;
+
+      membersGrid.appendChild(card);
+    });
+  })
+  .catch(err => console.error("Error fetching members:", err));
+
+// --------------------------
+// Event Delegation for Modal
+// --------------------------
+membersGrid.addEventListener('click', (e) => {
+  const card = e.target.closest('.member-card');
+  if (!card) return;
+
+const memberData = {
+    id: card.dataset.id,
+    name: card.dataset.name,
+    first_name: card.dataset.name.split(" ")[0],
+    last_name: card.dataset.name.split(" ").slice(1).join(" "),
+    role: card.dataset.role,
+    email: card.dataset.email,
+    phone: card.dataset.phone,
+    missions: card.dataset.missions,
+    skills: card.dataset.skills,
+    availability: card.dataset.availability
+};
+
+
+  // VIEW PROFILE
+  if (e.target.closest('.member-profile-btn')) {
+    modalContent.innerHTML = `
+  <div class="space-y-6">
+    <!-- Header with Avatar -->
+    <div class="flex items-center space-x-4">
+      <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(memberData.name)}&size=64" 
+           alt="${memberData.name}" class="w-16 h-16 rounded-full object-cover border-2 border-gray-200">
+      <div class="flex-1">
+        <h2 class="text-2xl font-bold text-gray-900">${memberData.name}</h2>
+        <p class="text-sm text-gray-500">Joined: ${new Date(memberData.created_at).toLocaleDateString()}</p>
+      </div>
+    </div>
+
+    <!-- Role & Availability -->
+    <div class="flex flex-wrap gap-3">
+      <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">${memberData.role}</span>
+      <span class="px-3 py-1 bg-${availabilityColors[memberData.availability]}/20 text-${availabilityColors[memberData.availability]} text-xs rounded-full">
+        ${memberData.availability}
+      </span>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="flex items-center space-x-2">
+        <i class="ri-mail-line text-gray-400"></i>
+        <span class="text-sm text-gray-700">${memberData.email}</span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <i class="ri-phone-line text-gray-400"></i>
+        <span class="text-sm text-gray-700">${memberData.phone}</span>
+      </div>
+    </div>
+
+    <!-- Missions -->
+    <div>
+      <p class="text-sm text-gray-500 mb-2 font-medium">Current Missions:</p>
+      <div class="flex flex-wrap gap-2">
+        ${memberData.missions?.length
+          ? memberData.missions.split(',').map(m => `<span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">${m}</span>`).join('')
+          : '<span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">None</span>'}
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div>
+      <p class="text-sm text-gray-500 mb-2 font-medium">Skills:</p>
+      <div class="flex flex-wrap gap-2">
+        ${memberData.skills?.length
+          ? memberData.skills.split(',').map(s => `<span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">${s}</span>`).join('')
+          : '<span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">None</span>'}
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-wrap gap-3 justify-end mt-4">
+      <button id="edit-member-btn" 
+              class="flex-1 sm:flex-none px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition">
+        <i class="ri-edit-line mr-2"></i> Edit
+      </button>
+      <button id="chat-member-btn" 
+              class="flex-1 sm:flex-none px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+        <i class="ri-message-line mr-2"></i> Chat
+      </button>
+      <button id="delete-member-btn" 
+              class="flex-1 sm:flex-none px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
+        <i class="ri-delete-bin-line mr-2"></i> Delete
+      </button>
+    </div>
+  </div>
+`;
+
+    modal.classList.remove('hidden');
+
+
+
+// Add this inside your existing membersGrid click listener or after modalContent is updated
+modalContent.addEventListener('click', async (e) => {
+  if (e.target.closest('#delete-member-btn')) {
+    const confirmDelete = confirm(`Are you sure you want to delete ${memberData.name}?`);
+    if (!confirmDelete) return;
+
+    try {
+      const res = await fetch(`/api/members/${memberData.id}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Failed to delete member');
+
+      // Remove card from grid
+      const card = document.querySelector(`[data-id="${memberData.id}"]`);
+      if (card) card.remove();
+
+      modal.classList.add('hidden');
+      alert(`${memberData.name} has been deleted.`);
+    } catch (err) {
+      console.error(err);
+      alert('Error deleting member.');
+    }
+  }
+});
+
+    
+
+  // EDIT PROFILE
+  }else if (e.target.closest('.edit-btn')) {
+
+    modalContent.innerHTML = `
+      <h2 class="text-2xl font-bold mb-3">Edit ${memberData.first_name} ${memberData.last_name}</h2>
+
+      <form id="edit-member-form" class="space-y-3">
+
+        <input type="text" name="name" 
+          value="${memberData.first_name} ${memberData.last_name}" 
+          class="w-full border rounded-lg px-3 py-2" placeholder="Full Name">
+
+        <input type="email" name="email" value="${memberData.email}" 
+          class="w-full border rounded-lg px-3 py-2" placeholder="Email">
+
+        <input type="text" name="phone" value="${memberData.phone}" 
+          class="w-full border rounded-lg px-3 py-2" placeholder="Phone">
+
+        <input type="text" name="role" value="${memberData.role}" 
+          class="w-full border rounded-lg px-3 py-2" placeholder="Role">
+
+        <textarea name="missions" class="w-full border rounded-lg px-3 py-2" placeholder="Missions">${memberData.missions || ''}</textarea>
+
+        <textarea name="skills" class="w-full border rounded-lg px-3 py-2" placeholder="Skills">${memberData.skills || ''}</textarea>
+
+        <div class="flex justify-end">
+          <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90">Save</button>
+        </div>
+
+      </form>
+    `;
+
+    modal.classList.remove('hidden');
+
+    // Handle SAVE submission
+    document.getElementById('edit-member-form').addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+
+      const formData = new FormData(ev.target);
+      const updatedData = Object.fromEntries(formData.entries());
+
+      // Split full name → first + last
+      const nameParts = updatedData.name.trim().split(" ");
+      updatedData.first_name = nameParts[0] || "";
+      updatedData.last_name = nameParts.slice(1).join(" ") || "";
+      delete updatedData.name; // not in DB
+
+      try {
+        const res = await fetch(`/api/members/${memberData.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedData)
+        });
+
+        if (!res.ok) throw new Error("Failed to update member");
+
+        alert(`${updatedData.first_name} has been updated successfully.`);
+
+        // LIVE UI Update
+        const card = document.querySelector(`[data-id="${memberData.id}"]`);
+        if (card) {
+          card.querySelector('.member-name').innerText = updatedData.first_name + " " + updatedData.last_name;
+          card.querySelector('.member-role').innerText = updatedData.role;
+        }
+
+        modal.classList.add('hidden');
+
+      } catch (err) {
+        console.error(err);
+        alert("Error updating member.");
+      }
+    });
+
+
+
+
+
+  // CHAT
+  } else if (e.target.closest('.chat-btn')) {
+    modalContent.innerHTML = `
+      <h2 class="text-2xl font-bold mb-3">Chat with ${memberData.name}</h2>
+      <div class="flex flex-col space-y-3 mb-3 max-h-64 overflow-y-auto border rounded-lg p-3 bg-gray-50">
+        <!-- Chat messages will go here -->
+        <p class="text-sm text-gray-500 italic">No messages yet</p>
+      </div>
+      <form id="chat-form" class="flex space-x-2">
+        <input type="text" name="message" placeholder="Type a message..." class="flex-1 border rounded-lg px-3 py-2">
+        <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90">Send</button>
+      </form>
+    `;
+    modal.classList.remove('hidden');
+
+    // Optional: Handle sending chat
+    document.getElementById('chat-form').addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      alert('Chat functionality to be implemented with backend API');
+      ev.target.reset();
+    });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------------
+// Close modal
+// --------------------------
+modalClose.addEventListener('click', () => modal.classList.add('hidden'));
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) modal.classList.add('hidden');
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<div class="member-container list-view hidden">
+<div class="bg-white rounded-xl shadow-sm border">
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead class="bg-gray-50 border-b">
+<tr>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Member</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Role</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Contact</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Current Missions</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Availability</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Join Date</th>
+<th class="text-left py-4 px-6 text-sm font-medium text-gray-900">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200" id="members-list">
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6">
+<div class="flex items-center space-x-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20female%20church%20leader%20with%20warm%20confident%20smile%20wearing%20business%20casual%20attire%20church%20office%20background%20leadership%20portrait&width=48&height=48&seq=member1&orientation=squarish" alt="Member" class="w-12 h-12 rounded-full object-cover">
+<div>
+<h4 class="font-medium text-gray-900">Sarah Williams</h4>
+<p class="text-sm text-gray-600">Mission Leader</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Leader</span>
+</td>
+<td class="py-4 px-6 text-sm text-gray-600">
+<p>sarah.williams@email.com</p>
+<p>(555) 123-4567</p>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Downtown Outreach</span>
+<span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Youth Camp</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<div class="w-3 h-3 bg-green-500 rounded-full"></div>
+<span class="text-sm text-gray-600">Available</span>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-gray-600">Jan 2020</td>
+<td class="py-4 px-6">
+<div class="flex items-center space-x-2">
+<button class="text-primary hover:text-primary/80 text-sm member-profile-btn">View</button>
+<button class="text-gray-600 hover:text-gray-900 text-sm">Edit</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" id="member-profile-modal">
+<div class="flex items-center justify-center min-h-screen p-4">
+<div class="bg-white rounded-xl shadow-xl max-w-4xl w-full max-h-screen overflow-y-auto">
+<div class="p-6 border-b">
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-semibold text-gray-900" id="profile-modal-title">Member Profile</h2>
+<button class="p-2 hover:bg-gray-100 rounded-lg" id="close-profile-modal">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-close-line text-gray-600"></i>
+</div>
+</button>
+</div>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 space-y-6">
+<div class="flex items-start space-x-6">
+<img src="https://readdy.ai/api/search-image?query=professional%20female%20church%20leader%20with%20warm%20confident%20smile%20wearing%20business%20casual%20attire%20church%20office%20background%20leadership%20portrait&width=120&height=120&seq=member1&orientation=squarish" alt="Profile" class="w-32 h-32 rounded-xl object-cover">
+<div class="flex-1">
+<h3 class="text-2xl font-semibold text-gray-900 mb-2">Sarah Williams</h3>
+<p class="text-lg text-gray-600 mb-3">Mission Leader</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm rounded-full">Leader</span>
+<span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Available</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+<div class="flex items-center space-x-2">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-mail-line text-gray-400"></i>
+</div>
+<span class="text-gray-600">sarah.williams@email.com</span>
+</div>
+<div class="flex items-center space-x-2">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-phone-line text-gray-400"></i>
+</div>
+<span class="text-gray-600">(555) 123-4567</span>
+</div>
+<div class="flex items-center space-x-2">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-map-pin-line text-gray-400"></i>
+</div>
+<span class="text-gray-600">123 Church St, City</span>
+</div>
+<div class="flex items-center space-x-2">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-calendar-line text-gray-400"></i>
+</div>
+<span class="text-gray-600">Joined: January 2020</span>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-gray-900 mb-3">Mission History</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+<div>
+<p class="font-medium text-gray-900">Downtown Outreach Ministry</p>
+<p class="text-sm text-gray-600">Team Leader - Current</p>
+</div>
+<span class="px-2 py-1 bg-secondary text-white text-xs rounded-full">Active</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+<div>
+<p class="font-medium text-gray-900">Youth Evangelism Camp 2025</p>
+<p class="text-sm text-gray-600">Coordinator - Current</p>
+</div>
+<span class="px-2 py-1 bg-blue-500 text-white text-xs rounded-full">Planning</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+<div>
+<p class="font-medium text-gray-900">Thanksgiving Food Drive</p>
+<p class="text-sm text-gray-600">Volunteer - Completed</p>
+</div>
+<span class="px-2 py-1 bg-gray-500 text-white text-xs rounded-full">Completed</span>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-gray-900 mb-3">Skills & Certifications</h3>
+<div class="grid grid-cols-2 gap-3">
+<div class="p-3 bg-gray-50 rounded-lg">
+<p class="font-medium text-gray-900">Leadership</p>
+<p class="text-sm text-gray-600">Expert Level</p>
+</div>
+<div class="p-3 bg-gray-50 rounded-lg">
+<p class="font-medium text-gray-900">Counseling</p>
+<p class="text-sm text-gray-600">Advanced Level</p>
+</div>
+<div class="p-3 bg-gray-50 rounded-lg">
+<p class="font-medium text-gray-900">Public Speaking</p>
+<p class="text-sm text-gray-600">Expert Level</p>
+</div>
+<div class="p-3 bg-gray-50 rounded-lg">
+<p class="font-medium text-gray-900">Event Planning</p>
+<p class="text-sm text-gray-600">Intermediate Level</p>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div>
+<h3 class="text-lg font-semibold text-gray-900 mb-3">Availability Calendar</h3>
+<div class="bg-gray-50 rounded-lg p-4">
+<div class="grid grid-cols-7 gap-2 text-center text-sm">
+<div class="font-medium text-gray-600">Sun</div>
+<div class="font-medium text-gray-600">Mon</div>
+<div class="font-medium text-gray-600">Tue</div>
+<div class="font-medium text-gray-600">Wed</div>
+<div class="font-medium text-gray-600">Thu</div>
+<div class="font-medium text-gray-600">Fri</div>
+<div class="font-medium text-gray-600">Sat</div>
+<div class="w-8 h-8 bg-green-200 rounded flex items-center justify-center text-xs">1</div>
+<div class="w-8 h-8 bg-green-200 rounded flex items-center justify-center text-xs">2</div>
+<div class="w-8 h-8 bg-green-200 rounded flex items-center justify-center text-xs">3</div>
+<div class="w-8 h-8 bg-red-200 rounded flex items-center justify-center text-xs">4</div>
+<div class="w-8 h-8 bg-green-200 rounded flex items-center justify-center text-xs">5</div>
+<div class="w-8 h-8 bg-green-200 rounded flex items-center justify-center text-xs">6</div>
+<div class="w-8 h-8 bg-green-200 rounded flex items-center justify-center text-xs">7</div>
+</div>
+<div class="mt-3 flex items-center space-x-4 text-xs">
+<div class="flex items-center space-x-1">
+<div class="w-3 h-3 bg-green-200 rounded"></div>
+<span class="text-gray-600">Available</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-3 h-3 bg-red-200 rounded"></div>
+<span class="text-gray-600">Busy</span>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-gray-900 mb-3">Emergency Contact</h3>
+<div class="bg-gray-50 rounded-lg p-4 space-y-2">
+<p class="font-medium text-gray-900">John Williams (Spouse)</p>
+<p class="text-sm text-gray-600">(555) 123-4568</p>
+<p class="text-sm text-gray-600">john.williams@email.com</p>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-gray-900 mb-3">Communication Preferences</h3>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-600">Email Notifications</span>
+<div class="w-10 h-6 bg-primary rounded-full relative">
+<div class="w-4 h-4 bg-white rounded-full absolute top-1 right-1"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-600">SMS Updates</span>
+<div class="w-10 h-6 bg-primary rounded-full relative">
+<div class="w-4 h-4 bg-white rounded-full absolute top-1 right-1"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-600">Phone Calls</span>
+<div class="w-10 h-6 bg-gray-300 rounded-full relative">
+<div class="w-4 h-4 bg-white rounded-full absolute top-1 left-1"></div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-gray-900 mb-3">Quick Actions</h3>
+<div class="space-y-2">
+<button class="w-full py-2 bg-primary text-white rounded-lg hover:bg-primary/90 text-sm whitespace-nowrap !rounded-button">Send Message</button>
+<button class="w-full py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button">Assign to Mission</button>
+<button class="w-full py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button">Edit Profile</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" id="add-member-modal">
+<div class="flex items-center justify-center min-h-screen p-4">
+<div class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-screen overflow-y-auto">
+<div class="p-6 border-b">
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-semibold text-gray-900">Add New Member</h2>
+<button class="p-2 hover:bg-gray-100 rounded-lg" id="close-add-modal">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-close-line text-gray-600"></i>
+</div>
+</button>
+</div>
+</div>
+<div class="p-6">
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+<input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="Enter first name">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+<input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="Enter last name">
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+<input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="Enter email address">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+<input type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="Enter phone number">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+<textarea rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="Enter full address"></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
+<div class="relative">
+<button type="button" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm text-left flex items-center justify-between" id="member-role-btn">
+<span>Select member role</span>
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+</button>
+<div class="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10 hidden" id="member-role-dropdown">
+<div class="py-1">
+<button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 member-role-option" data-role="volunteer">Volunteer</button>
+<button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 member-role-option" data-role="coordinator">Coordinator</button>
+<button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 member-role-option" data-role="leader">Mission Leader</button>
+<button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 member-role-option" data-role="specialist">Specialist</button>
+</div>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Skills & Certifications</label>
+<textarea rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="List skills, certifications, and areas of expertise"></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Ministry Experience</label>
+<textarea rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="Describe previous ministry or volunteer experience"></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Availability</label>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+<label class="flex items-center">
+<input type="checkbox" class="sr-only availability-checkbox">
+<div class="w-4 h-4 border-2 border-gray-300 rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-2 h-2 bg-primary rounded-sm hidden checkbox-dot"></div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Weekdays</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="sr-only availability-checkbox">
+<div class="w-4 h-4 border-2 border-gray-300 rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-2 h-2 bg-primary rounded-sm hidden checkbox-dot"></div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Weekends</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="sr-only availability-checkbox">
+<div class="w-4 h-4 border-2 border-gray-300 rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-2 h-2 bg-primary rounded-sm hidden checkbox-dot"></div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Evenings</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="sr-only availability-checkbox">
+<div class="w-4 h-4 border-2 border-gray-300 rounded flex items-center justify-center cursor-pointer checkbox-custom">
+<div class="w-2 h-2 bg-primary rounded-sm hidden checkbox-dot"></div>
+</div>
+<span class="ml-2 text-sm text-gray-700">Travel</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Emergency Contact</label>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="Emergency contact name">
+<input type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="Emergency contact phone">
+</div>
+</div>
+<div class="flex items-center justify-end space-x-3 pt-4">
+<button type="button" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm whitespace-nowrap !rounded-button" id="cancel-add">Cancel</button>
+<button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 text-sm whitespace-nowrap !rounded-button">Add Member</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+<script id="member-filters">
+document.addEventListener('DOMContentLoaded', function() {
+const filterButtons = document.querySelectorAll('.member-filter');
+const memberCards = document.querySelectorAll('.member-card');
+filterButtons.forEach(button => {
+button.addEventListener('click', function() {
+filterButtons.forEach(btn => {
+btn.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+btn.classList.add('text-gray-600');
+});
+this.classList.remove('text-gray-600');
+this.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+const filter = this.dataset.filter;
+memberCards.forEach(card => {
+if (filter === 'all' || card.dataset.status === filter) {
+card.style.display = 'block';
+} else {
+card.style.display = 'none';
+}
+});
+});
+});
+});
+</script>
+<script id="view-toggle">
+document.addEventListener('DOMContentLoaded', function() {
+const viewToggleButtons = document.querySelectorAll('.view-toggle');
+const gridView = document.querySelector('.grid-view');
+const listView = document.querySelector('.list-view');
+viewToggleButtons.forEach(button => {
+button.addEventListener('click', function() {
+viewToggleButtons.forEach(btn => btn.classList.remove('active', 'bg-primary', 'text-white'));
+this.classList.add('active', 'bg-primary', 'text-white');
+const view = this.dataset.view;
+if (view === 'grid') {
+gridView.classList.remove('hidden');
+listView.classList.add('hidden');
+} else {
+gridView.classList.add('hidden');
+listView.classList.remove('hidden');
+}
+});
+});
+});
+</script>
+<script id="member-search">
+document.addEventListener('DOMContentLoaded', function() {
+const searchInput = document.getElementById('member-search');
+const memberCards = document.querySelectorAll('.member-card');
+searchInput.addEventListener('input', function() {
+const searchTerm = this.value.toLowerCase();
+memberCards.forEach(card => {
+const memberName = card.dataset.name.toLowerCase();
+const memberRole = card.dataset.role.toLowerCase();
+if (memberName.includes(searchTerm) || memberRole.includes(searchTerm)) {
+card.style.display = 'block';
+} else {
+card.style.display = 'none';
+}
+});
+});
+});
+</script>
+<script id="sort-dropdown">
+document.addEventListener('DOMContentLoaded', function() {
+const sortButton = document.getElementById('sort-dropdown-btn');
+const sortDropdown = document.getElementById('sort-dropdown');
+const sortOptions = document.querySelectorAll('.sort-option');
+sortButton.addEventListener('click', function() {
+sortDropdown.classList.toggle('hidden');
+});
+document.addEventListener('click', function(e) {
+if (!sortButton.contains(e.target) && !sortDropdown.contains(e.target)) {
+sortDropdown.classList.add('hidden');
+}
+});
+sortOptions.forEach(option => {
+option.addEventListener('click', function() {
+const sortType = this.dataset.sort;
+const sortText = this.textContent;
+sortButton.querySelector('span').textContent = `Sort by: ${sortText}`;
+sortDropdown.classList.add('hidden');
+});
+});
+});
+</script>
+<script id="member-profile-modal">
+document.addEventListener('DOMContentLoaded', function() {
+const modal = document.getElementById('member-profile-modal');
+const closeModal = document.getElementById('close-profile-modal');
+const profileButtons = document.querySelectorAll('.member-profile-btn');
+profileButtons.forEach(button => {
+button.addEventListener('click', function() {
+modal.classList.remove('hidden');
+document.body.style.overflow = 'hidden';
+});
+});
+closeModal.addEventListener('click', function() {
+modal.classList.add('hidden');
+document.body.style.overflow = 'auto';
+});
+modal.addEventListener('click', function(e) {
+if (e.target === modal) {
+modal.classList.add('hidden');
+document.body.style.overflow = 'auto';
+}
+});
+});
+</script>
+<script id="add-member-modal">
+document.addEventListener('DOMContentLoaded', function() {
+const addButton = document.getElementById('add-member-btn');
+const addModal = document.getElementById('add-member-modal');
+const closeAddModal = document.getElementById('close-add-modal');
+const cancelAdd = document.getElementById('cancel-add');
+const memberRoleBtn = document.getElementById('member-role-btn');
+const memberRoleDropdown = document.getElementById('member-role-dropdown');
+const memberRoleOptions = document.querySelectorAll('.member-role-option');
+const availabilityCheckboxes = document.querySelectorAll('.availability-checkbox');
+const checkboxCustoms = document.querySelectorAll('.checkbox-custom');
+addButton.addEventListener('click', function() {
+addModal.classList.remove('hidden');
+document.body.style.overflow = 'hidden';
+});
+closeAddModal.addEventListener('click', function() {
+addModal.classList.add('hidden');
+document.body.style.overflow = 'auto';
+});
+cancelAdd.addEventListener('click', function() {
+addModal.classList.add('hidden');
+document.body.style.overflow = 'auto';
+});
+addModal.addEventListener('click', function(e) {
+if (e.target === addModal) {
+addModal.classList.add('hidden');
+document.body.style.overflow = 'auto';
+}
+});
+memberRoleBtn.addEventListener('click', function() {
+memberRoleDropdown.classList.toggle('hidden');
+});
+memberRoleOptions.forEach(option => {
+option.addEventListener('click', function() {
+const roleText = this.textContent;
+memberRoleBtn.querySelector('span').textContent = roleText;
+memberRoleDropdown.classList.add('hidden');
+});
+});
+checkboxCustoms.forEach((checkbox, index) => {
+checkbox.addEventListener('click', function() {
+const checkboxDot = this.querySelector('.checkbox-dot');
+const isChecked = !checkboxDot.classList.contains('hidden');
+if (isChecked) {
+checkboxDot.classList.add('hidden');
+this.classList.remove('border-primary');
+this.classList.add('border-gray-300');
+} else {
+checkboxDot.classList.remove('hidden');
+this.classList.remove('border-gray-300');
+this.classList.add('border-primary');
+}
+});
+});
+});
+</script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("/api/admin-info")
+        .then(res => res.json())
+        .then(data => {
+            if (!data.success) return;
+
+            // Dynamic name
+            document.getElementById("profileName").textContent = data.full_name;
+
+            // Dynamic role
+            document.getElementById("profileRole").textContent = data.role;
+
+            // Dynamic profile image
+            document.getElementById("profileImage").src =
+                data.profile_image 
+                || "https://ui-avatars.com/api/?name=" + encodeURIComponent(data.full_name);
+
+            // Notifications
+            const noti = document.getElementById("notificationCount");
+            noti.textContent = data.notifications;
+
+            if (data.notifications === 0) {
+                noti.classList.add("hidden");
+            }
+        });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const logoutBtn = document.getElementById('logoutBtn'); // make sure <a> has id="logoutBtn"
+    
+    logoutBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch('/admin/logout', { method: 'POST' });
+            const data = await res.json();
+            if (data.success) {
+                window.location.href = '/'; // redirect to login page
+            } else {
+                alert(data.message || 'Failed to logout');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Server error. Try again.');
+        }
+    });
+});
+</script>
+
+
+
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('add-member-modal');
+    const openBtn = document.getElementById('open-add-modal'); // Add a button in your UI
+    const closeBtn = document.getElementById('close-add-modal');
+    const cancelBtn = document.getElementById('cancel-add');
+    const roleBtn = document.getElementById('member-role-btn');
+    const roleDropdown = document.getElementById('member-role-dropdown');
+    const roleOptions = document.querySelectorAll('.member-role-option');
+    const form = modal.querySelector('form');
+
+    // Open modal
+    if (openBtn) openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+
+    // Close modal
+    [closeBtn, cancelBtn].forEach(btn => {
+        btn.addEventListener('click', () => modal.classList.add('hidden'));
+    });
+
+    // Role dropdown toggle
+    roleBtn.addEventListener('click', () => {
+        roleDropdown.classList.toggle('hidden');
+    });
+
+    // Select role
+    roleOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            roleBtn.querySelector('span').textContent = option.textContent;
+            roleBtn.dataset.selectedRole = option.dataset.role;
+            roleDropdown.classList.add('hidden');
+        });
+    });
+
+    // Availability checkboxes
+    const checkboxes = modal.querySelectorAll('.availability-checkbox');
+    checkboxes.forEach(chk => {
+        chk.addEventListener('change', () => {
+            const dot = chk.nextElementSibling.querySelector('.checkbox-dot');
+            dot.classList.toggle('hidden', !chk.checked);
+        });
+    });
+
+    // Submit form
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const availabilitySelected = [];
+        checkboxes.forEach(chk => {
+            if (chk.checked) availabilitySelected.push(chk.nextElementSibling.nextElementSibling.textContent.trim());
+        });
+
+        const data = {
+            first_name: form.querySelector('input[placeholder="Enter first name"]').value,
+            last_name: form.querySelector('input[placeholder="Enter last name"]').value,
+            email: form.querySelector('input[placeholder="Enter email address"]').value,
+            phone: form.querySelector('input[placeholder="Enter phone number"]').value,
+            address: form.querySelector('textarea[placeholder="Enter full address"]').value,
+            role: roleBtn.dataset.selectedRole || 'volunteer',
+            skills: form.querySelector('textarea[placeholder="List skills, certifications, and areas of expertise"]').value,
+            experience: form.querySelector('textarea[placeholder="Describe previous ministry or volunteer experience"]').value,
+            availability: availabilitySelected,
+            emergency_contact_name: form.querySelector('input[placeholder="Emergency contact name"]').value,
+            emergency_contact_phone: form.querySelector('input[placeholder="Emergency contact phone"]').value
+        };
+
+        try {
+            const res = await fetch('/members/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await res.json();
+            if (result.success) {
+                alert('Member added successfully!');
+                form.reset();
+                modal.classList.add('hidden');
+            } else {
+                alert(result.message || 'Error adding member');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Server error. Try again.');
+        }
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
