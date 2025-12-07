@@ -156,6 +156,10 @@ document.addEventListener('DOMContentLoaded', function() {
       loginLoading.classList.add('hidden');
 
       if (res.ok) {
+        // Save token to localStorage
+        if (data.access_token) {
+          localStorage.setItem('access_token', data.access_token);
+        }
         // Show dashboard
         window.location.href ="/dashboard";
       } else {

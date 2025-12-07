@@ -254,9 +254,14 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.classList.remove('from-primary', 'to-purple-600');
             submitButton.classList.add('from-green-500', 'to-green-600');
 
-            // Redirect to dashboard
+            // Save token to localStorage
+            if (result.access_token) {
+                localStorage.setItem('access_token', result.access_token);
+            }
+
+            // Redirect based on role
             setTimeout(() => {
-                window.location.href = '/dashboard';
+                window.location.href = result.redirect_url || '/dashboard';
             }, 1500);
 
         } catch (error) {

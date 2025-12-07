@@ -943,7 +943,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         signOutBtn.addEventListener('click', async (e) => {
             e.preventDefault();
             await fetch('/auth/logout', { method: 'POST', credentials: 'include' });
-            window.location.href = '/login.html';
+            window.location.href = '/auth/login';
         });
 
         // ------------------------
@@ -960,8 +960,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         `;
 
     } catch (err) {
-        console.error(err);
-        window.location.href = '/login.html';
+        console.error('Failed to fetch user data:', err);
+        alert('Failed to fetch user data. Please try logging in again.');
+        window.location.href = '/auth/login';
     }
 });
 </script>
@@ -1008,7 +1009,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 4️⃣ Fetch user data from backend
     try {
-        const res = await fetch('/auth/user2', { method: 'GET', credentials: 'include' });
+        const token = localStorage.getItem('access_token');
+        const res = await fetch('/auth/user', { 
+            method: 'GET', 
+            credentials: 'include',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         const user = await res.json();
         if (!res.ok) throw new Error(user.message || 'Failed to load user');
 
@@ -1021,7 +1029,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         lastNameInput.value = lastName;
         emailInput.value = user.email || '';
         phoneInput.value = user.phone || '';
-        locationInput.value = user.location || '';
 
         // Show initials
         userInitials.textContent = (firstName[0] + (lastName[0] || '')).toUpperCase();

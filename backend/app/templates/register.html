@@ -182,6 +182,18 @@ alt="Welcome" class="mx-auto rounded-lg object-cover w-full max-w-md h-32">
 </div>
 </div>
 </div>
+<div class="mt-6">
+<div class="relative">
+<select id="role" class="input-field w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:border-primary appearance-none" required>
+<option value="missionary">Missionary</option>
+<option value="admin">Administrator</option>
+</select>
+<label for="role" class="floating-label absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-2 peer-focus:left-2 peer-focus:text-sm peer-focus:text-primary peer-focus:bg-white peer-focus:px-2">I am joining as a...</label>
+<div class="absolute right-3 top-3 w-6 h-6 flex items-center justify-center">
+<i class="ri-briefcase-line text-gray-400"></i>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="step-2" class="step-content hidden">
@@ -325,6 +337,47 @@ Already have an account? <a href="/auth/login" class="text-primary hover:underli
 </div>
 </main>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const roleSelect = document.getElementById('role');
+        const missionaryFields = ['batch', 'experience', 'language'];
+        
+        roleSelect.addEventListener('change', function() {
+            const isMissionary = this.value === 'missionary';
+            const step3 = document.getElementById('step-3');
+            
+            missionaryFields.forEach(id => {
+                const field = document.getElementById(id);
+                if (field) {
+                    const container = field.closest('.relative');
+                    if (container) {
+                        if (isMissionary) {
+                            container.style.display = 'block';
+                            field.setAttribute('required', 'true');
+                        } else {
+                            container.style.display = 'none';
+                            field.removeAttribute('required');
+                        }
+                    }
+                }
+            });
+            
+            // Update Step 3 title/desc if needed
+            const step3Title = step3.querySelector('h2');
+            const step3Desc = step3.querySelector('p');
+            if (step3Title && step3Desc) {
+                if (isMissionary) {
+                    step3Title.textContent = "Tell Us About You!";
+                    step3Desc.textContent = "Help us personalize your experience";
+                } else {
+                    step3Title.textContent = "Admin Verification";
+                    step3Desc.textContent = "Additional details for administrators (None required)";
+                }
+            }
+        });
+    });
+</script>
+
 
 <script id="form-navigation">
 document.addEventListener('DOMContentLoaded', function() {
@@ -425,17 +478,20 @@ let formData = {
     full_name: full_name,
     phone: document.getElementById("phone").value.trim(),
     email: document.getElementById("email").value.trim(),
-    batch: document.getElementById("batch").value,
-    language: document.getElementById("language").value,
-    experienced: document.getElementById("experience").value,
-    attendance: true,
-    verified: false,
-    password: document.getElementById("password").value
+    password: document.getElementById("password").value,
+    role: document.getElementById("role").value
 };
 
-// Convert types BEFORE sending
-formData.experienced = formData.experienced === "true";
-formData.batch = parseInt(formData.batch);
+if (formData.role === 'missionary') {
+    formData.batch = document.getElementById("batch").value;
+    formData.language = document.getElementById("language").value;
+    formData.experienced = document.getElementById("experience").value === "true";
+    formData.attendance = true;
+    formData.verified = false;
+    
+    // Parse batch
+    if(formData.batch) formData.batch = parseInt(formData.batch);
+}
 
 console.log("Sending:", formData); // Debug
 

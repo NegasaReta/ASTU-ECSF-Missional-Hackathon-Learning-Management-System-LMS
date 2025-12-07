@@ -9,7 +9,6 @@ from enum import Enum
 class AdminBase(SQLModel):
     full_name: str
     email: EmailStr
-    password: str
     phone: str = Field(max_length=10, min_length=10)
 
 
@@ -18,7 +17,7 @@ class AdminCreate(AdminBase):
 
 
 class Admin(AdminCreate, table=True):
-    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
+    id: uuid.UUID = Field(primary_key=True)
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
 
