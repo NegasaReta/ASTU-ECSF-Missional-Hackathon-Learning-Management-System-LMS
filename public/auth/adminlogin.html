@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Go Preach Portal Management</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+background-color: #f0f1f2;
+}
+.login-container {
+background-image: url('');
+background-size: cover;
+background-position: center;
+}
+.form-input::placeholder {
+color: #9CA3AF;
+opacity: 0.8;
+}
+#email, #password {
+border: 1px solid gray;
+}
+.logo-text {
+color: #6366f1;
+font-family: 'Pacifico', serif;
+}
+.form-input:focus {
+border-color: #6366f1;
+box-shadow: 0 0 0 3px rgba(66, 68, 176, 0.2);
+}
+.dashboard-container {
+display: none;
+padding: 2rem;
+}
+</style>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#6366f1',secondary:'#8b5cf6'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+</head>
+<body class="min-h-screen">
+
+<!-- Login Container -->
+<div class="login-container min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl w-full max-w-md p-12 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 pointer-events-none"></div>
+    <div class="relative">
+      <div class="text-center mb-10">
+        <h1 class="logo-text text-5xl mb-3 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Go Preach</h1>
+        <p class="text-gray-600 text-lg">Go Preach Admin Portal</p>
+      </div>
+
+      <form id="loginForm" class="space-y-6">
+        <div class="space-y-6">
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <i class="ri-mail-line text-primary/60"></i>
+              </div>
+              <input id="email" type="email" class="form-input block w-full pl-11 pr-4 h-12 bg-gray-50/50 border-none rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20" placeholder="Enter your email address" required>
+            </div>
+          </div>
+
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <i class="ri-lock-line text-primary/60"></i>
+              </div>
+              <input id="password" type="password" class="form-input block w-full pl-11 pr-11 h-12 bg-gray-50/50 border-none rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20" placeholder="Enter your password" required>
+              <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
+                <button type="button" id="togglePassword" class="text-primary/60 hover:text-primary focus:outline-none">
+                  <i class="ri-eye-line"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 space-y-4">
+          <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-base font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary whitespace-nowrap transition-all duration-200 hover:shadow-primary/25 !rounded-button">
+            Sign In
+          </button>
+          <div class="text-center">
+            <a href="#" id="forgotPasswordLink" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Forgot your password?</a>
+          </div>
+        </div>
+      </form>
+
+      <!-- Footer -->
+      <div class="mt-6 text-center text-xs text-gray-500">
+        <p>© 2025 Go Preach System Management. All rights reserved.</p>
+      </div>
+
+      <div id="loginError" class="mt-4 text-center text-sm text-red-600 hidden">
+        Invalid email or password. Please try again.
+      </div>
+      <div id="loginLoading" class="mt-4 text-center hidden">
+        <div class="inline-block animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-primary"></div>
+        <p class="mt-2 text-sm text-gray-600">Authenticating...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Scripts -->
+ <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const loginForm = document.getElementById('loginForm');
+  const loginError = document.getElementById('loginError');
+  const loginLoading = document.getElementById('loginLoading');
+  const togglePassword = document.getElementById('togglePassword');
+  const passwordInput = document.getElementById('password');
+  const adminNameSpan = document.getElementById('adminName');
+  const totalStudentsSpan = document.getElementById('totalStudents');
+  const activeUsersSpan = document.getElementById('activeUsers');
+  
+  // Toggle password visibility
+  togglePassword.addEventListener('click', function() {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    const icon = togglePassword.querySelector('i');
+    if (type === 'text') {
+      icon.classList.remove('ri-eye-line');
+      icon.classList.add('ri-eye-off-line');
+    } else {
+      icon.classList.remove('ri-eye-off-line');
+      icon.classList.add('ri-eye-line');
+    }
+  });
+
+  // Handle login
+  loginForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    loginError.classList.add('hidden');
+    loginLoading.classList.remove('hidden');
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+      const res = await fetch('/adminlogin', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+      loginLoading.classList.add('hidden');
+
+      if (data.success) {
+        // Show dashboard
+        window.location.href ="/admindashboard";
+      } else {
+        loginError.textContent = data.message || 'Invalid email or password';
+        loginError.classList.remove('hidden');
+      }
+    } catch (err) {
+      loginLoading.classList.add('hidden');
+      loginError.textContent = 'Server error. Please try again later.';
+      loginError.classList.remove('hidden');
+    }
+  });
+
+  // Logout
+  const logoutBtn = document.getElementById('logoutBtn');
+  logoutBtn.addEventListener('click', function() {
+    document.querySelector('.login-container').style.display = 'flex';
+    document.querySelector('.dashboard-container').style.display = 'none';
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+    loginError.classList.add('hidden');
+  });
+});
+</script> 
+
+
+</body>
+</html>
