@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pairing Groups - Grace Church Mission Management</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#6366f1',secondary:'#8b5cf6'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+.drag-handle { cursor: grab; }
+.drag-handle:active { cursor: grabbing; }
+.group-card.dragging { opacity: 0.5; }
+.drop-zone { border: 2px dashed #6366f1; background-color: rgba(99, 102, 241, 0.05); }
+</style>
+</head>
+<body class="bg-gray-50">
+<div class="min-h-screen flex">
+<!-- Sidebar -->
+<div class="w-64 bg-white shadow-sm">
+<div class="p-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+<span class="text-white text-sm font-bold">G</span>
+</div>
+<div>
+<h1 class="font-['Pacifico'] text-primary text-lg">Go Preach</h1>
+
+</div>
+</div>
+</div>
+<nav class="px-4 space-y-1">
+<a href="dashboard.html" class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-dashboard-line text-lg"></i>
+</div>
+<span>Dashboard</span>
+</a>
+<a href="mission.html" class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-map-pin-line text-lg"></i>
+</div>
+<span>Missions</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-group-line text-lg"></i>
+</div>
+<span>Members</span>
+</a>
+<a href="report.html" class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-file-text-line text-lg"></i>
+</div>
+<span>Reports</span>
+</a>
+<a href="communication.html" class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-chat-3-line text-lg"></i>
+</div>
+<span>Communication</span>
+</a>
+<a href="pairing.html" class="flex items-center gap-3 px-3 py-2 bg-primary text-white rounded-lg">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-team-line text-lg"></i>
+</div>
+<span>Pairing</span>
+</a>
+<a href="media.html" data-readdy="true" class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-image-line text-lg"></i>
+</div>
+<span>Media Gallery</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-calendar-check-line text-lg"></i>
+</div>
+<span>Attendance</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-profile-line text-lg"></i>
+</div>
+<span>Profile</span>
+</a>
+</nav>
+<div class="p-4 border-t">
+  <a href="#" id="logoutBtn" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+    <div class="w-5 h-5 flex items-center justify-center">
+      <i class="ri-logout-box-line"></i>
+    </div>
+    <span>Logout</span>
+  </a>
+</div>
+
+</div>
+<!-- Main Content -->
+<div class="flex-1">
+<!-- Header -->
+<header class="bg-white border-b border-gray-200 px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<h1 class="text-2xl font-semibold text-gray-900">Pairing Groups</h1>
+<nav class="flex items-center gap-2 text-sm text-gray-500">
+<span>Home</span>
+<i class="ri-arrow-right-s-line"></i>
+<span>Dashboard</span>
+<i class="ri-arrow-right-s-line"></i>
+<span class="text-gray-900">Pairing</span>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+
+    <!-- Search -->
+    <div class="relative">
+        <input 
+            id="searchInput"
+            type="text" 
+            placeholder="Search missions, members..." 
+            class="w-80 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+        >
+        <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+            <i class="ri-search-line text-gray-400"></i>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <button class="relative p-2 text-gray-600 hover:text-gray-900">
+        <div class="w-6 h-6 flex items-center justify-center">
+            <i class="ri-notification-line"></i>
+        </div>
+        <span 
+            id="notificationCount" 
+            class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+        </span>
+    </button>
+
+    <!-- Profile -->
+    <div class="flex items-center space-x-3 cursor-pointer">
+        <img 
+            id="profileImage"
+            src="" 
+            alt="Profile"
+            class="w-10 h-10 rounded-full object-cover"
+        >
+
+        <div>
+            <p id="profileName" class="text-sm font-medium text-gray-900"></p>
+            <p id="profileRole" class="text-xs text-gray-500"></p>
+        </div>
+
+        <div class="w-4 h-4 flex items-center justify-center">
+            <i class="ri-arrow-down-s-line text-gray-400"></i>
+        </div>
+    </div>
+
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-6">
+<!-- Page Header -->
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="text-3xl font-bold text-gray-900">Pairing Groups</h2>
+<p class="text-gray-600 mt-1">Manage and organize mission teams into effective pairing groups</p>
+</div>
+<button id="generateGroupBtn" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-primary/90 transition-colors flex items-center gap-2 whitespace-nowrap !rounded-button">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-add-line"></i>
+</div>
+Generate Group
+</button>
+</div>
+<!-- Pairing Groups Grid -->
+<div id="pairingGroups" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Group 1 -->
+<div class="group-card bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow" draggable="true">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="drag-handle w-6 h-6 flex items-center justify-center text-gray-400 hover:text-gray-600">
+<i class="ri-drag-move-line"></i>
+</div>
+<h3 class="font-semibold text-gray-900">Downtown Outreach Team</h3>
+</div>
+<div class="relative">
+<button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-50">
+<i class="ri-more-2-line"></i>
+</button>
+</div>
+</div>
+<div class="mb-4">
+<p class="text-sm text-gray-500 mb-2">Created: December 1, 2024</p>
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">6 Members</span>
+<span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+</div>
+</div>
+<div class="mb-4">
+<div class="flex -space-x-2 mb-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20young%20woman%20missionary%20volunteer%20with%20warm%20smile%20wearing%20casual%20shirt%20against%20neutral%20background&width=32&height=32&seq=member1&orientation=squarish" alt="Sarah Williams" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20middle%20aged%20man%20volunteer%20missionary%20with%20friendly%20expression%20wearing%20polo%20shirt%20against%20neutral%20background&width=32&height=32&seq=member2&orientation=squarish" alt="David Chen" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20young%20man%20volunteer%20missionary%20with%20bright%20smile%20wearing%20button%20down%20shirt%20against%20neutral%20background&width=32&height=32&seq=member3&orientation=squarish" alt="Marcus Thompson" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20mature%20woman%20volunteer%20missionary%20with%20kind%20smile%20wearing%20blouse%20against%20neutral%20background&width=32&height=32&seq=member4&orientation=squarish" alt="Lisa Rodriguez" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-xs text-gray-600">+2</div>
+</div>
+<div class="text-sm text-gray-600 space-y-1">
+<p>Sarah Williams, David Chen</p>
+<p>Marcus Thompson, Lisa Rodriguez</p>
+<p>James Wilson, Maria Garcia</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-gray-100 text-gray-700 px-3 py-2 rounded-button text-sm font-medium hover:bg-gray-200 transition-colors whitespace-nowrap !rounded-button">
+Edit Group
+</button>
+<button class="bg-primary text-white px-3 py-2 rounded-button text-sm font-medium hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">
+Add Members
+</button>
+</div>
+</div>
+<!-- Group 2 -->
+<div class="group-card bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow" draggable="true">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="drag-handle w-6 h-6 flex items-center justify-center text-gray-400 hover:text-gray-600">
+<i class="ri-drag-move-line"></i>
+</div>
+<h3 class="font-semibold text-gray-900">Youth Evangelism Squad</h3>
+</div>
+<div class="relative">
+<button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-50">
+<i class="ri-more-2-line"></i>
+</button>
+</div>
+</div>
+<div class="mb-4">
+<p class="text-sm text-gray-500 mb-2">Created: November 28, 2024</p>
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">8 Members</span>
+<span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+</div>
+</div>
+<div class="mb-4">
+<div class="flex -space-x-2 mb-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20young%20woman%20youth%20leader%20volunteer%20with%20energetic%20smile%20wearing%20casual%20top%20against%20neutral%20background&width=32&height=32&seq=youth1&orientation=squarish" alt="Emily Parker" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20young%20man%20youth%20volunteer%20with%20enthusiastic%20expression%20wearing%20casual%20shirt%20against%20neutral%20background&width=32&height=32&seq=youth2&orientation=squarish" alt="Ryan Mitchell" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20teenage%20girl%20volunteer%20with%20bright%20smile%20wearing%20casual%20clothing%20against%20neutral%20background&width=32&height=32&seq=youth3&orientation=squarish" alt="Jessica Lee" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20teenage%20boy%20volunteer%20with%20confident%20smile%20wearing%20casual%20shirt%20against%20neutral%20background&width=32&height=32&seq=youth4&orientation=squarish" alt="Tyler Johnson" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-xs text-gray-600">+4</div>
+</div>
+<div class="text-sm text-gray-600 space-y-1">
+<p>Emily Parker, Ryan Mitchell</p>
+<p>Jessica Lee, Tyler Johnson</p>
+<p>Alex Brown, Sophia Davis</p>
+<p>Nathan White, Olivia Taylor</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-gray-100 text-gray-700 px-3 py-2 rounded-button text-sm font-medium hover:bg-gray-200 transition-colors whitespace-nowrap !rounded-button">
+Edit Group
+</button>
+<button class="bg-primary text-white px-3 py-2 rounded-button text-sm font-medium hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">
+Add Members
+</button>
+</div>
+</div>
+<!-- Group 3 -->
+<div class="group-card bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow" draggable="true">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="drag-handle w-6 h-6 flex items-center justify-center text-gray-400 hover:text-gray-600">
+<i class="ri-drag-move-line"></i>
+</div>
+<h3 class="font-semibold text-gray-900">Medical Mission Unit</h3>
+</div>
+<div class="relative">
+<button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-50">
+<i class="ri-more-2-line"></i>
+</button>
+</div>
+</div>
+<div class="mb-4">
+<p class="text-sm text-gray-500 mb-2">Created: November 25, 2024</p>
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">4 Members</span>
+<span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Preparing</span>
+</div>
+</div>
+<div class="mb-4">
+<div class="flex -space-x-2 mb-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20female%20doctor%20volunteer%20missionary%20with%20caring%20smile%20wearing%20medical%20scrubs%20against%20neutral%20background&width=32&height=32&seq=medical1&orientation=squarish" alt="Dr. Rachel Adams" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20male%20nurse%20volunteer%20missionary%20with%20compassionate%20expression%20wearing%20medical%20uniform%20against%20neutral%20background&width=32&height=32&seq=medical2&orientation=squarish" alt="Michael Foster" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20female%20nurse%20volunteer%20missionary%20with%20gentle%20smile%20wearing%20medical%20scrubs%20against%20neutral%20background&width=32&height=32&seq=medical3&orientation=squarish" alt="Jennifer Clark" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20male%20medical%20assistant%20volunteer%20with%20helpful%20expression%20wearing%20medical%20uniform%20against%20neutral%20background&width=32&height=32&seq=medical4&orientation=squarish" alt="Robert Kim" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+</div>
+<div class="text-sm text-gray-600 space-y-1">
+<p>Dr. Rachel Adams, Michael Foster</p>
+<p>Jennifer Clark, Robert Kim</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-gray-100 text-gray-700 px-3 py-2 rounded-button text-sm font-medium hover:bg-gray-200 transition-colors whitespace-nowrap !rounded-button">
+Edit Group
+</button>
+<button class="bg-primary text-white px-3 py-2 rounded-button text-sm font-medium hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">
+Add Members
+</button>
+</div>
+</div>
+<!-- Group 4 -->
+<div class="group-card bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow" draggable="true">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="drag-handle w-6 h-6 flex items-center justify-center text-gray-400 hover:text-gray-600">
+<i class="ri-drag-move-line"></i>
+</div>
+<h3 class="font-semibold text-gray-900">Community Service Partners</h3>
+</div>
+<div class="relative">
+<button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-50">
+<i class="ri-more-2-line"></i>
+</button>
+</div>
+</div>
+<div class="mb-4">
+<p class="text-sm text-gray-500 mb-2">Created: November 20, 2024</p>
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">10 Members</span>
+<span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+</div>
+</div>
+<div class="mb-4">
+<div class="flex -space-x-2 mb-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20middle%20aged%20woman%20community%20volunteer%20with%20warm%20smile%20wearing%20casual%20blouse%20against%20neutral%20background&width=32&height=32&seq=community1&orientation=squarish" alt="Patricia Moore" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20senior%20man%20community%20volunteer%20with%20kind%20expression%20wearing%20casual%20shirt%20against%20neutral%20background&width=32&height=32&seq=community2&orientation=squarish" alt="William Turner" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20young%20woman%20community%20volunteer%20with%20enthusiastic%20smile%20wearing%20casual%20top%20against%20neutral%20background&width=32&height=32&seq=community3&orientation=squarish" alt="Amanda Scott" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20middle%20aged%20man%20community%20volunteer%20with%20friendly%20smile%20wearing%20casual%20polo%20against%20neutral%20background&width=32&height=32&seq=community4&orientation=squarish" alt="Christopher Hall" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-xs text-gray-600">+6</div>
+</div>
+<div class="text-sm text-gray-600 space-y-1">
+<p>Patricia Moore, William Turner</p>
+<p>Amanda Scott, Christopher Hall</p>
+<p>Rebecca Lewis, Daniel Walker</p>
+<p>Michelle Young, Kevin Allen</p>
+<p>Sandra Hill, Thomas Green</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-gray-100 text-gray-700 px-3 py-2 rounded-button text-sm font-medium hover:bg-gray-200 transition-colors whitespace-nowrap !rounded-button">
+Edit Group
+</button>
+<button class="bg-primary text-white px-3 py-2 rounded-button text-sm font-medium hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">
+Add Members
+</button>
+</div>
+</div>
+</div>
+<!-- Empty State (hidden by default) -->
+<div id="emptyState" class="hidden text-center py-16">
+<div class="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+<i class="ri-team-line text-3xl text-gray-400"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-2">No pairing groups created yet</h3>
+<p class="text-gray-600 mb-6 max-w-md mx-auto">Start organizing your mission teams by creating your first pairing group. Groups help coordinate activities and improve team collaboration.</p>
+<button class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">
+Create Your First Group
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Members Modal -->
+<div id="addMembersModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+<div class="bg-white rounded-xl p-6 w-full max-w-2xl mx-4 max-h-[90vh] overflow-hidden flex flex-col">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-gray-900">Add Members to <span id="targetGroupName">Downtown Outreach Team</span></h3>
+<button id="closeAddMembersModal" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-50">
+<i class="ri-close-line"></i>
+</button>
+</div>
+<div class="mb-4">
+<div class="relative">
+<input type="text" id="memberSearch" placeholder="Search members by name or role..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+<div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+<i class="ri-search-line text-gray-400"></i>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto mb-4">
+<div id="membersList" class="space-y-3">
+<div class="member-item flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50" data-name="john anderson" data-role="community volunteer">
+<input type="checkbox" id="member1" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+<label for="member1" class="flex items-center gap-3 ml-3 flex-1 cursor-pointer">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20middle%20aged%20man%20community%20volunteer%20with%20warm%20smile%20wearing%20casual%20shirt%20against%20neutral%20background&width=48&height=48&seq=available1&orientation=squarish" alt="John Anderson" class="w-12 h-12 rounded-full object-cover">
+<div>
+<p class="font-medium text-gray-900">John Anderson</p>
+<p class="text-sm text-gray-500">Community Volunteer</p>
+<p class="text-xs text-gray-400">Available • Joined 2 years ago</p>
+</div>
+</label>
+</div>
+<div class="member-item flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50" data-name="grace murphy" data-role="youth coordinator">
+<input type="checkbox" id="member2" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+<label for="member2" class="flex items-center gap-3 ml-3 flex-1 cursor-pointer">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20young%20woman%20youth%20coordinator%20volunteer%20with%20bright%20smile%20wearing%20casual%20blouse%20against%20neutral%20background&width=48&height=48&seq=available2&orientation=squarish" alt="Grace Murphy" class="w-12 h-12 rounded-full object-cover">
+<div>
+<p class="font-medium text-gray-900">Grace Murphy</p>
+<p class="text-sm text-gray-500">Youth Coordinator</p>
+<p class="text-xs text-gray-400">Available • Joined 1 year ago</p>
+</div>
+</label>
+</div>
+<div class="member-item flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50" data-name="benjamin carter" data-role="outreach specialist">
+<input type="checkbox" id="member3" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+<label for="member3" class="flex items-center gap-3 ml-3 flex-1 cursor-pointer">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20young%20man%20outreach%20specialist%20volunteer%20with%20confident%20smile%20wearing%20casual%20shirt%20against%20neutral%20background&width=48&height=48&seq=available3&orientation=squarish" alt="Benjamin Carter" class="w-12 h-12 rounded-full object-cover">
+<div>
+<p class="font-medium text-gray-900">Benjamin Carter</p>
+<p class="text-sm text-gray-500">Outreach Specialist</p>
+<p class="text-xs text-gray-400">Available • Joined 3 years ago</p>
+</div>
+</label>
+</div>
+<div class="member-item flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50" data-name="hannah brooks" data-role="prayer coordinator">
+<input type="checkbox" id="member4" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+<label for="member4" class="flex items-center gap-3 ml-3 flex-1 cursor-pointer">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20middle%20aged%20woman%20prayer%20coordinator%20volunteer%20with%20gentle%20smile%20wearing%20casual%20top%20against%20neutral%20background&width=48&height=48&seq=available4&orientation=squarish" alt="Hannah Brooks" class="w-12 h-12 rounded-full object-cover">
+<div>
+<p class="font-medium text-gray-900">Hannah Brooks</p>
+<p class="text-sm text-gray-500">Prayer Coordinator</p>
+<p class="text-xs text-gray-400">Available • Joined 4 years ago</p>
+</div>
+</label>
+</div>
+<div class="member-item flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50" data-name="caleb jenkins" data-role="worship leader">
+<input type="checkbox" id="member5" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+<label for="member5" class="flex items-center gap-3 ml-3 flex-1 cursor-pointer">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20young%20man%20worship%20leader%20volunteer%20with%20enthusiastic%20smile%20wearing%20casual%20shirt%20against%20neutral%20background&width=48&height=48&seq=available5&orientation=squarish" alt="Caleb Jenkins" class="w-12 h-12 rounded-full object-cover">
+<div>
+<p class="font-medium text-gray-900">Caleb Jenkins</p>
+<p class="text-sm text-gray-500">Worship Leader</p>
+<p class="text-xs text-gray-400">Available • Joined 2 years ago</p>
+</div>
+</label>
+</div>
+<div class="member-item flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50" data-name="victoria stone" data-role="administrative assistant">
+<input type="checkbox" id="member6" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+<label for="member6" class="flex items-center gap-3 ml-3 flex-1 cursor-pointer">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20mature%20woman%20administrative%20assistant%20volunteer%20with%20professional%20smile%20wearing%20business%20casual%20against%20neutral%20background&width=48&height=48&seq=available6&orientation=squarish" alt="Victoria Stone" class="w-12 h-12 rounded-full object-cover">
+<div>
+<p class="font-medium text-gray-900">Victoria Stone</p>
+<p class="text-sm text-gray-500">Administrative Assistant</p>
+<p class="text-xs text-gray-400">Available • Joined 5 years ago</p>
+</div>
+</label>
+</div>
+<div class="member-item flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50" data-name="ethan cooper" data-role="tech support">
+<input type="checkbox" id="member7" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+<label for="member7" class="flex items-center gap-3 ml-3 flex-1 cursor-pointer">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20young%20man%20tech%20support%20volunteer%20with%20friendly%20smile%20wearing%20casual%20shirt%20against%20neutral%20background&width=48&height=48&seq=available7&orientation=squarish" alt="Ethan Cooper" class="w-12 h-12 rounded-full object-cover">
+<div>
+<p class="font-medium text-gray-900">Ethan Cooper</p>
+<p class="text-sm text-gray-500">Tech Support</p>
+<p class="text-xs text-gray-400">Available • Joined 1 year ago</p>
+</div>
+</label>
+</div>
+<div class="member-item flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50" data-name="isabella martinez" data-role="children coordinator">
+<input type="checkbox" id="member8" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+<label for="member8" class="flex items-center gap-3 ml-3 flex-1 cursor-pointer">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20young%20woman%20children%20coordinator%20volunteer%20with%20caring%20smile%20wearing%20casual%20top%20against%20neutral%20background&width=48&height=48&seq=available8&orientation=squarish" alt="Isabella Martinez" class="w-12 h-12 rounded-full object-cover">
+<div>
+<p class="font-medium text-gray-900">Isabella Martinez</p>
+<p class="text-sm text-gray-500">Children Coordinator</p>
+<p class="text-xs text-gray-400">Available • Joined 3 years ago</p>
+</div>
+</label>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-gray-200">
+<p class="text-sm text-gray-500"><span id="selectedCount">0</span> members selected</p>
+<div class="flex gap-3">
+<button type="button" id="cancelAddMembers" class="bg-gray-100 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-200 transition-colors whitespace-nowrap !rounded-button">
+Cancel
+</button>
+<button type="button" id="confirmAddMembers" class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">
+Add Selected Members
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Edit Group Modal -->
+<div id="editGroupModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+<div class="bg-white rounded-xl p-6 w-full max-w-lg mx-4">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-gray-900">Edit Group</h3>
+<button id="closeEditModal" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-50">
+<i class="ri-close-line"></i>
+</button>
+</div>
+<form id="editGroupForm" class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Group Name</label>
+<input type="text" id="editGroupName" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+<div class="relative">
+<select id="editGroupStatus" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent pr-8">
+<option value="Active">Active</option>
+<option value="Preparing">Preparing</option>
+<option value="On Hold">On Hold</option>
+<option value="Completed">Completed</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+<textarea id="editGroupDescription" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter group description..."></textarea>
+</div>
+<div class="flex gap-3 pt-4">
+<button type="button" id="cancelEditGroup" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-200 transition-colors whitespace-nowrap !rounded-button">
+Cancel
+</button>
+<button type="submit" class="flex-1 bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">
+Save Changes
+</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Delete Confirmation Modal -->
+<div id="deleteConfirmModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+<div class="bg-white rounded-xl p-6 w-full max-w-md mx-4">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-gray-900">Delete Group</h3>
+<button id="closeDeleteModal" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-50">
+<i class="ri-close-line"></i>
+</button>
+</div>
+<div class="mb-6">
+<p class="text-gray-600">Are you sure you want to delete <strong id="deleteGroupName"></strong>? This action cannot be undone.</p>
+</div>
+<div class="flex gap-3">
+<button type="button" id="cancelDelete" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-200 transition-colors whitespace-nowrap !rounded-button">
+Cancel
+</button>
+<button type="button" id="confirmDelete" class="flex-1 bg-red-500 text-white px-4 py-2 rounded-button font-medium hover:bg-red-600 transition-colors whitespace-nowrap !rounded-button">
+Delete Group
+</button>
+</div>
+</div>
+</div>
+<!-- Generate Group Modal -->
+<div id="generateGroupModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+<div class="bg-white rounded-xl p-6 w-full max-w-md mx-4">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-gray-900">Generate New Pairing Group</h3>
+<button id="closeModal" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-50">
+<i class="ri-close-line"></i>
+</button>
+</div>
+<form class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Group Name</label>
+<input type="text" placeholder="Enter group name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Group Type</label>
+<div class="relative">
+<button type="button" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-left focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent pr-8">
+Select group type
+</button>
+<div class="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Number of Members</label>
+<input type="number" placeholder="4" min="2" max="20" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div class="flex gap-3 pt-4">
+<button type="button" id="cancelBtn" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-200 transition-colors whitespace-nowrap !rounded-button">
+Cancel
+</button>
+<button type="submit" class="flex-1 bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors whitespace-nowrap !rounded-button">
+Generate Group
+</button>
+</div>
+</form>
+</div>
+</div>
+<script id="modal-functionality">
+document.addEventListener('DOMContentLoaded', function() {
+const generateGroupBtn = document.getElementById('generateGroupBtn');
+const generateGroupModal = document.getElementById('generateGroupModal');
+const closeModal = document.getElementById('closeModal');
+const cancelBtn = document.getElementById('cancelBtn');
+generateGroupBtn.addEventListener('click', function() {
+generateGroupModal.classList.remove('hidden');
+});
+closeModal.addEventListener('click', function() {
+generateGroupModal.classList.add('hidden');
+});
+cancelBtn.addEventListener('click', function() {
+generateGroupModal.classList.add('hidden');
+});
+generateGroupModal.addEventListener('click', function(e) {
+if (e.target === generateGroupModal) {
+generateGroupModal.classList.add('hidden');
+}
+});
+});
+</script>
+<script id="add-members-functionality">
+document.addEventListener('DOMContentLoaded', function() {
+const addMembersModal = document.getElementById('addMembersModal');
+const closeAddMembersModal = document.getElementById('closeAddMembersModal');
+const cancelAddMembers = document.getElementById('cancelAddMembers');
+const confirmAddMembers = document.getElementById('confirmAddMembers');
+const memberSearch = document.getElementById('memberSearch');
+const membersList = document.getElementById('membersList');
+const selectedCount = document.getElementById('selectedCount');
+const targetGroupName = document.getElementById('targetGroupName');
+let currentTargetGroup = null;
+document.addEventListener('click', function(e) {
+if (e.target.textContent.trim() === 'Add Members') {
+const groupCard = e.target.closest('.group-card');
+const groupTitle = groupCard.querySelector('h3').textContent;
+targetGroupName.textContent = groupTitle;
+currentTargetGroup = groupCard;
+addMembersModal.classList.remove('hidden');
+}
+});
+closeAddMembersModal.addEventListener('click', function() {
+addMembersModal.classList.add('hidden');
+resetModal();
+});
+cancelAddMembers.addEventListener('click', function() {
+addMembersModal.classList.add('hidden');
+resetModal();
+});
+addMembersModal.addEventListener('click', function(e) {
+if (e.target === addMembersModal) {
+addMembersModal.classList.add('hidden');
+resetModal();
+}
+});
+memberSearch.addEventListener('input', function() {
+const searchTerm = this.value.toLowerCase();
+const memberItems = membersList.querySelectorAll('.member-item');
+memberItems.forEach(item => {
+const name = item.getAttribute('data-name');
+const role = item.getAttribute('data-role');
+if (name.includes(searchTerm) || role.includes(searchTerm)) {
+item.style.display = 'flex';
+} else {
+item.style.display = 'none';
+}
+});
+});
+membersList.addEventListener('change', function(e) {
+if (e.target.type === 'checkbox') {
+updateSelectedCount();
+}
+});
+confirmAddMembers.addEventListener('click', function() {
+const selectedMembers = membersList.querySelectorAll('input[type="checkbox"]:checked');
+if (selectedMembers.length > 0) {
+updateGroupMemberCount(currentTargetGroup, selectedMembers.length);
+showSuccessMessage(`${selectedMembers.length} member(s) added to ${targetGroupName.textContent}`);
+addMembersModal.classList.add('hidden');
+resetModal();
+}
+});
+function updateGroupMemberCount(groupCard, addedCount) {
+const memberBadge = groupCard.querySelector('.bg-blue-100');
+const currentCount = parseInt(memberBadge.textContent.split(' ')[0]);
+const newCount = currentCount + addedCount;
+memberBadge.textContent = `${newCount} Members`;
+}
+function updateSelectedCount() {
+const selectedMembers = membersList.querySelectorAll('input[type="checkbox"]:checked');
+selectedCount.textContent = selectedMembers.length;
+}
+function resetModal() {
+memberSearch.value = '';
+const checkboxes = membersList.querySelectorAll('input[type="checkbox"]');
+checkboxes.forEach(checkbox => {
+checkbox.checked = false;
+});
+const memberItems = membersList.querySelectorAll('.member-item');
+memberItems.forEach(item => {
+item.style.display = 'flex';
+});
+updateSelectedCount();
+currentTargetGroup = null;
+}
+function showSuccessMessage(message) {
+const successDiv = document.createElement('div');
+successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+successDiv.textContent = message;
+document.body.appendChild(successDiv);
+setTimeout(() => {
+successDiv.remove();
+}, 3000);
+}
+});
+</script>
+<script id="edit-group-functionality">
+document.addEventListener('DOMContentLoaded', function() {
+const editGroupModal = document.getElementById('editGroupModal');
+const closeEditModal = document.getElementById('closeEditModal');
+const cancelEditGroup = document.getElementById('cancelEditGroup');
+const editGroupForm = document.getElementById('editGroupForm');
+const editGroupName = document.getElementById('editGroupName');
+const editGroupStatus = document.getElementById('editGroupStatus');
+const editGroupDescription = document.getElementById('editGroupDescription');
+let currentEditGroup = null;
+document.addEventListener('click', function(e) {
+if (e.target.textContent.trim() === 'Edit Group') {
+const groupCard = e.target.closest('.group-card');
+const groupTitle = groupCard.querySelector('h3').textContent;
+const statusBadge = groupCard.querySelector('.bg-green-100, .bg-yellow-100, .bg-red-100');
+const currentStatus = statusBadge ? statusBadge.textContent.trim() : 'Active';
+currentEditGroup = groupCard;
+editGroupName.value = groupTitle;
+editGroupStatus.value = currentStatus;
+editGroupDescription.value = '';
+editGroupModal.classList.remove('hidden');
+}
+});
+closeEditModal.addEventListener('click', function() {
+editGroupModal.classList.add('hidden');
+});
+cancelEditGroup.addEventListener('click', function() {
+editGroupModal.classList.add('hidden');
+});
+editGroupModal.addEventListener('click', function(e) {
+if (e.target === editGroupModal) {
+editGroupModal.classList.add('hidden');
+}
+});
+editGroupForm.addEventListener('submit', function(e) {
+e.preventDefault();
+if (currentEditGroup) {
+const groupTitle = currentEditGroup.querySelector('h3');
+const statusBadge = currentEditGroup.querySelector('.bg-green-100, .bg-yellow-100, .bg-red-100');
+groupTitle.textContent = editGroupName.value;
+if (statusBadge) {
+statusBadge.textContent = editGroupStatus.value;
+statusBadge.className = statusBadge.className.replace(/bg-(green|yellow|red)-100 text-(green|yellow|red)-800/, '');
+const statusColors = {
+'Active': 'bg-green-100 text-green-800',
+'Preparing': 'bg-yellow-100 text-yellow-800',
+'On Hold': 'bg-red-100 text-red-800',
+'Completed': 'bg-gray-100 text-gray-800'
+};
+statusBadge.className += ' ' + statusColors[editGroupStatus.value];
+}
+showSuccessMessage('Group updated successfully');
+editGroupModal.classList.add('hidden');
+}
+});
+function showSuccessMessage(message) {
+const successDiv = document.createElement('div');
+successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+successDiv.textContent = message;
+document.body.appendChild(successDiv);
+setTimeout(() => {
+successDiv.remove();
+}, 3000);
+}
+});
+</script>
+<script id="delete-group-functionality">
+document.addEventListener('DOMContentLoaded', function() {
+const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+const closeDeleteModal = document.getElementById('closeDeleteModal');
+const cancelDelete = document.getElementById('cancelDelete');
+const confirmDelete = document.getElementById('confirmDelete');
+const deleteGroupName = document.getElementById('deleteGroupName');
+let currentDeleteGroup = null;
+document.addEventListener('click', function(e) {
+const moreButton = e.target.closest('button');
+if (moreButton && moreButton.querySelector('.ri-more-2-line')) {
+e.preventDefault();
+const groupCard = moreButton.closest('.group-card');
+const groupTitle = groupCard.querySelector('h3').textContent;
+const dropdown = document.createElement('div');
+dropdown.className = 'absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-40 min-w-[150px]';
+dropdown.innerHTML = `
+<button class="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-t-lg rename-group-btn">
+<i class="ri-edit-line w-4 h-4 inline mr-2"></i>Rename Group
+</button>
+<button class="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 switch-members-btn">
+<i class="ri-shuffle-line w-4 h-4 inline mr-2"></i>Switch Members
+</button>
+<button class="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-b-lg delete-group-btn">
+<i class="ri-delete-bin-line w-4 h-4 inline mr-2"></i>Delete Group
+</button>
+`;
+const existingDropdown = document.querySelector('.group-dropdown');
+if (existingDropdown) {
+existingDropdown.remove();
+}
+dropdown.classList.add('group-dropdown');
+moreButton.parentNode.style.position = 'relative';
+moreButton.parentNode.appendChild(dropdown);
+dropdown.querySelector('.delete-group-btn').addEventListener('click', function() {
+currentDeleteGroup = groupCard;
+deleteGroupName.textContent = groupTitle;
+deleteConfirmModal.classList.remove('hidden');
+dropdown.remove();
+});
+dropdown.querySelector('.rename-group-btn').addEventListener('click', function() {
+const titleElement = groupCard.querySelector('h3');
+const currentName = titleElement.textContent;
+const input = document.createElement('input');
+input.type = 'text';
+input.value = currentName;
+input.className = 'font-semibold text-gray-900 bg-transparent border-b border-primary focus:outline-none';
+titleElement.replaceWith(input);
+input.focus();
+input.select();
+const saveRename = () => {
+const newTitle = document.createElement('h3');
+newTitle.className = 'font-semibold text-gray-900';
+newTitle.textContent = input.value || currentName;
+input.replaceWith(newTitle);
+showSuccessMessage('Group renamed successfully');
+};
+input.addEventListener('blur', saveRename);
+input.addEventListener('keypress', function(e) {
+if (e.key === 'Enter') {
+saveRename();
+}
+});
+dropdown.remove();
+});
+dropdown.querySelector('.switch-members-btn').addEventListener('click', function() {
+showSuccessMessage('Member switching feature activated');
+dropdown.remove();
+});
+setTimeout(() => {
+document.addEventListener('click', function closeDropdown(e) {
+if (!dropdown.contains(e.target) && !moreButton.contains(e.target)) {
+dropdown.remove();
+document.removeEventListener('click', closeDropdown);
+}
+});
+}, 0);
+}
+});
+closeDeleteModal.addEventListener('click', function() {
+deleteConfirmModal.classList.add('hidden');
+});
+cancelDelete.addEventListener('click', function() {
+deleteConfirmModal.classList.add('hidden');
+});
+deleteConfirmModal.addEventListener('click', function(e) {
+if (e.target === deleteConfirmModal) {
+deleteConfirmModal.classList.add('hidden');
+}
+});
+confirmDelete.addEventListener('click', function() {
+if (currentDeleteGroup) {
+currentDeleteGroup.style.transition = 'all 0.3s ease';
+currentDeleteGroup.style.opacity = '0';
+currentDeleteGroup.style.transform = 'scale(0.9)';
+setTimeout(() => {
+currentDeleteGroup.remove();
+showSuccessMessage('Group deleted successfully');
+checkEmptyState();
+}, 300);
+deleteConfirmModal.classList.add('hidden');
+}
+});
+function checkEmptyState() {
+const remainingGroups = document.querySelectorAll('.group-card');
+const emptyState = document.getElementById('emptyState');
+const pairingGroups = document.getElementById('pairingGroups');
+if (remainingGroups.length === 0) {
+pairingGroups.classList.add('hidden');
+emptyState.classList.remove('hidden');
+}
+}
+function showSuccessMessage(message) {
+const successDiv = document.createElement('div');
+successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+successDiv.textContent = message;
+document.body.appendChild(successDiv);
+setTimeout(() => {
+successDiv.remove();
+}, 3000);
+}
+});
+</script>
+<script id="drag-drop-functionality">
+document.addEventListener('DOMContentLoaded', function() {
+const groupCards = document.querySelectorAll('.group-card');
+let draggedElement = null;
+groupCards.forEach(card => {
+card.addEventListener('dragstart', function(e) {
+draggedElement = this;
+this.classList.add('dragging');
+});
+card.addEventListener('dragend', function(e) {
+this.classList.remove('dragging');
+draggedElement = null;
+});
+card.addEventListener('dragover', function(e) {
+e.preventDefault();
+this.classList.add('drop-zone');
+});
+card.addEventListener('dragleave', function(e) {
+this.classList.remove('drop-zone');
+});
+card.addEventListener('drop', function(e) {
+e.preventDefault();
+this.classList.remove('drop-zone');
+if (draggedElement && draggedElement !== this) {
+const container = this.parentNode;
+const afterElement = getDragAfterElement(container, e.clientY);
+if (afterElement == null) {
+container.appendChild(draggedElement);
+} else {
+container.insertBefore(draggedElement, afterElement);
+}
+}
+});
+});
+function getDragAfterElement(container, y) {
+const draggableElements = [...container.querySelectorAll('.group-card:not(.dragging)')];
+return draggableElements.reduce((closest, child) => {
+const box = child.getBoundingClientRect();
+const offset = y - box.top - box.height / 2;
+if (offset < 0 && offset > closest.offset) {
+return { offset: offset, element: child };
+} else {
+return closest;
+}
+}, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("/api/admin-info")
+        .then(res => res.json())
+        .then(data => {
+            if (!data.success) return;
+
+            // Dynamic name
+            document.getElementById("profileName").textContent = data.full_name;
+
+            // Dynamic role
+            document.getElementById("profileRole").textContent = data.role;
+
+            // Dynamic profile image
+            document.getElementById("profileImage").src =
+                data.profile_image 
+                || "https://ui-avatars.com/api/?name=" + encodeURIComponent(data.full_name);
+
+            // Notifications
+            const noti = document.getElementById("notificationCount");
+            noti.textContent = data.notifications;
+
+            if (data.notifications === 0) {
+                noti.classList.add("hidden");
+            }
+        });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const logoutBtn = document.getElementById('logoutBtn'); // make sure <a> has id="logoutBtn"
+    
+    logoutBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch('/admin/logout', { method: 'POST' });
+            const data = await res.json();
+            if (data.success) {
+                window.location.href = '/'; // redirect to login page
+            } else {
+                alert(data.message || 'Failed to logout');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Server error. Try again.');
+        }
+    });
+});
+</script>
+
+</body>
+</html>
